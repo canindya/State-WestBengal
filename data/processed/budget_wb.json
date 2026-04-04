@@ -1,0 +1,42 @@
+{
+  "revenue": [
+    { "year": "2019-20", "ownTax": 51890, "nonTax": 8120, "centralTransfers": 52340, "total": 112350 },
+    { "year": "2020-21", "ownTax": 48650, "nonTax": 7890, "centralTransfers": 54120, "total": 110660 },
+    { "year": "2021-22", "ownTax": 61230, "nonTax": 9450, "centralTransfers": 58670, "total": 129350 },
+    { "year": "2022-23", "ownTax": 72540, "nonTax": 10230, "centralTransfers": 62140, "total": 144910 },
+    { "year": "2023-24", "ownTax": 80120, "nonTax": 11560, "centralTransfers": 68900, "total": 160580 },
+    { "year": "2024-25", "ownTax": 89450, "nonTax": 12890, "centralTransfers": 75230, "total": 177570 },
+    { "year": "2025-26", "ownTax": 98700, "nonTax": 14200, "centralTransfers": 82100, "total": 195000 }
+  ],
+  "expenditure": [
+    { "year": "2019-20", "revenue": 166890, "capital": 18340, "total": 185230 },
+    { "year": "2020-21", "revenue": 172450, "capital": 17120, "total": 189570 },
+    { "year": "2021-22", "revenue": 186230, "capital": 21450, "total": 207680 },
+    { "year": "2022-23", "revenue": 205670, "capital": 24890, "total": 230560 },
+    { "year": "2023-24", "revenue": 225340, "capital": 28560, "total": 253900 },
+    { "year": "2024-25", "revenue": 248900, "capital": 32450, "total": 281350 },
+    { "year": "2025-26", "revenue": 271000, "capital": 36500, "total": 307500 }
+  ],
+  "sectorExpenditure": [
+    { "sector": "Education", "amount": 46230, "percentage": 15.0, "year": "2025-26" },
+    { "sector": "Health & Family Welfare", "amount": 18450, "percentage": 6.0, "year": "2025-26" },
+    { "sector": "Rural Development", "amount": 24600, "percentage": 8.0, "year": "2025-26" },
+    { "sector": "Urban Development", "amount": 15375, "percentage": 5.0, "year": "2025-26" },
+    { "sector": "Agriculture", "amount": 18450, "percentage": 6.0, "year": "2025-26" },
+    { "sector": "Social Welfare", "amount": 36900, "percentage": 12.0, "year": "2025-26" },
+    { "sector": "Police & Home Affairs", "amount": 21525, "percentage": 7.0, "year": "2025-26" },
+    { "sector": "Transport & Roads", "amount": 15375, "percentage": 5.0, "year": "2025-26" },
+    { "sector": "Interest Payments", "amount": 55350, "percentage": 18.0, "year": "2025-26" },
+    { "sector": "Pensions", "amount": 30750, "percentage": 10.0, "year": "2025-26" },
+    { "sector": "Others", "amount": 24495, "percentage": 8.0, "year": "2025-26" }
+  ],
+  "fiscalIndicators": [
+    { "year": "2019-20", "fiscalDeficit": 3.8, "revenueDeficit": 2.9, "debtGsdpRatio": 34.2 },
+    { "year": "2020-21", "fiscalDeficit": 4.7, "revenueDeficit": 3.5, "debtGsdpRatio": 38.8 },
+    { "year": "2021-22", "fiscalDeficit": 3.5, "revenueDeficit": 2.5, "debtGsdpRatio": 37.2 },
+    { "year": "2022-23", "fiscalDeficit": 3.3, "revenueDeficit": 2.2, "debtGsdpRatio": 35.5 },
+    { "year": "2023-24", "fiscalDeficit": 3.2, "revenueDeficit": 2.0, "debtGsdpRatio": 34.8 },
+    { "year": "2024-25", "fiscalDeficit": 3.5, "revenueDeficit": 2.3, "debtGsdpRatio": 35.0 },
+    { "year": "2025-26", "fiscalDeficit": 3.4, "revenueDeficit": 2.1, "debtGsdpRatio": 34.5 }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "population": { "value": "10.32 Cr", "year": 2024, "source": "statisticstimes.com (projection from Census 2011)" },
+  "populationDensity": { "value": "1,029", "unit": "per km\u00B2", "source": "Census 2011" },
+  "literacy": { "value": "77.08%", "male": "82.67%", "female": "71.16%", "source": "Census 2011" },
+  "sexRatio": { "value": 950, "source": "Census 2011" },
+  "gsdp": { "value": "\u20B915.40 Lakh Cr", "growthRate": "8.4%", "year": "2024-25 (Advance Est.)", "source": "WB Finance Department" },
+  "hdi": { "value": 0.641, "rank": 28, "source": "NHSRC India Health Dossier 2021" },
+  "forestCover": { "value": "16,832 km\u00B2", "percentage": "18.93%", "source": "ISFR 2023" },
+  "roadDensity": { "value": "115.5", "unit": "km per 100 km\u00B2", "source": "Indiastat / WB PWD" }
+}

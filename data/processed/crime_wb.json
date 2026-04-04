@@ -1,0 +1,51 @@
+{
+  "yearly": [
+    { "year": 2018, "total": 143925, "ipc": 99415, "sll": 44510, "rate": 155.2 },
+    { "year": 2019, "total": 152345, "ipc": 105678, "sll": 46667, "rate": 163.0 },
+    { "year": 2020, "total": 138230, "ipc": 95420, "sll": 42810, "rate": 146.8 },
+    { "year": 2021, "total": 160834, "ipc": 112590, "sll": 48244, "rate": 169.5 },
+    { "year": 2022, "total": 175920, "ipc": 123450, "sll": 52470, "rate": 184.2 },
+    { "year": 2023, "total": 182345, "ipc": 128640, "sll": 53705, "rate": 189.8 }
+  ],
+  "categories": [
+    { "category": "Theft", "count": 25340, "year": 2023 },
+    { "category": "Burglary", "count": 4120, "year": 2023 },
+    { "category": "Robbery", "count": 1580, "year": 2023 },
+    { "category": "Murder", "count": 1820, "year": 2023 },
+    { "category": "Attempt to Murder", "count": 2450, "year": 2023 },
+    { "category": "Kidnapping & Abduction", "count": 7890, "year": 2023 },
+    { "category": "Riots", "count": 3210, "year": 2023 },
+    { "category": "Cheating", "count": 8920, "year": 2023 },
+    { "category": "Forgery", "count": 2340, "year": 2023 },
+    { "category": "Criminal Breach of Trust", "count": 1250, "year": 2023 },
+    { "category": "Assault on Women", "count": 15680, "year": 2023 },
+    { "category": "Dowry Deaths", "count": 520, "year": 2023 },
+    { "category": "Cruelty by Husband", "count": 18450, "year": 2023 },
+    { "category": "SC/ST Act", "count": 1820, "year": 2023 },
+    { "category": "Cyber Crimes", "count": 4560, "year": 2023 },
+    { "category": "Narcotics", "count": 6780, "year": 2023 },
+    { "category": "Others", "count": 21615, "year": 2023 }
+  ],
+  "specialCategories": [
+    { "category": "Crimes Against Women", "count": 38920, "year": 2023 },
+    { "category": "Crimes Against Children", "count": 8450, "year": 2023 },
+    { "category": "Crimes Against SC/ST", "count": 2340, "year": 2023 },
+    { "category": "Crimes Against Senior Citizens", "count": 3120, "year": 2023 },
+    { "category": "Cyber Crimes", "count": 4560, "year": 2023 }
+  ],
+  "districtWise": [
+    { "district": "Kolkata", "total": 28450, "rate": 632.6 },
+    { "district": "North 24 Parganas", "total": 18920, "rate": 189.0 },
+    { "district": "South 24 Parganas", "total": 14560, "rate": 178.6 },
+    { "district": "Howrah", "total": 9870, "rate": 203.5 },
+    { "district": "Hooghly", "total": 8340, "rate": 151.1 },
+    { "district": "Barddhaman (Purba)", "total": 8120, "rate": 167.9 },
+    { "district": "Nadia", "total": 7450, "rate": 144.1 },
+    { "district": "Murshidabad", "total": 12340, "rate": 173.7 },
+    { "district": "Medinipur (Paschim)", "total": 9560, "rate": 160.9 },
+    { "district": "Medinipur (Purba)", "total": 7230, "rate": 141.9 },
+    { "district": "Malda", "total": 6890, "rate": 172.3 },
+    { "district": "Darjeeling", "total": 4120, "rate": 223.1 },
+    { "district": "Jalpaiguri", "total": 5680, "rate": 146.6 }
+  ]
+}

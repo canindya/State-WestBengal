@@ -1,0 +1,101 @@
+{
+  "nav": {
+    "brand": "West Bengal Data",
+    "home": "Home",
+    "people": "People",
+    "climate": "Climate",
+    "airQuality": "Air Quality",
+    "health": "Health",
+    "education": "Education",
+    "crime": "Crime",
+    "transport": "Transport",
+    "budget": "Budget",
+    "map": "Map"
+  },
+  "common": {
+    "loading": "Loading",
+    "filterByYear": "Filter by year:",
+    "to": "to",
+    "reset": "Reset",
+    "all": "All",
+    "downloadCsv": "\u2193 CSV",
+    "downloadCsvTitle": "Download as CSV",
+    "colorBy": "Color by:",
+    "na": "N/A",
+    "million": "Million",
+    "crores": "Cr",
+    "percentage": "%",
+    "perCapita": "Per Capita",
+    "census2011": "Census 2011",
+    "legend": "Legend",
+    "comingSoon": "Data coming soon",
+    "comingSoonDesc": "This section is under development. Check back for updates.",
+    "source": "Source",
+    "districts": "Districts"
+  },
+  "layout": {
+    "title": "West Bengal State Dashboard",
+    "description": "Interactive data dashboard for West Bengal - demographics, climate, air quality, health, education, crime, transport, budget, and geographic insights from open data sources.",
+    "footer": "Data from Census 2011, India Meteorological Dept (IMD), National Crime Records Bureau (NCRB), National Family Health Survey (NFHS-5), UDISE+, PRS India, VAHAN, WB Finance Dept, and Open-Meteo"
+  },
+  "home": {
+    "pageTitle": "West Bengal",
+    "pageTitleSuffix": "State Dashboard",
+    "pageDesc": "10 domains, 30+ open data sources, 23 districts. What does the data say about West Bengal?",
+    "stat_population": "Population",
+    "stat_density": "Population Density",
+    "stat_literacy": "Literacy Rate",
+    "stat_sexRatio": "Sex Ratio",
+    "stat_gsdp": "GSDP",
+    "stat_hdi": "HDI",
+    "stat_forest": "Forest Cover",
+    "stat_roads": "Road Density",
+    "sections": "Explore Sections",
+    "dataSources": "Data Sources"
+  },
+  "climate": {
+    "pageTitle": "Climate & Environment",
+    "pageDesc": "Rainfall patterns, temperature trends, and extreme weather events across West Bengal's 23 districts.",
+    "loading": "Loading climate data..."
+  },
+  "environment": {
+    "pageTitle": "Air Quality",
+    "pageDesc": "Air Quality Index monitoring across major cities in West Bengal — PM2.5, PM10, NO2, SO2, and other pollutants.",
+    "loading": "Loading air quality data..."
+  },
+  "health": {
+    "pageTitle": "Health",
+    "pageDesc": "Healthcare infrastructure, maternal & child health indicators, and disease burden across West Bengal.",
+    "loading": "Loading health data..."
+  },
+  "education": {
+    "pageTitle": "Education",
+    "pageDesc": "School infrastructure, enrollment trends, learning outcomes, and teacher metrics from UDISE+ data.",
+    "loading": "Loading education data..."
+  },
+  "crime": {
+    "pageTitle": "Crime & Safety",
+    "pageDesc": "Crime statistics, trends, and safety indicators from NCRB data for West Bengal.",
+    "loading": "Loading crime data..."
+  },
+  "transport": {
+    "pageTitle": "Transport",
+    "pageDesc": "Road network, vehicle registrations, public transport usage, and road safety in West Bengal.",
+    "loading": "Loading transport data..."
+  },
+  "budget": {
+    "pageTitle": "Budget & Finance",
+    "pageDesc": "Revenue sources, expenditure patterns, fiscal deficits, and debt status of West Bengal state government.",
+    "loading": "Loading budget data..."
+  },
+  "demographics": {
+    "pageTitle": "People & Demographics",
+    "pageDesc": "Population composition, district-wise distribution, urban-rural split, and social categories across West Bengal.",
+    "loading": "Loading demographics data..."
+  },
+  "map": {
+    "pageTitle": "Geographic Map",
+    "pageDesc": "Interactive district-level map of West Bengal with thematic overlays for population, literacy, density, and more.",
+    "loading": "Loading map data..."
+  }
+}

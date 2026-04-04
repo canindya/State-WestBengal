@@ -1,0 +1,49 @@
+{
+  "schools": [
+    { "type": "Primary", "count": 52890, "management": "Government" },
+    { "type": "Primary", "count": 8450, "management": "Private" },
+    { "type": "Upper Primary", "count": 15230, "management": "Government" },
+    { "type": "Upper Primary", "count": 4120, "management": "Private" },
+    { "type": "Secondary", "count": 8920, "management": "Government" },
+    { "type": "Secondary", "count": 3450, "management": "Private" },
+    { "type": "Higher Secondary", "count": 5680, "management": "Government" },
+    { "type": "Higher Secondary", "count": 2340, "management": "Private" }
+  ],
+  "enrollment": [
+    { "level": "Primary (I-V)", "boys": 4850000, "girls": 4720000, "total": 9570000 },
+    { "level": "Upper Primary (VI-VIII)", "boys": 2340000, "girls": 2280000, "total": 4620000 },
+    { "level": "Secondary (IX-X)", "boys": 1560000, "girls": 1620000, "total": 3180000 },
+    { "level": "Higher Secondary (XI-XII)", "boys": 890000, "girls": 960000, "total": 1850000 }
+  ],
+  "infrastructure": [
+    { "metric": "Electricity", "percentage": 96.2 },
+    { "metric": "Drinking Water", "percentage": 97.8 },
+    { "metric": "Girls' Toilets", "percentage": 95.4 },
+    { "metric": "Boys' Toilets", "percentage": 94.1 },
+    { "metric": "Computer Lab", "percentage": 28.5 },
+    { "metric": "Internet", "percentage": 22.3 },
+    { "metric": "Library", "percentage": 68.4 },
+    { "metric": "Playground", "percentage": 62.1 },
+    { "metric": "Ramp for Disabled", "percentage": 72.8 },
+    { "metric": "Boundary Wall", "percentage": 78.5 }
+  ],
+  "teacherMetrics": [
+    { "district": "Kolkata", "pupilTeacherRatio": 24, "qualified": 92 },
+    { "district": "North 24 Parganas", "pupilTeacherRatio": 32, "qualified": 88 },
+    { "district": "South 24 Parganas", "pupilTeacherRatio": 38, "qualified": 82 },
+    { "district": "Howrah", "pupilTeacherRatio": 28, "qualified": 90 },
+    { "district": "Murshidabad", "pupilTeacherRatio": 42, "qualified": 78 },
+    { "district": "Malda", "pupilTeacherRatio": 45, "qualified": 75 },
+    { "district": "Uttar Dinajpur", "pupilTeacherRatio": 48, "qualified": 72 },
+    { "district": "Purulia", "pupilTeacherRatio": 35, "qualified": 80 },
+    { "district": "Darjeeling", "pupilTeacherRatio": 22, "qualified": 94 }
+  ],
+  "learningOutcomes": [
+    { "indicator": "Std III can read Std I text", "wb": 42.5, "national": 46.2 },
+    { "indicator": "Std V can read Std II text", "wb": 48.3, "national": 50.5 },
+    { "indicator": "Std III can do subtraction", "wb": 28.1, "national": 25.9 },
+    { "indicator": "Std V can do division", "wb": 22.4, "national": 25.6 },
+    { "indicator": "Std VIII can read Std II text", "wb": 72.8, "national": 73.5 },
+    { "indicator": "Std VIII can do division", "wb": 38.5, "national": 44.7 }
+  ]
+}

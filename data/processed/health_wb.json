@@ -1,0 +1,74 @@
+{
+  "infrastructure": [
+    { "district": "Kolkata", "hospitals": 48, "phcs": 0, "chcs": 0, "beds": 28000, "doctors": 5200 },
+    { "district": "North 24 Parganas", "hospitals": 22, "phcs": 78, "chcs": 21, "beds": 8500, "doctors": 1800 },
+    { "district": "South 24 Parganas", "hospitals": 18, "phcs": 85, "chcs": 19, "beds": 6200, "doctors": 1200 },
+    { "district": "Howrah", "hospitals": 15, "phcs": 45, "chcs": 12, "beds": 5100, "doctors": 1100 },
+    { "district": "Hooghly", "hospitals": 12, "phcs": 62, "chcs": 15, "beds": 4800, "doctors": 950 },
+    { "district": "Barddhaman (Purba)", "hospitals": 14, "phcs": 55, "chcs": 14, "beds": 4200, "doctors": 880 },
+    { "district": "Nadia", "hospitals": 10, "phcs": 58, "chcs": 13, "beds": 3600, "doctors": 720 },
+    { "district": "Murshidabad", "hospitals": 11, "phcs": 72, "chcs": 16, "beds": 4100, "doctors": 680 },
+    { "district": "Medinipur (Paschim)", "hospitals": 9, "phcs": 80, "chcs": 18, "beds": 3900, "doctors": 620 },
+    { "district": "Medinipur (Purba)", "hospitals": 8, "phcs": 65, "chcs": 14, "beds": 3200, "doctors": 550 },
+    { "district": "Malda", "hospitals": 7, "phcs": 42, "chcs": 10, "beds": 2100, "doctors": 380 },
+    { "district": "Darjeeling", "hospitals": 6, "phcs": 38, "chcs": 9, "beds": 1800, "doctors": 350 },
+    { "district": "Jalpaiguri", "hospitals": 8, "phcs": 48, "chcs": 12, "beds": 2400, "doctors": 420 },
+    { "district": "Cooch Behar", "hospitals": 5, "phcs": 38, "chcs": 9, "beds": 1500, "doctors": 280 },
+    { "district": "Purulia", "hospitals": 5, "phcs": 42, "chcs": 10, "beds": 1600, "doctors": 250 },
+    { "district": "Bankura", "hospitals": 6, "phcs": 48, "chcs": 11, "beds": 1800, "doctors": 300 },
+    { "district": "Birbhum", "hospitals": 5, "phcs": 40, "chcs": 10, "beds": 1700, "doctors": 290 }
+  ],
+  "indicators": {
+    "imr": {
+      "value": 22,
+      "trend": [
+        { "year": "2005-06", "value": 48 },
+        { "year": "2010-11", "value": 36 },
+        { "year": "2015-16", "value": 27 },
+        { "year": "2019-21", "value": 22 }
+      ]
+    },
+    "mmr": {
+      "value": 109,
+      "trend": [
+        { "year": "2004-06", "value": 141 },
+        { "year": "2007-09", "value": 145 },
+        { "year": "2011-13", "value": 113 },
+        { "year": "2014-16", "value": 101 },
+        { "year": "2016-18", "value": 98 },
+        { "year": "2018-20", "value": 109 }
+      ]
+    },
+    "immunization": {
+      "value": 75.8,
+      "children": {
+        "BCG": 98.7,
+        "DPT3": 83.2,
+        "Polio3": 83.5,
+        "Measles": 85.1,
+        "FullImmunization": 75.8,
+        "VitaminA": 63.2
+      }
+    },
+    "institutionalDelivery": 92.3,
+    "anemia": {
+      "women": 62.4,
+      "children": 69.0
+    }
+  },
+  "nfhs": {
+    "fertility": {
+      "TotalFertilityRate": 1.6,
+      "WomenMarriedBefore18": 41.6,
+      "TeenagePregnancy": 16.4
+    },
+    "nutrition": {
+      "ChildrenStunted": 34.4,
+      "ChildrenWasted": 20.3,
+      "ChildrenUnderweight": 32.2,
+      "ChildrenOverweight": 3.0,
+      "WomenBMIBelow18.5": 21.3,
+      "MenBMIBelow18.5": 20.2
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "roadNetwork": [
+    { "type": "National Highways", "length": 3635, "unit": "km" },
+    { "type": "State Highways", "length": 3788, "unit": "km" },
+    { "type": "Major District Roads", "length": 7845, "unit": "km" },
+    { "type": "Other District Roads", "length": 12560, "unit": "km" },
+    { "type": "Village Roads", "length": 74520, "unit": "km" }
+  ],
+  "vehicleRegistration": [
+    { "year": 2018, "total": 8956000, "twoWheeler": 4890000, "car": 1567000, "commercial": 1234000, "ev": 1200 },
+    { "year": 2019, "total": 9678000, "twoWheeler": 5320000, "car": 1690000, "commercial": 1298000, "ev": 3500 },
+    { "year": 2020, "total": 9980000, "twoWheeler": 5480000, "car": 1750000, "commercial": 1310000, "ev": 6800 },
+    { "year": 2021, "total": 10560000, "twoWheeler": 5820000, "car": 1890000, "commercial": 1350000, "ev": 15200 },
+    { "year": 2022, "total": 11420000, "twoWheeler": 6310000, "car": 2050000, "commercial": 1410000, "ev": 32400 },
+    { "year": 2023, "total": 12350000, "twoWheeler": 6850000, "car": 2230000, "commercial": 1480000, "ev": 58000 },
+    { "year": 2024, "total": 13280000, "twoWheeler": 7380000, "car": 2420000, "commercial": 1540000, "ev": 95000 }
+  ],
+  "publicTransport": [
+    { "mode": "State Bus (SBSTC/NBSTC)", "fleet": 3200, "dailyRidership": 1200000 },
+    { "mode": "Private Bus", "fleet": 28000, "dailyRidership": 8500000 },
+    { "mode": "Kolkata Metro", "fleet": 54, "dailyRidership": 650000 },
+    { "mode": "Kolkata Tram", "fleet": 25, "dailyRidership": 15000 },
+    { "mode": "Ferry Services", "fleet": 85, "dailyRidership": 45000 },
+    { "mode": "Auto Rickshaw", "fleet": 125000, "dailyRidership": 3500000 }
+  ],
+  "accidents": [
+    { "year": 2018, "total": 12456, "deaths": 5234, "injuries": 10890 },
+    { "year": 2019, "total": 11890, "deaths": 5012, "injuries": 10230 },
+    { "year": 2020, "total": 8920, "deaths": 4156, "injuries": 7450 },
+    { "year": 2021, "total": 10230, "deaths": 4678, "injuries": 8900 },
+    { "year": 2022, "total": 11450, "deaths": 5120, "injuries": 10120 },
+    { "year": 2023, "total": 11890, "deaths": 5340, "injuries": 10560 }
+  ]
+}

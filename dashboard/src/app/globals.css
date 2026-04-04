@@ -1,0 +1,134 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme inline {
+  /* Accent colors (same in both themes) */
+  --color-sundarbans: #2D7D46;
+  --color-ganga: #2B6E99;
+  --color-shantiniketan: #C4873B;
+  --color-durga: #D94F3D;
+  --color-mustard: #D4A824;
+  --color-terracotta: #A0522D;
+  --color-twilight: #7B68AE;
+  --color-tea: #5A8F6A;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Theme-aware tokens (dark defaults) */
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-card: var(--card);
+  --color-card-hover: var(--card-h);
+  --color-border: var(--bdr);
+  --color-muted: var(--mute);
+}
+
+/* Dark theme (default) */
+:root {
+  --bg: #0F1419;
+  --fg: #E8EAED;
+  --card: #1E2A3A;
+  --card-h: #243447;
+  --bdr: #2D3748;
+  --mute: #9AA0A6;
+  --tooltip-bg: #1E2A3A;
+  --tooltip-border: #2D3748;
+  --tooltip-text: #E8EAED;
+  --chart-grid: #2D3748;
+  --chart-axis: #9AA0A6;
+}
+
+/* Light theme */
+.light {
+  --bg: #F8F9FA;
+  --fg: #1A1A2E;
+  --card: #FFFFFF;
+  --card-h: #F0F1F3;
+  --bdr: #E2E4E8;
+  --mute: #6B7280;
+  --tooltip-bg: #FFFFFF;
+  --tooltip-border: #E2E4E8;
+  --tooltip-text: #1A1A2E;
+  --chart-grid: #E2E4E8;
+  --chart-axis: #6B7280;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), Arial, sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bdr);
+  border-radius: 4px;
+}
+
+/* Recharts tooltip fix */
+.recharts-tooltip-wrapper {
+  z-index: 100 !important;
+}
+
+/* Theme-aware Recharts overrides */
+.recharts-default-tooltip {
+  background-color: var(--tooltip-bg) !important;
+  border-color: var(--tooltip-border) !important;
+  color: var(--tooltip-text) !important;
+}
+.recharts-default-tooltip .recharts-tooltip-label {
+  color: var(--tooltip-text) !important;
+}
+.recharts-default-tooltip .recharts-tooltip-item {
+  color: var(--tooltip-text) !important;
+}
+.recharts-cartesian-grid line {
+  stroke: var(--chart-grid) !important;
+}
+.recharts-xAxis .recharts-cartesian-axis-tick text,
+.recharts-yAxis .recharts-cartesian-axis-tick text {
+  fill: var(--chart-axis) !important;
+}
+.recharts-xAxis .recharts-cartesian-axis-line,
+.recharts-yAxis .recharts-cartesian-axis-line {
+  stroke: var(--chart-grid) !important;
+}
+.recharts-polar-grid .recharts-polar-grid-concentric path,
+.recharts-polar-grid .recharts-polar-grid-angle line {
+  stroke: var(--chart-grid) !important;
+}
+.recharts-polar-angle-axis .recharts-polar-angle-axis-tick text {
+  fill: var(--chart-axis) !important;
+}
+.recharts-polar-radius-axis .recharts-polar-radius-axis-tick text {
+  fill: var(--chart-axis) !important;
+}
+.recharts-legend-item-text {
+  color: var(--chart-axis) !important;
+}
+.recharts-label {
+  fill: var(--chart-axis) !important;
+}
+
+/* Light mode Pie chart labels */
+.light .recharts-pie-label-text {
+  fill: var(--fg) !important;
+}
+.light .recharts-pie-label-line {
+  stroke: var(--mute) !important;
+}
+
+/* Light mode card shadows */
+.light .rounded-xl {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.light .rounded-xl:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
