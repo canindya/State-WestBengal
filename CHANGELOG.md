@@ -4,4 +4,23 @@ All notable changes to the West Bengal State Dashboard will be documented in thi
 
 ---
 
-*No commits yet. This file will be updated after each commit.*
+## 2026-04-04 — Initial project setup
+
+**Commit:** `e74d366` — Initial project setup: Next.js 16 dashboard with 10 pages, 6 fully built
+
+- Scaffolded Next.js 16 + TypeScript + Tailwind v4 + Recharts + Leaflet
+- Created WB cultural color palette (Sundarbans Green, Ganga Blue, Shantiniketan Ochre, etc.)
+- Built 7 shared layout components (Navbar, PageHeader, StatCard, ChartCard, CategoryToggle, DateRangeFilter, Footer)
+- Dark/light theme toggle with CSS custom properties
+- i18n system (English complete, Bengali stub)
+- 10 page routes scaffolded, 6 with full chart content:
+  - Landing page: 8 stat cards, 9 section cards, data sources grid
+  - Climate: District rainfall, monthly pattern, seasonal radar, temperature trend, extreme events
+  - Air Quality: City-wise AQI, seasonal pattern, pollutant comparison
+  - Budget: Revenue vs expenditure, sector breakdown, fiscal indicators
+  - Health: Infrastructure, immunization radar, IMR/MMR trends, nutrition
+  - Map: Leaflet district choropleth with metric selector
+- Curated JSON data for all 10 domains from government sources
+- Python data pipeline scripts for Open-Meteo weather/AQI API
+- Placeholder district GeoJSON for 23 WB districts
+- Documentation: CLAUDE.md, DESIGN.md, todo.md, CHANGELOG.md

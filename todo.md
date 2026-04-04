@@ -41,10 +41,10 @@
 - [x] Map page (Leaflet choropleth with metric selector, color legend)
 
 ## Phase 2: Additional Pages
-- [ ] Demographics page (population pyramid, district density, urban/rural, SC/ST composition)
-- [ ] Education page (school infrastructure, enrollment, learning outcomes, teacher metrics)
-- [ ] Crime page (yearly trends, categories, special categories, district-wise)
-- [ ] Transport page (road network, vehicle registration, public transport, accidents)
+- [x] Demographics page (population pyramid, district density, urbanization, urban/rural trend, SC/ST composition)
+- [x] Education page (schools by type/management, enrollment by gender, infrastructure, learning outcomes, teacher metrics, management pie)
+- [x] Crime page (yearly trends, category treemap, special categories, district-wise crime rate)
+- [x] Transport page (road network, vehicle registration trend, EV adoption, public transport cards, accident trends)
 
 ## Phase 3: Deployment & Polish
 - [ ] GitHub Pages deployment workflow
