@@ -17,11 +17,15 @@ import {
 export default function BudgetPage() {
   const { t } = useTranslation();
   const [data, setData] = useState<BudgetData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    loadBudget().then(setData);
+    loadBudget()
+      .then(setData)
+      .catch(e => { console.error('Budget load error:', e); setError(e.message); });
   }, []);
 
+  if (error) return <div className="text-center py-20"><p className="text-durga font-semibold">Error loading budget data</p><p className="text-muted text-sm mt-2">{error}</p></div>;
   if (!data) return <div className="text-center py-20 text-muted">{t('budget.loading')}</div>;
 
   const latest = data.revenue[data.revenue.length - 1];
@@ -84,13 +88,13 @@ export default function BudgetPage() {
         {/* Sector Expenditure */}
         <ChartCard title={`Expenditure by Sector (${data.sectorExpenditure[0]?.year})`} subtitle="Where the state spends its money" data={data.sectorExpenditure as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={400}>
-            <BarChart data={data.sectorExpenditure.sort((a, b) => b.amount - a.amount)} layout="vertical">
+            <BarChart data={[...data.sectorExpenditure].sort((a, b) => b.amount - a.amount)} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" tickFormatter={(v) => `${(v / 1000).toFixed(0)}K Cr`} />
               <YAxis type="category" dataKey="sector" width={140} tick={{ fontSize: 10 }} />
               <Tooltip formatter={(v) => `\u20B9${Number(v).toLocaleString()} Cr`} />
               <Bar dataKey="amount" name="\u20B9 Crores">
-                {data.sectorExpenditure.sort((a, b) => b.amount - a.amount).map((_, i) => (
+                {[...data.sectorExpenditure].sort((a, b) => b.amount - a.amount).map((_, i) => (
                   <Cell key={i} fill={COLORS.chart[i % COLORS.chart.length]} />
                 ))}
               </Bar>

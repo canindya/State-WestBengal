@@ -9,30 +9,32 @@ import ChartCard from '@/components/layout/ChartCard';
 import { COLORS } from '@/lib/colors';
 import { useTranslation } from '@/i18n/useTranslation';
 import {
-  BarChart, Bar, LineChart, Line, PieChart, Pie,
+  BarChart, Bar, LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Cell,
-  Treemap,
 } from 'recharts';
 
 export default function CrimePage() {
   const { t } = useTranslation();
   const [data, setData] = useState<CrimeData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    loadCrime().then(setData);
+    loadCrime()
+      .then(setData)
+      .catch(e => { console.error('Crime load error:', e); setError(e.message); });
   }, []);
 
+  if (error) return <div className="text-center py-20"><p className="text-durga font-semibold">Error loading crime data</p><p className="text-muted text-sm mt-2">{error}</p></div>;
   if (!data) return <div className="text-center py-20 text-muted">{t('crime.loading')}</div>;
 
   const latestYear = data.yearly[data.yearly.length - 1];
   const prevYear = data.yearly[data.yearly.length - 2];
   const changeRate = (((latestYear.total - prevYear.total) / prevYear.total) * 100).toFixed(1);
 
-  // Category treemap
-  const treemapData = data.categories
+  // Category bar chart
+  const categoryData = data.categories
     .filter(c => c.category !== 'Others')
-    .sort((a, b) => b.count - a.count)
-    .map(c => ({ name: c.category, size: c.count }));
+    .sort((a, b) => b.count - a.count);
 
   // District-wise sorted
   const districtCrime = [...data.districtWise].sort((a, b) => b.rate - a.rate);
@@ -69,30 +71,20 @@ export default function CrimePage() {
       </ChartCard>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-        {/* Crime Categories Treemap */}
-        <ChartCard title={`Crime Categories (${latestYear.year})`} subtitle="Major crime types by number of cases reported">
-          <ResponsiveContainer width="100%" height={400}>
-            <Treemap
-              data={treemapData}
-              dataKey="size"
-              aspectRatio={4 / 3}
-              stroke="#2D3748"
-              content={(props: Record<string, unknown>) => {
-                const { x, y, width, height, name, index } = props as { x: number; y: number; width: number; height: number; name: string; index: number };
-                const val = (props as Record<string, unknown>).size ?? (props as Record<string, unknown>).value ?? 0;
-                return (
-                  <g>
-                    <rect x={x} y={y} width={width} height={height} fill={COLORS.chart[(index ?? 0) % COLORS.chart.length]} opacity={0.85} rx={4} />
-                    {width > 60 && height > 30 && (
-                      <>
-                        <text x={x + 6} y={y + 16} fill="#fff" fontSize={10} fontWeight="bold">{name}</text>
-                        <text x={x + 6} y={y + 30} fill="#fff" fontSize={9} opacity={0.8}>{Number(val).toLocaleString()}</text>
-                      </>
-                    )}
-                  </g>
-                );
-              }}
-            />
+        {/* Crime Categories */}
+        <ChartCard title={`Crime Categories (${latestYear.year})`} subtitle="Major crime types by number of cases reported" data={categoryData as unknown as Record<string, unknown>[]}>
+          <ResponsiveContainer width="100%" height={500}>
+            <BarChart data={categoryData} layout="vertical">
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis type="number" tickFormatter={(v) => `${(v / 1000).toFixed(0)}K`} />
+              <YAxis type="category" dataKey="category" width={160} tick={{ fontSize: 10 }} />
+              <Tooltip formatter={(v) => Number(v).toLocaleString()} />
+              <Bar dataKey="count" name="Cases" radius={[0, 4, 4, 0]}>
+                {categoryData.map((_, i) => (
+                  <Cell key={i} fill={COLORS.chart[i % COLORS.chart.length]} />
+                ))}
+              </Bar>
+            </BarChart>
           </ResponsiveContainer>
         </ChartCard>
 

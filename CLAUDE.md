@@ -119,5 +119,13 @@ cp ../data/processed/*.json ../dashboard/public/data/
 cd dashboard && npm run build && npx next start -p 3000
 ```
 
+### Known issues / conventions
+- Always use `[...array].sort()` instead of `array.sort()` on state data — React 19 freezes state objects
+- All data-loading pages must have `.catch()` on the promise + error state display
+- Recharts `Tooltip` `formatter`: use `(v) =>` not `(v: number) =>` (type error)
+- Recharts `Pie` `label` with `percent`: needs `(percent ?? 0)` null guard
+- Recharts `Treemap` `content`: must return `<g />` not `null`
+- Avoid Treemap for categories with wide count ranges — use horizontal bar charts instead
+
 ## Session History
-- **Session 1** (2026-04-04): Project setup — scaffolded Next.js 16 app, created shared infrastructure (theme, colors, components, i18n), all 10 page routes, documentation files. Modeled after Kolkata City Dashboard.
+- **Session 1** (2026-04-04): Project setup and full build — scaffolded Next.js 16 app, created shared infrastructure (theme, colors, components, i18n), all 10 page routes with full chart content, curated JSON data for all domains, Python data pipeline for Open-Meteo API. Built Phase 1 (Landing, Climate, Air Quality, Budget, Health, Map) and Phase 2 (Demographics, Education, Crime, Transport) pages with 40+ Recharts visualizations. Fixed .sort() state mutation bugs, added error handling to all pages, replaced unreadable crime treemap with bar chart. Documentation files created (CLAUDE.md, DESIGN.md, todo.md, CHANGELOG.md).

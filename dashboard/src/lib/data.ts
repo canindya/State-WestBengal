@@ -14,9 +14,16 @@ import type {
 const BASE = (process.env.NEXT_PUBLIC_BASE_PATH || '') + '/data';
 
 async function fetchJSON<T>(path: string): Promise<T> {
-  const res = await fetch(`${BASE}/${path}`);
-  if (!res.ok) throw new Error(`Failed to fetch ${path}: ${res.status}`);
-  return res.json();
+  const url = `${BASE}/${path}`;
+  console.log(`[data] Fetching ${url}`);
+  const res = await fetch(url);
+  if (!res.ok) {
+    console.error(`[data] Failed to fetch ${url}: ${res.status} ${res.statusText}`);
+    throw new Error(`Failed to fetch ${path}: ${res.status}`);
+  }
+  const json = await res.json();
+  console.log(`[data] Loaded ${path}:`, typeof json, Array.isArray(json) ? `(${json.length} items)` : '');
+  return json;
 }
 
 export const loadOverview = () => fetchJSON<OverviewData>('overview_wb.json');

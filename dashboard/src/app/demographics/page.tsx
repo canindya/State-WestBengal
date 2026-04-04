@@ -16,11 +16,15 @@ import {
 export default function DemographicsPage() {
   const { t } = useTranslation();
   const [data, setData] = useState<DemographicsData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    loadDemographics().then(setData);
+    loadDemographics()
+      .then(setData)
+      .catch(e => { console.error('Demographics load error:', e); setError(e.message); });
   }, []);
 
+  if (error) return <div className="text-center py-20"><p className="text-durga font-semibold">Error loading demographics data</p><p className="text-muted text-sm mt-2">{error}</p></div>;
   if (!data) return <div className="text-center py-20 text-muted">{t('demographics.loading')}</div>;
 
   const totalPop = data.districts.reduce((s, d) => s + d.population, 0);

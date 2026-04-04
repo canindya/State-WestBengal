@@ -95,7 +95,22 @@ West Bengal, India's fourth most populous state, has rich socio-economic data sc
 
 ## 5. Phased Implementation
 
-- **Phase 1 (MVP):** Landing, Climate, Air Quality, Budget, Health, Map
-- **Phase 2:** Demographics, Education, Crime, Transport
-- **Phase 3:** Advanced features (interactive queries, historical comparison, data export)
-- **Phase 4:** Bengali language support, accessibility, performance tuning
+- **Phase 1 (MVP):** Landing, Climate, Air Quality, Budget, Health, Map — COMPLETE
+- **Phase 2:** Demographics, Education, Crime, Transport — COMPLETE
+- **Phase 3:** Real data pipeline, data quality, GitHub Pages deployment
+- **Phase 4:** Cross-domain correlations, Bengali language, accessibility
+- **Phase 5:** Performance tuning, SEO, analytics
+
+## 6. Lessons Learned
+
+### 6.1 React State Immutability
+**Issue:** `.sort()` on arrays from React state (`useState`) causes "Cannot assign to read only property" errors in React 19 strict mode. React freezes state objects.
+**Fix:** Always use `[...array].sort()` to create a copy before sorting. Applied across budget, education, and crime pages.
+
+### 6.2 Client-Side Data Loading Error Handling
+**Issue:** Pages using `loadData().then(setData)` without `.catch()` silently swallowed fetch errors, leaving pages stuck on "Loading..." with no indication of what went wrong.
+**Fix:** Added `.catch()` handlers and error state display on all 8 data-loading pages. Added console logging to `fetchJSON` in `data.ts` for debugging.
+
+### 6.3 Treemap Readability
+**Issue:** Recharts Treemap renders small cells for minor categories where text labels don't fit, making the chart unreadable.
+**Fix:** Replaced Crime Categories treemap with a horizontal bar chart — clearer labels, sortable, and each category is always visible.

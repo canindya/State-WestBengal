@@ -16,11 +16,15 @@ import {
 export default function EducationPage() {
   const { t } = useTranslation();
   const [data, setData] = useState<EducationData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    loadEducation().then(setData);
+    loadEducation()
+      .then(setData)
+      .catch(e => { console.error('Education load error:', e); setError(e.message); });
   }, []);
 
+  if (error) return <div className="text-center py-20"><p className="text-durga font-semibold">Error loading education data</p><p className="text-muted text-sm mt-2">{error}</p></div>;
   if (!data) return <div className="text-center py-20 text-muted">{t('education.loading')}</div>;
 
   const totalSchools = data.schools.reduce((s, d) => s + d.count, 0);
@@ -103,13 +107,13 @@ export default function EducationPage() {
       <div className="mt-6">
         <ChartCard title="School Infrastructure" subtitle="Percentage of schools with each facility (UDISE+ 2024-25)" data={data.infrastructure as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={data.infrastructure.sort((a, b) => b.percentage - a.percentage)} layout="vertical">
+            <BarChart data={[...data.infrastructure].sort((a, b) => b.percentage - a.percentage)} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
               <YAxis type="category" dataKey="metric" width={130} tick={{ fontSize: 10 }} />
               <Tooltip formatter={(v) => `${v}%`} />
               <Bar dataKey="percentage" name="% Schools" radius={[0, 4, 4, 0]}>
-                {data.infrastructure.sort((a, b) => b.percentage - a.percentage).map((d, i) => (
+                {[...data.infrastructure].sort((a, b) => b.percentage - a.percentage).map((d, i) => (
                   <Cell key={i} fill={d.percentage >= 90 ? COLORS.sundarbansGreen : d.percentage >= 60 ? COLORS.mustardYellow : COLORS.durgaVermillion} />
                 ))}
               </Bar>
@@ -137,13 +141,13 @@ export default function EducationPage() {
         {/* Teacher Metrics */}
         <ChartCard title="Pupil-Teacher Ratio by District" subtitle="Lower is better (RTE norm: 30:1 for primary)" data={data.teacherMetrics as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={data.teacherMetrics.sort((a, b) => b.pupilTeacherRatio - a.pupilTeacherRatio)} layout="vertical">
+            <BarChart data={[...data.teacherMetrics].sort((a, b) => b.pupilTeacherRatio - a.pupilTeacherRatio)} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" />
               <YAxis type="category" dataKey="district" width={120} tick={{ fontSize: 10 }} />
               <Tooltip />
               <Bar dataKey="pupilTeacherRatio" name="Pupil-Teacher Ratio" radius={[0, 4, 4, 0]}>
-                {data.teacherMetrics.sort((a, b) => b.pupilTeacherRatio - a.pupilTeacherRatio).map((d, i) => (
+                {[...data.teacherMetrics].sort((a, b) => b.pupilTeacherRatio - a.pupilTeacherRatio).map((d, i) => (
                   <Cell key={i} fill={d.pupilTeacherRatio > 40 ? COLORS.durgaVermillion : d.pupilTeacherRatio > 30 ? COLORS.mustardYellow : COLORS.sundarbansGreen} />
                 ))}
               </Bar>

@@ -4,6 +4,18 @@ All notable changes to the West Bengal State Dashboard will be documented in thi
 
 ---
 
+## 2026-04-04 — Bug fixes, error handling, and documentation
+
+- Fix: `.sort()` on frozen React state arrays causing runtime TypeError (budget, education pages)
+- Fix: Replace unreadable Crime Categories treemap with horizontal bar chart
+- Fix: Add error handling (`.catch()` + error state) to all 8 data-loading pages
+- Add: Console logging to `fetchJSON` in `data.ts` for debugging
+- Update: DESIGN.md with lessons learned (state immutability, error handling, treemap readability)
+- Update: CLAUDE.md with session history and known conventions
+- Update: todo.md with Phase 3-5 roadmap
+
+---
+
 ## 2026-04-04 — Phase 2: All pages complete
 
 **Commit:** `163ba0b` — Add Phase 2 pages: Demographics, Education, Crime, Transport

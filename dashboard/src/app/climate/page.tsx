@@ -17,11 +17,15 @@ import {
 export default function ClimatePage() {
   const { t } = useTranslation();
   const [data, setData] = useState<ClimateData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    loadClimate().then(setData);
+    loadClimate()
+      .then(setData)
+      .catch(e => { console.error('Climate load error:', e); setError(e.message); });
   }, []);
 
+  if (error) return <div className="text-center py-20"><p className="text-durga font-semibold">Error loading climate data</p><p className="text-muted text-sm mt-2">{error}</p></div>;
   if (!data) return <div className="text-center py-20 text-muted">{t('climate.loading')}</div>;
 
   // Sort districts by rainfall for the bar chart

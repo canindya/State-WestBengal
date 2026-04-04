@@ -19,12 +19,12 @@ export default function EnvironmentPage() {
   const { t } = useTranslation();
   const [data, setData] = useState<AQIData | null>(null);
   const [activeCities, setActiveCities] = useState<Set<string>>(new Set());
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    loadAQI().then(d => {
-      setData(d);
-      setActiveCities(new Set(d.cities));
-    });
+    loadAQI()
+      .then(d => { setData(d); setActiveCities(new Set(d.cities)); })
+      .catch(e => { console.error('AQI load error:', e); setError(e.message); });
   }, []);
 
   // City averages
@@ -71,6 +71,7 @@ export default function EnvironmentPage() {
     }));
   }, [data]);
 
+  if (error) return <div className="text-center py-20"><p className="text-durga font-semibold">Error loading air quality data</p><p className="text-muted text-sm mt-2">{error}</p></div>;
   if (!data) return <div className="text-center py-20 text-muted">{t('environment.loading')}</div>;
 
   const worstCity = cityAvg[0];

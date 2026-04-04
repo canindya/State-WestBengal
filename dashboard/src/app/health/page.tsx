@@ -17,11 +17,15 @@ import {
 export default function HealthPage() {
   const { t } = useTranslation();
   const [data, setData] = useState<HealthData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    loadHealth().then(setData);
+    loadHealth()
+      .then(setData)
+      .catch(e => { console.error('Health load error:', e); setError(e.message); });
   }, []);
 
+  if (error) return <div className="text-center py-20"><p className="text-durga font-semibold">Error loading health data</p><p className="text-muted text-sm mt-2">{error}</p></div>;
   if (!data) return <div className="text-center py-20 text-muted">{t('health.loading')}</div>;
 
   const totalBeds = data.infrastructure.reduce((s, d) => s + d.beds, 0);
