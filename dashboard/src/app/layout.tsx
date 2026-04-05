@@ -23,8 +23,25 @@ const notoBengali = Noto_Sans_Bengali({
 });
 
 export const metadata: Metadata = {
-  title: "West Bengal State Dashboard",
-  description: "Interactive data dashboard for West Bengal - demographics, climate, air quality, health, education, crime, transport, budget, and geographic insights from open data sources.",
+  title: {
+    default: "West Bengal State Dashboard",
+    template: "%s | West Bengal Dashboard",
+  },
+  description: "Interactive data dashboard for West Bengal — demographics, climate, air quality, health, education, crime, transport, budget, and geographic insights from 30+ open data sources.",
+  keywords: ["West Bengal", "dashboard", "open data", "demographics", "climate", "air quality", "health", "education", "crime", "transport", "budget", "India"],
+  authors: [{ name: "canindya" }],
+  openGraph: {
+    title: "West Bengal State Dashboard",
+    description: "Interactive data dashboard visualizing open data across 10 domains for West Bengal, India.",
+    type: "website",
+    locale: "en_IN",
+    siteName: "West Bengal State Dashboard",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "West Bengal State Dashboard",
+    description: "Interactive data dashboard visualizing open data across 10 domains for West Bengal, India.",
+  },
 };
 
 export default function RootLayout({

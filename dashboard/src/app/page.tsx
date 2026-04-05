@@ -44,9 +44,9 @@ export default function HomePage() {
       {/* Key Stats Ribbon */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-3 mb-10">
         <StatCard label={t('home.stat_population')} value="10.3 Cr" subtitle="2024 projection" color="ganga" />
-        <StatCard label={t('home.stat_density')} value="1,029" subtitle="per km\u00B2" color="shantiniketan" />
-        <StatCard label={t('home.stat_literacy')} value="77.08%" subtitle="Census 2011" color="sundarbans" />
-        <StatCard label={t('home.stat_sexRatio')} value="950" subtitle="females per 1000 males" color="durga" />
+        <StatCard label={t('home.stat_density')} value="10.1 Cr" subtitle="RGI Projection 2026" color="shantiniketan" />
+        <StatCard label={t('home.stat_literacy')} value="76.1%" subtitle="Female 15-49 (NFHS-5)" color="sundarbans" />
+        <StatCard label={t('home.stat_sexRatio')} value="973" subtitle="at birth (NFHS-5)" color="durga" />
         <StatCard label={t('home.stat_gsdp')} value="\u20B915.4L Cr" subtitle="2024-25 (est.)" color="mustard" />
         <StatCard label={t('home.stat_hdi')} value="0.641" subtitle="Rank 28 (2021)" color="tea" />
         <StatCard label={t('home.stat_forest')} value="18.93%" subtitle="ISFR 2023" color="sundarbans" />
@@ -72,7 +72,7 @@ export default function HomePage() {
       <h2 className="text-xl font-semibold mb-4">{t('home.dataSources')}</h2>
       <div className="rounded-xl border border-border bg-card p-5">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 text-sm text-muted">
-          <span>Census 2011</span>
+          <span>RGI Projections 2020</span>
           <span>India Meteorological Dept</span>
           <span>Open-Meteo API</span>
           <span>NCRB</span>

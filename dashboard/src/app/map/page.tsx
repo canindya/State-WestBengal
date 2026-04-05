@@ -21,13 +21,14 @@ const GeoJSON = dynamic(
   { ssr: false }
 );
 
-type MetricKey = 'population' | 'density' | 'literacy' | 'sexRatio';
+type MetricKey = 'sexRatioAtBirth' | 'femaleLiteracy15_49' | 'institutionalDelivery' | 'fullImmunization' | 'childrenStunted';
 
 const METRIC_OPTIONS: { key: MetricKey; label: string; format: (v: number) => string }[] = [
-  { key: 'population', label: 'Population', format: (v) => v.toLocaleString() },
-  { key: 'density', label: 'Density (per km\u00B2)', format: (v) => v.toLocaleString() },
-  { key: 'literacy', label: 'Literacy Rate (%)', format: (v) => `${v.toFixed(1)}%` },
-  { key: 'sexRatio', label: 'Sex Ratio', format: (v) => v.toString() },
+  { key: 'sexRatioAtBirth', label: 'Sex Ratio at Birth', format: (v) => v.toString() },
+  { key: 'femaleLiteracy15_49', label: 'Female Literacy (%)', format: (v) => `${v.toFixed(1)}%` },
+  { key: 'institutionalDelivery', label: 'Institutional Delivery (%)', format: (v) => `${v.toFixed(1)}%` },
+  { key: 'fullImmunization', label: 'Full Immunization (%)', format: (v) => `${v.toFixed(1)}%` },
+  { key: 'childrenStunted', label: 'Child Stunting (%)', format: (v) => `${v.toFixed(1)}%` },
 ];
 
 function getMetricValue(props: DistrictFeature['properties'], metric: MetricKey): number {
@@ -54,7 +55,7 @@ function interpolateColor(value: number, min: number, max: number): string {
 export default function MapPage() {
   const { t } = useTranslation();
   const [geoData, setGeoData] = useState<DistrictGeoJSON | null>(null);
-  const [metric, setMetric] = useState<MetricKey>('population');
+  const [metric, setMetric] = useState<MetricKey>('sexRatioAtBirth');
   const [hoveredDistrict, setHoveredDistrict] = useState<string | null>(null);
 
   useEffect(() => {

@@ -1,60 +1,356 @@
 {
   "districtRainfall": [
-    { "district": "Kolkata", "annual": 1582, "monsoon": 1264, "winter": 25, "preMonsoon": 183, "postMonsoon": 110 },
-    { "district": "North 24 Parganas", "annual": 1632, "monsoon": 1310, "winter": 22, "preMonsoon": 175, "postMonsoon": 125 },
-    { "district": "South 24 Parganas", "annual": 1812, "monsoon": 1450, "winter": 20, "preMonsoon": 195, "postMonsoon": 147 },
-    { "district": "Howrah", "annual": 1520, "monsoon": 1215, "winter": 24, "preMonsoon": 172, "postMonsoon": 109 },
-    { "district": "Hooghly", "annual": 1480, "monsoon": 1185, "winter": 26, "preMonsoon": 168, "postMonsoon": 101 },
-    { "district": "Barddhaman (Purba)", "annual": 1390, "monsoon": 1112, "winter": 28, "preMonsoon": 155, "postMonsoon": 95 },
-    { "district": "Barddhaman (Paschim)", "annual": 1320, "monsoon": 1055, "winter": 30, "preMonsoon": 148, "postMonsoon": 87 },
-    { "district": "Nadia", "annual": 1510, "monsoon": 1208, "winter": 23, "preMonsoon": 170, "postMonsoon": 109 },
-    { "district": "Murshidabad", "annual": 1440, "monsoon": 1152, "winter": 22, "preMonsoon": 162, "postMonsoon": 104 },
-    { "district": "Birbhum", "annual": 1350, "monsoon": 1080, "winter": 25, "preMonsoon": 148, "postMonsoon": 97 },
-    { "district": "Bankura", "annual": 1380, "monsoon": 1104, "winter": 24, "preMonsoon": 152, "postMonsoon": 100 },
-    { "district": "Purulia", "annual": 1310, "monsoon": 1048, "winter": 22, "preMonsoon": 145, "postMonsoon": 95 },
-    { "district": "Medinipur (Paschim)", "annual": 1520, "monsoon": 1216, "winter": 18, "preMonsoon": 178, "postMonsoon": 108 },
-    { "district": "Medinipur (Purba)", "annual": 1610, "monsoon": 1288, "winter": 16, "preMonsoon": 185, "postMonsoon": 121 },
-    { "district": "Jhargram", "annual": 1420, "monsoon": 1136, "winter": 19, "preMonsoon": 162, "postMonsoon": 103 },
-    { "district": "Malda", "annual": 1580, "monsoon": 1264, "winter": 18, "preMonsoon": 182, "postMonsoon": 116 },
-    { "district": "Uttar Dinajpur", "annual": 1820, "monsoon": 1456, "winter": 15, "preMonsoon": 212, "postMonsoon": 137 },
-    { "district": "Dakshin Dinajpur", "annual": 1700, "monsoon": 1360, "winter": 16, "preMonsoon": 195, "postMonsoon": 129 },
-    { "district": "Jalpaiguri", "annual": 3200, "monsoon": 2560, "winter": 22, "preMonsoon": 380, "postMonsoon": 238 },
-    { "district": "Alipurduar", "annual": 3650, "monsoon": 2920, "winter": 25, "preMonsoon": 420, "postMonsoon": 285 },
-    { "district": "Cooch Behar", "annual": 2900, "monsoon": 2320, "winter": 18, "preMonsoon": 345, "postMonsoon": 217 },
-    { "district": "Darjeeling", "annual": 3100, "monsoon": 2480, "winter": 35, "preMonsoon": 365, "postMonsoon": 220 },
-    { "district": "Kalimpong", "annual": 2800, "monsoon": 2240, "winter": 30, "preMonsoon": 330, "postMonsoon": 200 }
+    {
+      "district": "Kolkata",
+      "annual": 1893,
+      "monsoon": 1326,
+      "winter": 67,
+      "preMonsoon": 275,
+      "postMonsoon": 224
+    },
+    {
+      "district": "Howrah",
+      "annual": 1874,
+      "monsoon": 1323,
+      "winter": 69,
+      "preMonsoon": 267,
+      "postMonsoon": 215
+    },
+    {
+      "district": "Barddhaman (Paschim)",
+      "annual": 1582,
+      "monsoon": 1175,
+      "winter": 50,
+      "preMonsoon": 200,
+      "postMonsoon": 157
+    },
+    {
+      "district": "Barddhaman (Purba)",
+      "annual": 1619,
+      "monsoon": 1169,
+      "winter": 61,
+      "preMonsoon": 223,
+      "postMonsoon": 166
+    },
+    {
+      "district": "Darjeeling",
+      "annual": 3412,
+      "monsoon": 2805,
+      "winter": 28,
+      "preMonsoon": 390,
+      "postMonsoon": 189
+    },
+    {
+      "district": "Medinipur (Purba)",
+      "annual": 1876,
+      "monsoon": 1349,
+      "winter": 73,
+      "preMonsoon": 218,
+      "postMonsoon": 236
+    },
+    {
+      "district": "Malda",
+      "annual": 1611,
+      "monsoon": 1191,
+      "winter": 31,
+      "preMonsoon": 251,
+      "postMonsoon": 138
+    },
+    {
+      "district": "Murshidabad",
+      "annual": 1631,
+      "monsoon": 1129,
+      "winter": 45,
+      "preMonsoon": 307,
+      "postMonsoon": 149
+    },
+    {
+      "district": "Medinipur (Paschim)",
+      "annual": 1724,
+      "monsoon": 1265,
+      "winter": 57,
+      "preMonsoon": 224,
+      "postMonsoon": 179
+    },
+    {
+      "district": "North 24 Parganas",
+      "annual": 1632,
+      "monsoon": 1310,
+      "winter": 22,
+      "preMonsoon": 175,
+      "postMonsoon": 125
+    },
+    {
+      "district": "South 24 Parganas",
+      "annual": 1812,
+      "monsoon": 1450,
+      "winter": 20,
+      "preMonsoon": 195,
+      "postMonsoon": 147
+    },
+    {
+      "district": "Hooghly",
+      "annual": 1480,
+      "monsoon": 1185,
+      "winter": 26,
+      "preMonsoon": 168,
+      "postMonsoon": 101
+    },
+    {
+      "district": "Nadia",
+      "annual": 1510,
+      "monsoon": 1208,
+      "winter": 23,
+      "preMonsoon": 170,
+      "postMonsoon": 109
+    },
+    {
+      "district": "Birbhum",
+      "annual": 1350,
+      "monsoon": 1080,
+      "winter": 25,
+      "preMonsoon": 148,
+      "postMonsoon": 97
+    },
+    {
+      "district": "Bankura",
+      "annual": 1380,
+      "monsoon": 1104,
+      "winter": 24,
+      "preMonsoon": 152,
+      "postMonsoon": 100
+    },
+    {
+      "district": "Purulia",
+      "annual": 1310,
+      "monsoon": 1048,
+      "winter": 22,
+      "preMonsoon": 145,
+      "postMonsoon": 95
+    },
+    {
+      "district": "Jhargram",
+      "annual": 1420,
+      "monsoon": 1136,
+      "winter": 19,
+      "preMonsoon": 162,
+      "postMonsoon": 103
+    },
+    {
+      "district": "Uttar Dinajpur",
+      "annual": 1820,
+      "monsoon": 1456,
+      "winter": 15,
+      "preMonsoon": 212,
+      "postMonsoon": 137
+    },
+    {
+      "district": "Dakshin Dinajpur",
+      "annual": 1700,
+      "monsoon": 1360,
+      "winter": 16,
+      "preMonsoon": 195,
+      "postMonsoon": 129
+    },
+    {
+      "district": "Jalpaiguri",
+      "annual": 3200,
+      "monsoon": 2560,
+      "winter": 22,
+      "preMonsoon": 380,
+      "postMonsoon": 238
+    },
+    {
+      "district": "Alipurduar",
+      "annual": 3650,
+      "monsoon": 2920,
+      "winter": 25,
+      "preMonsoon": 420,
+      "postMonsoon": 285
+    },
+    {
+      "district": "Cooch Behar",
+      "annual": 2900,
+      "monsoon": 2320,
+      "winter": 18,
+      "preMonsoon": 345,
+      "postMonsoon": 217
+    },
+    {
+      "district": "Kalimpong",
+      "annual": 2800,
+      "monsoon": 2240,
+      "winter": 30,
+      "preMonsoon": 330,
+      "postMonsoon": 200
+    }
   ],
   "monthlyRainfall": [
-    { "month": "Jan", "rainfall": 12 },
-    { "month": "Feb", "rainfall": 18 },
-    { "month": "Mar", "rainfall": 32 },
-    { "month": "Apr", "rainfall": 58 },
-    { "month": "May", "rainfall": 112 },
-    { "month": "Jun", "rainfall": 260 },
-    { "month": "Jul", "rainfall": 340 },
-    { "month": "Aug", "rainfall": 310 },
-    { "month": "Sep", "rainfall": 252 },
-    { "month": "Oct", "rainfall": 128 },
-    { "month": "Nov", "rainfall": 22 },
-    { "month": "Dec", "rainfall": 8 }
+    {
+      "month": "Jan",
+      "rainfall": 11
+    },
+    {
+      "month": "Feb",
+      "rainfall": 23
+    },
+    {
+      "month": "Mar",
+      "rainfall": 32
+    },
+    {
+      "month": "Apr",
+      "rainfall": 64
+    },
+    {
+      "month": "May",
+      "rainfall": 168
+    },
+    {
+      "month": "Jun",
+      "rainfall": 273
+    },
+    {
+      "month": "Jul",
+      "rainfall": 404
+    },
+    {
+      "month": "Aug",
+      "rainfall": 389
+    },
+    {
+      "month": "Sep",
+      "rainfall": 324
+    },
+    {
+      "month": "Oct",
+      "rainfall": 166
+    },
+    {
+      "month": "Nov",
+      "rainfall": 17
+    },
+    {
+      "month": "Dec",
+      "rainfall": 21
+    }
   ],
   "temperatureTrend": [
-    { "year": 1990, "maxTemp": 32.5, "minTemp": 21.2, "avgTemp": 26.9 },
-    { "year": 1995, "maxTemp": 32.8, "minTemp": 21.5, "avgTemp": 27.2 },
-    { "year": 2000, "maxTemp": 33.1, "minTemp": 21.8, "avgTemp": 27.5 },
-    { "year": 2005, "maxTemp": 33.3, "minTemp": 22.0, "avgTemp": 27.7 },
-    { "year": 2010, "maxTemp": 33.6, "minTemp": 22.2, "avgTemp": 27.9 },
-    { "year": 2015, "maxTemp": 33.9, "minTemp": 22.5, "avgTemp": 28.2 },
-    { "year": 2020, "maxTemp": 34.2, "minTemp": 22.8, "avgTemp": 28.5 },
-    { "year": 2025, "maxTemp": 34.5, "minTemp": 23.0, "avgTemp": 28.8 }
+    {
+      "year": 2015,
+      "maxTemp": 30.1,
+      "minTemp": 21.7,
+      "avgTemp": 25.5
+    },
+    {
+      "year": 2016,
+      "maxTemp": 30.5,
+      "minTemp": 22.0,
+      "avgTemp": 25.8
+    },
+    {
+      "year": 2017,
+      "maxTemp": 30.3,
+      "minTemp": 21.8,
+      "avgTemp": 25.6
+    },
+    {
+      "year": 2018,
+      "maxTemp": 30.1,
+      "minTemp": 21.1,
+      "avgTemp": 25.2
+    },
+    {
+      "year": 2019,
+      "maxTemp": 30.2,
+      "minTemp": 21.5,
+      "avgTemp": 25.4
+    },
+    {
+      "year": 2020,
+      "maxTemp": 29.9,
+      "minTemp": 21.3,
+      "avgTemp": 25.2
+    },
+    {
+      "year": 2021,
+      "maxTemp": 30.4,
+      "minTemp": 21.6,
+      "avgTemp": 25.5
+    },
+    {
+      "year": 2022,
+      "maxTemp": 30.5,
+      "minTemp": 21.3,
+      "avgTemp": 25.4
+    },
+    {
+      "year": 2023,
+      "maxTemp": 31.4,
+      "minTemp": 21.7,
+      "avgTemp": 26.1
+    },
+    {
+      "year": 2024,
+      "maxTemp": 31.0,
+      "minTemp": 21.7,
+      "avgTemp": 25.9
+    },
+    {
+      "year": 2025,
+      "maxTemp": 30.8,
+      "minTemp": 21.6,
+      "avgTemp": 25.7
+    },
+    {
+      "year": 2026,
+      "maxTemp": 28.7,
+      "minTemp": 16.8,
+      "avgTemp": 22.3
+    }
   ],
   "extremeEvents": [
-    { "year": 2020, "event": "Cyclone Amphan", "type": "Cyclone", "affected": "South 24 Parganas, Kolkata, North 24 Parganas" },
-    { "year": 2021, "event": "Cyclone Yaas", "type": "Cyclone", "affected": "Purba Medinipur, South 24 Parganas" },
-    { "year": 2022, "event": "Severe Floods", "type": "Flood", "affected": "Murshidabad, Malda, Nadia" },
-    { "year": 2023, "event": "Heat Wave", "type": "Heat Wave", "affected": "Bankura, Purulia, Birbhum, Barddhaman" },
-    { "year": 2023, "event": "Flash Floods", "type": "Flood", "affected": "Darjeeling, Kalimpong, Jalpaiguri" },
-    { "year": 2024, "event": "Cyclone Remal", "type": "Cyclone", "affected": "South 24 Parganas, North 24 Parganas, Kolkata" },
-    { "year": 2024, "event": "Severe Heat Wave", "type": "Heat Wave", "affected": "Bankura, Purulia, Birbhum, Paschim Barddhaman" }
+    {
+      "year": 2020,
+      "event": "Cyclone Amphan",
+      "type": "Cyclone",
+      "affected": "South 24 Parganas, Kolkata, North 24 Parganas"
+    },
+    {
+      "year": 2021,
+      "event": "Cyclone Yaas",
+      "type": "Cyclone",
+      "affected": "Purba Medinipur, South 24 Parganas"
+    },
+    {
+      "year": 2022,
+      "event": "Severe Floods",
+      "type": "Flood",
+      "affected": "Murshidabad, Malda, Nadia"
+    },
+    {
+      "year": 2023,
+      "event": "Heat Wave",
+      "type": "Heat Wave",
+      "affected": "Bankura, Purulia, Birbhum, Barddhaman"
+    },
+    {
+      "year": 2023,
+      "event": "Flash Floods",
+      "type": "Flood",
+      "affected": "Darjeeling, Kalimpong, Jalpaiguri"
+    },
+    {
+      "year": 2024,
+      "event": "Cyclone Remal",
+      "type": "Cyclone",
+      "affected": "South 24 Parganas, North 24 Parganas, Kolkata"
+    },
+    {
+      "year": 2024,
+      "event": "Severe Heat Wave",
+      "type": "Heat Wave",
+      "affected": "Bankura, Purulia, Birbhum, Paschim Barddhaman"
+    }
   ]
 }

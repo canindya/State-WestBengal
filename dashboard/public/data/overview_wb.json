@@ -1,8 +1,8 @@
 {
   "population": { "value": "10.32 Cr", "year": 2024, "source": "statisticstimes.com (projection from Census 2011)" },
-  "populationDensity": { "value": "1,029", "unit": "per km\u00B2", "source": "Census 2011" },
-  "literacy": { "value": "77.08%", "male": "82.67%", "female": "71.16%", "source": "Census 2011" },
-  "sexRatio": { "value": 950, "source": "Census 2011" },
+  "estimatedPopulation": { "value": "10.06 Cr", "year": 2026, "source": "RGI Population Projections (2020)" },
+  "femaleLiteracy": { "value": "76.1%", "ageGroup": "15-49", "source": "NFHS-5 (2019-21)" },
+  "sexRatioAtBirth": { "value": 973, "source": "NFHS-5 (2019-21)" },
   "gsdp": { "value": "\u20B915.40 Lakh Cr", "growthRate": "8.4%", "year": "2024-25 (Advance Est.)", "source": "WB Finance Department" },
   "hdi": { "value": 0.641, "rank": 28, "source": "NHSRC India Health Dossier 2021" },
   "forestCover": { "value": "16,832 km\u00B2", "percentage": "18.93%", "source": "ISFR 2023" },

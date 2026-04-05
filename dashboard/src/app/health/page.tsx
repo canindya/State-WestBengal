@@ -65,7 +65,7 @@ export default function HealthPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Infrastructure by District */}
-        <ChartCard title="Hospital Beds by District" subtitle="Top 12 districts by number of hospital beds" data={topInfra as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Hospital Beds by District" subtitle="Top 12 districts by number of hospital beds" source="NHM West Bengal" data={topInfra as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={topInfra} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
@@ -80,7 +80,7 @@ export default function HealthPage() {
         </ChartCard>
 
         {/* Immunization Coverage Radar */}
-        <ChartCard title="Immunization Coverage" subtitle="Percentage of children (12-23 months) immunized by vaccine type">
+        <ChartCard title="Immunization Coverage" subtitle="Percentage of children (12-23 months) immunized by vaccine type" source="NFHS-5 (2019-21)">
           <ResponsiveContainer width="100%" height={400}>
             <RadarChart data={immunizationData}>
               <PolarGrid />
@@ -95,7 +95,7 @@ export default function HealthPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* IMR Trend */}
-        <ChartCard title="Infant Mortality Rate Trend" subtitle="Deaths per 1,000 live births (SDG target: 12)" data={data.indicators.imr.trend as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Infant Mortality Rate Trend" subtitle="Deaths per 1,000 live births (SDG target: 12)" source="SRS, NFHS-5 (2019-21)" data={data.indicators.imr.trend as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={data.indicators.imr.trend}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -110,7 +110,7 @@ export default function HealthPage() {
         </ChartCard>
 
         {/* MMR Trend */}
-        <ChartCard title="Maternal Mortality Ratio Trend" subtitle="Deaths per 100,000 live births (SDG target: 70)" data={data.indicators.mmr.trend as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Maternal Mortality Ratio Trend" subtitle="Deaths per 100,000 live births (SDG target: 70)" source="SRS, NFHS-5 (2019-21)" data={data.indicators.mmr.trend as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={data.indicators.mmr.trend}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -126,7 +126,7 @@ export default function HealthPage() {
 
       {/* Nutrition Indicators */}
       <div className="mt-6">
-        <ChartCard title="Nutrition Indicators (NFHS-5)" subtitle="Percentage of children and adults affected" data={nutritionData as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Nutrition Indicators (NFHS-5)" subtitle="Percentage of children and adults affected" source="NFHS-5 (2019-21)" data={nutritionData as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={nutritionData}>
               <CartesianGrid strokeDasharray="3 3" />

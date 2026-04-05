@@ -55,7 +55,7 @@ export default function CrimePage() {
       </div>
 
       {/* Yearly Crime Trend */}
-      <ChartCard title="Crime Trend (2018-2023)" subtitle="Total cognizable crimes registered in West Bengal" data={data.yearly as unknown as Record<string, unknown>[]}>
+      <ChartCard title="Crime Trend (2018-2023)" subtitle="Total cognizable crimes registered in West Bengal" source="NCRB — Crime in India 2023" data={data.yearly as unknown as Record<string, unknown>[]}>
         <ResponsiveContainer width="100%" height={350}>
           <LineChart data={data.yearly}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -72,7 +72,7 @@ export default function CrimePage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Crime Categories */}
-        <ChartCard title={`Crime Categories (${latestYear.year})`} subtitle="Major crime types by number of cases reported" data={categoryData as unknown as Record<string, unknown>[]}>
+        <ChartCard title={`Crime Categories (${latestYear.year})`} subtitle="Major crime types by number of cases reported" source="NCRB — Crime in India 2023" data={categoryData as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={500}>
             <BarChart data={categoryData} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
@@ -89,7 +89,7 @@ export default function CrimePage() {
         </ChartCard>
 
         {/* Special Categories */}
-        <ChartCard title={`Special Category Crimes (${latestYear.year})`} subtitle="Crimes against women, children, SC/ST, and seniors" data={data.specialCategories as unknown as Record<string, unknown>[]}>
+        <ChartCard title={`Special Category Crimes (${latestYear.year})`} subtitle="Crimes against women, children, SC/ST, and seniors" source="NCRB — Crime in India 2023" data={data.specialCategories as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={data.specialCategories} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
@@ -108,7 +108,7 @@ export default function CrimePage() {
 
       {/* District-wise Crime Rate */}
       <div className="mt-6">
-        <ChartCard title="District-wise Crime Rate" subtitle="Crimes per 100,000 population (reporting districts)" data={districtCrime as unknown as Record<string, unknown>[]}>
+        <ChartCard title="District-wise Crime Rate" subtitle="Crimes per 100,000 population (reporting districts)" source="NCRB — Crime in India 2023" data={districtCrime as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={districtCrime} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />

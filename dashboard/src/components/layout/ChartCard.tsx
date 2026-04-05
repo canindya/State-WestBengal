@@ -4,6 +4,7 @@ import { useTranslation } from '@/i18n/useTranslation';
 interface ChartCardProps {
   title: string;
   subtitle?: string;
+  source?: string;
   children: React.ReactNode;
   className?: string;
   data?: Record<string, unknown>[];
@@ -36,7 +37,7 @@ function slugify(text: string): string {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 }
 
-export default function ChartCard({ title, subtitle, children, className = '', data, filename }: ChartCardProps) {
+export default function ChartCard({ title, subtitle, source, children, className = '', data, filename }: ChartCardProps) {
   const { t } = useTranslation();
   return (
     <div className={`rounded-xl border border-border bg-card p-4 sm:p-6 ${className}`}>
@@ -57,6 +58,7 @@ export default function ChartCard({ title, subtitle, children, className = '', d
       {subtitle && <p className="text-sm text-muted mb-4">{subtitle}</p>}
       {!subtitle && <div className="mb-4" />}
       {children}
+      {source && <p className="text-xs text-muted mt-3 opacity-70">Source: {source}</p>}
     </div>
   );
 }

@@ -26,7 +26,7 @@
     "crores": "Cr",
     "percentage": "%",
     "perCapita": "Per Capita",
-    "census2011": "Census 2011",
+    "nfhs5": "NFHS-5 (2019-21)",
     "legend": "Legend",
     "comingSoon": "Data coming soon",
     "comingSoonDesc": "This section is under development. Check back for updates.",
@@ -36,7 +36,7 @@
   "layout": {
     "title": "West Bengal State Dashboard",
     "description": "Interactive data dashboard for West Bengal - demographics, climate, air quality, health, education, crime, transport, budget, and geographic insights from open data sources.",
-    "footer": "Data from Census 2011, India Meteorological Dept (IMD), National Crime Records Bureau (NCRB), National Family Health Survey (NFHS-5), UDISE+, PRS India, VAHAN, WB Finance Dept, and Open-Meteo"
+    "footer": "Data from NFHS-5, RGI Projections, SRS, India Meteorological Dept (IMD), NCRB, UDISE+, PRS India, VAHAN, WB Finance Dept, and Open-Meteo"
   },
   "home": {
     "pageTitle": "West Bengal",
@@ -90,12 +90,12 @@
   },
   "demographics": {
     "pageTitle": "People & Demographics",
-    "pageDesc": "Population composition, district-wise distribution, urban-rural split, and social categories across West Bengal.",
+    "pageDesc": "Population projections, female literacy, child nutrition, household amenities, and vital statistics for West Bengal.",
     "loading": "Loading demographics data..."
   },
   "map": {
     "pageTitle": "Geographic Map",
-    "pageDesc": "Interactive district-level map of West Bengal with thematic overlays for population, literacy, density, and more.",
+    "pageDesc": "Interactive district-level map of West Bengal with NFHS-5 indicators — sex ratio, literacy, immunization, and more.",
     "loading": "Loading map data..."
   }
 }

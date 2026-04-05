@@ -10,23 +10,37 @@ export interface OverviewData {
   roadDensity: { value: string; unit: string; source: string };
 }
 
-// Demographics
-export interface DistrictDemographic {
+// Demographics (NFHS-5 district data + RGI projections + SRS trends)
+export interface DistrictNFHS5 {
   district: string;
-  population: number;
-  area: number;
-  density: number;
-  literacy: number;
-  sexRatio: number;
-  urbanPercentage: number;
-  scPercentage: number;
-  stPercentage: number;
+  sexRatioAtBirth: number;
+  femaleLiteracy15_49: number;
+  institutionalDelivery: number;
+  fullImmunization: number;
+  childrenStunted: number;
+  childrenUnderweight: number;
+  improvedSanitation: number;
+  cleanCookingFuel: number;
+  electricity: number;
 }
 
 export interface DemographicsData {
-  districts: DistrictDemographic[];
-  populationTrend: { year: number; population: number; urban: number; rural: number }[];
-  ageDistribution: { ageGroup: string; male: number; female: number }[];
+  districts: DistrictNFHS5[];
+  stateAverage: {
+    sexRatioAtBirth: number;
+    totalFertilityRate: number;
+    femaleLiteracy15_49: number;
+    institutionalDelivery: number;
+    fullImmunization: number;
+    childrenStunted: number;
+    childrenUnderweight: number;
+    improvedSanitation: number;
+    cleanCookingFuel: number;
+    electricity: number;
+  };
+  srsTrend: { year: number; birthRate: number; deathRate: number; naturalGrowthRate: number; imr: number }[];
+  populationProjection: { year: number; total: number; male: number; female: number }[];
+  ageProjection: { ageGroup: string; male2011: number; female2011: number; male2026: number; female2026: number }[];
 }
 
 // Climate
@@ -107,9 +121,11 @@ export interface DistrictFeature {
   properties: {
     district: string;
     dtcode: string;
-    population?: number;
-    density?: number;
-    literacy?: number;
+    sexRatioAtBirth?: number;
+    femaleLiteracy15_49?: number;
+    institutionalDelivery?: number;
+    fullImmunization?: number;
+    childrenStunted?: number;
     [key: string]: string | number | undefined;
   };
   geometry: {

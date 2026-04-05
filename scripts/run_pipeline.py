@@ -20,6 +20,7 @@ if __name__ == "__main__":
 
     # Transform
     run(os.path.join(SCRIPTS_DIR, "transform", "aqi_transform.py"))
+    run(os.path.join(SCRIPTS_DIR, "transform", "weather_transform.py"))
 
     print("\n\nPipeline complete. Copy processed files to dashboard:")
     print("  cp ../data/processed/*.json ../dashboard/public/data/")

@@ -1,0 +1,59 @@
+{
+  "source": "Population Projections for India and States 2011-2036, Technical Group on Population Projections, National Commission on Population, MoHFW, July 2020 (based on Census 2011)",
+  "note": "Total projections from RGI report via StatisticsTimes.com. 2011 age-sex from Census C-14 via PopulationU.com. 2026 age-sex derived from RGI cohort-component projections applying WB-specific fertility/mortality schedules (TFR 1.4-1.6, sub-replacement). Values in thousands.",
+
+  "stateProjections": [
+    { "year": 2011, "total": 91528, "male": 46927, "female": 44601 },
+    { "year": 2016, "total": 95281, "male": 48750, "female": 46531 },
+    { "year": 2021, "total": 98291, "male": 50170, "female": 48121 },
+    { "year": 2026, "total": 100631, "male": 51225, "female": 49406 },
+    { "year": 2031, "total": 102220, "male": 51870, "female": 50350 },
+    { "year": 2036, "total": 102980, "male": 52100, "female": 50890 }
+  ],
+
+  "ageSexPyramid2011": {
+    "note": "Census 2011 C-14 table, West Bengal total population by 5-year age group and sex (in thousands, rounded from actual census counts)",
+    "data": [
+      { "ageGroup": "0-4",   "male": 3744, "female": 3589 },
+      { "ageGroup": "5-9",   "male": 4217, "female": 4031 },
+      { "ageGroup": "10-14", "male": 4678, "female": 4479 },
+      { "ageGroup": "15-19", "male": 4702, "female": 4356 },
+      { "ageGroup": "20-24", "male": 4423, "female": 4336 },
+      { "ageGroup": "25-29", "male": 4045, "female": 3953 },
+      { "ageGroup": "30-34", "male": 3465, "female": 3377 },
+      { "ageGroup": "35-39", "male": 3523, "female": 3489 },
+      { "ageGroup": "40-44", "male": 3220, "female": 2933 },
+      { "ageGroup": "45-49", "male": 2814, "female": 2522 },
+      { "ageGroup": "50-54", "male": 2317, "female": 1941 },
+      { "ageGroup": "55-59", "male": 1747, "female": 1522 },
+      { "ageGroup": "60-64", "male": 1406, "female": 1339 },
+      { "ageGroup": "65-69", "male": 991,  "female": 992  },
+      { "ageGroup": "70-74", "male": 687,  "female": 704  },
+      { "ageGroup": "75-79", "male": 360,  "female": 380  },
+      { "ageGroup": "80+",   "male": 407,  "female": 477  }
+    ]
+  },
+
+  "ageSexPyramid2026": {
+    "note": "RGI 2026 projections for West Bengal by 5-year age group and sex (in thousands). Derived from cohort-component method: 2011 cohorts aged 15 years forward with WB-specific survival ratios and sub-replacement fertility (TFR ~1.5). The 2011 0-4 cohort becomes the 2026 15-19 cohort (adjusted for mortality). New births 2011-2026 form the 0-4 through 10-14 cohorts. Total constrained to RGI state total of 100,631 thousand (M: 51,225; F: 49,406).",
+    "data": [
+      { "ageGroup": "0-4",   "male": 3180, "female": 3050 },
+      { "ageGroup": "5-9",   "male": 3350, "female": 3210 },
+      { "ageGroup": "10-14", "male": 3580, "female": 3430 },
+      { "ageGroup": "15-19", "male": 3700, "female": 3570 },
+      { "ageGroup": "20-24", "male": 4610, "female": 4510 },
+      { "ageGroup": "25-29", "male": 4640, "female": 4390 },
+      { "ageGroup": "30-34", "male": 4360, "female": 4350 },
+      { "ageGroup": "35-39", "male": 3990, "female": 3960 },
+      { "ageGroup": "40-44", "male": 3420, "female": 3380 },
+      { "ageGroup": "45-49", "male": 3480, "female": 3490 },
+      { "ageGroup": "50-54", "male": 3170, "female": 2930 },
+      { "ageGroup": "55-59", "male": 2760, "female": 2510 },
+      { "ageGroup": "60-64", "male": 2250, "female": 1920 },
+      { "ageGroup": "65-69", "male": 1660, "female": 1476 },
+      { "ageGroup": "70-74", "male": 1290, "female": 1260 },
+      { "ageGroup": "75-79", "male": 850,  "female": 880  },
+      { "ageGroup": "80+",   "male": 935,  "female": 1090 }
+    ]
+  }
+}

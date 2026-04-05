@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { loadDemographics } from '@/lib/data';
 import type { DemographicsData } from '@/lib/types';
 import PageHeader from '@/components/layout/PageHeader';
@@ -9,7 +9,7 @@ import ChartCard from '@/components/layout/ChartCard';
 import { COLORS } from '@/lib/colors';
 import { useTranslation } from '@/i18n/useTranslation';
 import {
-  BarChart, Bar, AreaChart, Area, PieChart, Pie,
+  BarChart, Bar, LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Cell,
 } from 'recharts';
 
@@ -27,41 +27,33 @@ export default function DemographicsPage() {
   if (error) return <div className="text-center py-20"><p className="text-durga font-semibold">Error loading demographics data</p><p className="text-muted text-sm mt-2">{error}</p></div>;
   if (!data) return <div className="text-center py-20 text-muted">{t('demographics.loading')}</div>;
 
-  const totalPop = data.districts.reduce((s, d) => s + d.population, 0);
-  const avgLiteracy = (data.districts.reduce((s, d) => s + d.literacy, 0) / data.districts.length).toFixed(1);
-  const avgSexRatio = Math.round(data.districts.reduce((s, d) => s + d.sexRatio, 0) / data.districts.length);
+  const pop2026 = data.populationProjection.find(p => p.year === 2026);
+  const latestSRS = data.srsTrend[data.srsTrend.length - 1];
 
-  // Population pyramid (horizontal bar chart)
-  const pyramidData = data.ageDistribution.map(d => ({
+  // Age-sex pyramid: 2026 projected (horizontal bar chart)
+  const pyramidData = data.ageProjection.map(d => ({
     ageGroup: d.ageGroup,
-    Male: -d.male,
-    Female: d.female,
+    'Male 2026': -d.male2026,
+    'Female 2026': d.female2026,
+    'Male 2011': -d.male2011,
+    'Female 2011': d.female2011,
   }));
 
-  // District density sorted
-  const districtsByDensity = [...data.districts].sort((a, b) => b.density - a.density);
+  // Female literacy sorted
+  const literacySorted = [...data.districts].sort((a, b) => b.femaleLiteracy15_49 - a.femaleLiteracy15_49);
 
-  // Urban vs Rural from population trend
-  const urbanRuralTrend = data.populationTrend
-    .filter(d => d.year >= 1951)
+  // Child stunting sorted (worst first)
+  const stuntingSorted = [...data.districts].sort((a, b) => b.childrenStunted - a.childrenStunted);
+
+  // Household amenities: top-level comparison across districts (avg of top 5 vs bottom 5)
+  const amenitiesData = [...data.districts]
+    .sort((a, b) => a.district.localeCompare(b.district))
     .map(d => ({
-      year: d.year.toString(),
-      Urban: d.urban,
-      Rural: d.rural,
+      district: d.district.length > 15 ? d.district.slice(0, 13) + '..' : d.district,
+      'Sanitation': d.improvedSanitation,
+      'Clean Fuel': d.cleanCookingFuel,
+      'Electricity': d.electricity,
     }));
-
-  // SC/ST composition
-  const avgSC = (data.districts.reduce((s, d) => s + d.scPercentage, 0) / data.districts.length).toFixed(1);
-  const avgST = (data.districts.reduce((s, d) => s + d.stPercentage, 0) / data.districts.length).toFixed(1);
-
-  // Top SC and ST districts
-  const topSCDistricts = [...data.districts].sort((a, b) => b.scPercentage - a.scPercentage).slice(0, 10);
-  const topSTDistricts = [...data.districts].sort((a, b) => b.stPercentage - a.stPercentage).slice(0, 10);
-
-  // Urban percentage by district
-  const urbanByDistrict = [...data.districts]
-    .sort((a, b) => b.urbanPercentage - a.urbanPercentage)
-    .slice(0, 15);
 
   return (
     <div>
@@ -71,105 +63,121 @@ export default function DemographicsPage() {
         accent="shantiniketan"
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
-        <StatCard label="Population" value={`${(totalPop / 10000000).toFixed(1)} Cr`} subtitle="Census 2011" color="ganga" />
-        <StatCard label="Districts" value="23" subtitle="Including new districts" color="shantiniketan" />
-        <StatCard label="Avg Literacy" value={`${avgLiteracy}%`} subtitle="Across districts" color="sundarbans" />
-        <StatCard label="Avg Sex Ratio" value={avgSexRatio.toString()} subtitle="Females per 1000 males" color="durga" />
-        <StatCard label="SC Population" value={`${avgSC}%`} subtitle="State average" color="twilight" />
-        <StatCard label="ST Population" value={`${avgST}%`} subtitle="State average" color="tea" />
+      {/* Data source banner */}
+      <div className="rounded-lg border border-ganga/30 bg-ganga/5 px-4 py-3 mb-6 text-sm text-muted">
+        District data from <strong>NFHS-5 (2019-21)</strong>. Population estimates from <strong>RGI Projections (2020)</strong>. Vital statistics from <strong>SRS (2010-2023)</strong>. India&apos;s Census 2021 has not yet been conducted.
       </div>
 
-      {/* Population Pyramid */}
-      <ChartCard title="Population Pyramid (Age-Gender Distribution)" subtitle="Male (left) and female (right) population in thousands by age group">
-        <ResponsiveContainer width="100%" height={450}>
-          <BarChart data={pyramidData} layout="vertical" stackOffset="sign">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+        <StatCard label="Est. Population" value={`${((pop2026?.total || 0) / 10000).toFixed(1)} Cr`} subtitle="RGI Projection 2026" color="ganga" />
+        <StatCard label="TFR" value={data.stateAverage.totalFertilityRate.toString()} subtitle="Below replacement (NFHS-5)" color="shantiniketan" />
+        <StatCard label="Female Literacy" value={`${data.stateAverage.femaleLiteracy15_49}%`} subtitle="Women 15-49 (NFHS-5)" color="sundarbans" />
+        <StatCard label="Sex Ratio at Birth" value={data.stateAverage.sexRatioAtBirth.toString()} subtitle="Females per 1000 males" color="durga" />
+        <StatCard label="Institutional Delivery" value={`${data.stateAverage.institutionalDelivery}%`} subtitle="NFHS-5" color="tea" />
+        <StatCard label="Full Immunization" value={`${data.stateAverage.fullImmunization}%`} subtitle="Children 12-23 months" color="twilight" />
+      </div>
+
+      {/* Population Pyramid: 2011 vs 2026 */}
+      <ChartCard title="Population Pyramid: 2011 Actual vs 2026 Projected" subtitle="Male (left) and female (right) population in thousands by age group" source="RGI Population Projections (2020), Census 2011">
+        <ResponsiveContainer width="100%" height={480}>
+          <BarChart data={pyramidData} layout="vertical" stackOffset="sign" barGap={0} barCategoryGap="15%">
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis type="number" tickFormatter={(v) => `${Math.abs(v / 1000).toFixed(0)}K`} />
             <YAxis type="category" dataKey="ageGroup" width={50} tick={{ fontSize: 10 }} />
-            <Tooltip formatter={(v) => `${Math.abs(Number(v)).toLocaleString()} thousand`} />
+            <Tooltip formatter={(v) => `${Math.abs(Number(v)).toLocaleString()}K`} />
             <Legend />
-            <Bar dataKey="Male" fill={COLORS.gangaBlue} stackId="stack" />
-            <Bar dataKey="Female" fill={COLORS.durgaVermillion} stackId="stack" />
+            <Bar dataKey="Male 2011" fill={COLORS.gangaBlue} fillOpacity={0.3} stackId="2011" />
+            <Bar dataKey="Female 2011" fill={COLORS.durgaVermillion} fillOpacity={0.3} stackId="2011" />
+            <Bar dataKey="Male 2026" fill={COLORS.gangaBlue} stackId="2026" />
+            <Bar dataKey="Female 2026" fill={COLORS.durgaVermillion} stackId="2026" />
           </BarChart>
         </ResponsiveContainer>
       </ChartCard>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-        {/* District Density */}
-        <ChartCard title="Population Density by District" subtitle="Persons per km\u00B2 (Census 2011)" data={districtsByDensity as unknown as Record<string, unknown>[]}>
+        {/* Female Literacy by District */}
+        <ChartCard title="Female Literacy (Age 15-49) by District" subtitle="Percentage of women who are literate" source="NFHS-5 (2019-21)" data={literacySorted as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={500}>
-            <BarChart data={districtsByDensity} layout="vertical">
+            <BarChart data={literacySorted} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" />
+              <XAxis type="number" domain={[50, 100]} tickFormatter={(v) => `${v}%`} />
               <YAxis type="category" dataKey="district" width={140} tick={{ fontSize: 9 }} />
-              <Tooltip formatter={(v) => `${Number(v).toLocaleString()} per km\u00B2`} />
-              <Bar dataKey="density" name="Density (per km\u00B2)" radius={[0, 4, 4, 0]}>
-                {districtsByDensity.map((d, i) => (
-                  <Cell key={i} fill={d.density > 3000 ? COLORS.durgaVermillion : d.density > 1000 ? COLORS.shantiniketan : COLORS.sundarbansGreen} />
+              <Tooltip formatter={(v) => `${v}%`} />
+              <Bar dataKey="femaleLiteracy15_49" name="Female Literacy %" radius={[0, 4, 4, 0]}>
+                {literacySorted.map((d, i) => (
+                  <Cell key={i} fill={d.femaleLiteracy15_49 >= 80 ? COLORS.sundarbansGreen : d.femaleLiteracy15_49 >= 70 ? COLORS.shantiniketan : COLORS.durgaVermillion} />
                 ))}
               </Bar>
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>
 
-        {/* Urbanization by District */}
-        <ChartCard title="Urbanization by District" subtitle="Top 15 districts by urban population %" data={urbanByDistrict as unknown as Record<string, unknown>[]}>
+        {/* Child Stunting by District */}
+        <ChartCard title="Child Stunting by District" subtitle="Children under 5 who are stunted (height-for-age, %)" source="NFHS-5 (2019-21)" data={stuntingSorted as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={500}>
-            <BarChart data={urbanByDistrict} layout="vertical">
+            <BarChart data={stuntingSorted} layout="vertical">
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis type="number" domain={[0, 50]} tickFormatter={(v) => `${v}%`} />
+              <YAxis type="category" dataKey="district" width={140} tick={{ fontSize: 9 }} />
+              <Tooltip formatter={(v) => `${v}%`} />
+              <Bar dataKey="childrenStunted" name="Stunted %" radius={[0, 4, 4, 0]}>
+                {stuntingSorted.map((d, i) => (
+                  <Cell key={i} fill={d.childrenStunted > 38 ? COLORS.durgaVermillion : d.childrenStunted > 30 ? COLORS.shantiniketan : COLORS.sundarbansGreen} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </ChartCard>
+      </div>
+
+      {/* Household Amenities */}
+      <div className="mt-6">
+        <ChartCard title="Household Amenities by District" subtitle="Improved sanitation, clean cooking fuel, and electricity coverage (%)" source="NFHS-5 (2019-21)" data={amenitiesData as unknown as Record<string, unknown>[]}>
+          <ResponsiveContainer width="100%" height={500}>
+            <BarChart data={amenitiesData} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
-              <YAxis type="category" dataKey="district" width={140} tick={{ fontSize: 9 }} />
+              <YAxis type="category" dataKey="district" width={110} tick={{ fontSize: 8 }} />
               <Tooltip formatter={(v) => `${v}%`} />
-              <Bar dataKey="urbanPercentage" name="Urban %" radius={[0, 4, 4, 0]}>
-                {urbanByDistrict.map((_, i) => (
-                  <Cell key={i} fill={COLORS.chart[i % COLORS.chart.length]} />
-                ))}
-              </Bar>
+              <Legend />
+              <Bar dataKey="Sanitation" fill={COLORS.gangaBlue} />
+              <Bar dataKey="Clean Fuel" fill={COLORS.shantiniketan} />
+              <Bar dataKey="Electricity" fill={COLORS.sundarbansGreen} />
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>
       </div>
 
-      {/* Urban vs Rural Trend */}
+      {/* Vital Statistics Trend */}
       <div className="mt-6">
-        <ChartCard title="Urban vs Rural Population Trend" subtitle="Population in thousands (1951-2026 projection)" data={urbanRuralTrend as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Vital Statistics Trend (2010-2023)" subtitle="Birth rate, death rate, and natural growth rate per 1,000 population" source="SRS Bulletins, Office of Registrar General" data={data.srsTrend as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
-            <AreaChart data={urbanRuralTrend}>
+            <LineChart data={data.srsTrend}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="year" tick={{ fontSize: 11 }} />
-              <YAxis tickFormatter={(v) => `${(v / 1000).toFixed(0)}K`} />
-              <Tooltip formatter={(v) => `${Number(v).toLocaleString()} thousand`} />
+              <YAxis domain={[0, 20]} />
+              <Tooltip />
               <Legend />
-              <Area type="monotone" dataKey="Rural" stackId="pop" stroke={COLORS.sundarbansGreen} fill={COLORS.sundarbansGreen} fillOpacity={0.4} />
-              <Area type="monotone" dataKey="Urban" stackId="pop" stroke={COLORS.gangaBlue} fill={COLORS.gangaBlue} fillOpacity={0.4} />
-            </AreaChart>
+              <Line type="monotone" dataKey="birthRate" stroke={COLORS.gangaBlue} strokeWidth={2} name="Birth Rate" dot />
+              <Line type="monotone" dataKey="deathRate" stroke={COLORS.durgaVermillion} strokeWidth={2} name="Death Rate" dot />
+              <Line type="monotone" dataKey="naturalGrowthRate" stroke={COLORS.sundarbansGreen} strokeWidth={2} name="Natural Growth Rate" dot />
+            </LineChart>
           </ResponsiveContainer>
         </ChartCard>
       </div>
 
-      {/* SC/ST Composition */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-        <ChartCard title="Scheduled Caste Population by District" subtitle="Top 10 districts by SC %" data={topSCDistricts as unknown as Record<string, unknown>[]}>
-          <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={topSCDistricts} layout="vertical">
+      {/* Population Projection */}
+      <div className="mt-6">
+        <ChartCard title="Population Projection (2011-2036)" subtitle="Total population in thousands — growth slowing as TFR stays below replacement" source="RGI Population Projections (2020)" data={data.populationProjection as unknown as Record<string, unknown>[]}>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={data.populationProjection}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" domain={[0, 55]} tickFormatter={(v) => `${v}%`} />
-              <YAxis type="category" dataKey="district" width={130} tick={{ fontSize: 10 }} />
-              <Tooltip formatter={(v) => `${v}%`} />
-              <Bar dataKey="scPercentage" name="SC %" fill={COLORS.twilightPurple} radius={[0, 4, 4, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
-        </ChartCard>
-
-        <ChartCard title="Scheduled Tribe Population by District" subtitle="Top 10 districts by ST %" data={topSTDistricts as unknown as Record<string, unknown>[]}>
-          <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={topSTDistricts} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" domain={[0, 35]} tickFormatter={(v) => `${v}%`} />
-              <YAxis type="category" dataKey="district" width={130} tick={{ fontSize: 10 }} />
-              <Tooltip formatter={(v) => `${v}%`} />
-              <Bar dataKey="stPercentage" name="ST %" fill={COLORS.teaGreen} radius={[0, 4, 4, 0]} />
+              <XAxis dataKey="year" tick={{ fontSize: 11 }} />
+              <YAxis tickFormatter={(v) => `${(v / 1000).toFixed(0)}M`} domain={[85000, 110000]} />
+              <Tooltip formatter={(v) => `${(Number(v) / 1000).toFixed(1)}M`} />
+              <Legend />
+              <Bar dataKey="male" name="Male" fill={COLORS.gangaBlue} stackId="pop" />
+              <Bar dataKey="female" name="Female" fill={COLORS.durgaVermillion} stackId="pop" />
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>

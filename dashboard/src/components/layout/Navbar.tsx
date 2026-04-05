@@ -50,7 +50,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop nav links */}
-          <div className="hidden md:flex items-center gap-1 ml-4">
+          <div className="hidden lg:flex items-center gap-1 ml-4">
             {NAV_ITEMS.map((item) => {
               const isActive = pathname === item.href;
               return (
@@ -93,7 +93,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile: hamburger + theme toggle */}
-          <div className="flex md:hidden items-center gap-1">
+          <div className="flex lg:hidden items-center gap-1">
             <button
               onClick={toggle}
               className="shrink-0 rounded-md p-2.5 text-muted hover:text-foreground hover:bg-card transition-colors"
@@ -144,7 +144,7 @@ export default function Navbar() {
 
       {/* Mobile dropdown menu */}
       <div
-        className={`md:hidden overflow-hidden transition-[max-height] duration-300 ease-in-out ${
+        className={`lg:hidden overflow-hidden transition-[max-height] duration-300 ease-in-out ${
           isOpen ? 'max-h-[500px]' : 'max-h-0'
         }`}
       >

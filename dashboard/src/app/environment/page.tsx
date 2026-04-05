@@ -109,7 +109,7 @@ export default function EnvironmentPage() {
       </div>
 
       {/* City-wise Average AQI */}
-      <ChartCard title="City-wise Average AQI" subtitle="Average Air Quality Index across monitoring cities (lower is better)" data={cityAvg as unknown as Record<string, unknown>[]}>
+      <ChartCard title="City-wise Average AQI" subtitle="Average Air Quality Index across monitoring cities (lower is better)" source="Open-Meteo Air Quality API" data={cityAvg as unknown as Record<string, unknown>[]}>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={cityAvg}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -127,7 +127,7 @@ export default function EnvironmentPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Seasonal AQI */}
-        <ChartCard title="Seasonal AQI Pattern" subtitle="Average AQI by season (all cities combined)" data={seasonalData as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Seasonal AQI Pattern" subtitle="Average AQI by season (all cities combined)" source="Open-Meteo Air Quality API" data={seasonalData as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={seasonalData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -144,7 +144,7 @@ export default function EnvironmentPage() {
         </ChartCard>
 
         {/* Pollutant Comparison */}
-        <ChartCard title="Pollutant Levels by City" subtitle="Average PM2.5, PM10, NO2, SO2 (\u00B5g/m\u00B3)" data={pollutantData as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Pollutant Levels by City" subtitle="Average PM2.5, PM10, NO2, SO2 (\u00B5g/m\u00B3)" source="Open-Meteo Air Quality API" data={pollutantData as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={pollutantData}>
               <CartesianGrid strokeDasharray="3 3" />

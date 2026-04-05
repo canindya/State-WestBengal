@@ -2,6 +2,7 @@
 import json
 import requests
 import os
+import time
 from datetime import date, timedelta
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'raw')
@@ -39,11 +40,21 @@ def download_weather():
             "timezone": "Asia/Kolkata"
         }
         print(f"Fetching weather data for {city}...")
-        resp = requests.get(url, params=params, timeout=120)
-        resp.raise_for_status()
+        for attempt in range(5):
+            resp = requests.get(url, params=params, timeout=120)
+            if resp.status_code == 429:
+                wait = 10 * (attempt + 1)
+                print(f"  Rate limited, waiting {wait}s (attempt {attempt+1}/5)...")
+                time.sleep(wait)
+                continue
+            resp.raise_for_status()
+            break
+        else:
+            raise Exception(f"Failed to fetch weather for {city} after 5 retries")
         all_data[city] = resp.json()
         n_days = len(resp.json().get("daily", {}).get("time", []))
         print(f"  {city}: {n_days} days")
+        time.sleep(3)  # Rate limit: pause between cities
 
     out_path = os.path.join(OUTPUT_DIR, "openmeteo_weather_wb.json")
     with open(out_path, 'w') as f:
@@ -69,11 +80,21 @@ def download_air_quality():
             "timezone": "Asia/Kolkata"
         }
         print(f"Fetching AQ data for {city}...")
-        resp = requests.get(url, params=params, timeout=120)
-        resp.raise_for_status()
+        for attempt in range(5):
+            resp = requests.get(url, params=params, timeout=120)
+            if resp.status_code == 429:
+                wait = 10 * (attempt + 1)
+                print(f"  Rate limited, waiting {wait}s (attempt {attempt+1}/5)...")
+                time.sleep(wait)
+                continue
+            resp.raise_for_status()
+            break
+        else:
+            raise Exception(f"Failed to fetch AQ for {city} after 5 retries")
         all_data[city] = resp.json()
         n_hours = len(resp.json().get("hourly", {}).get("time", []))
         print(f"  {city}: {n_hours} hours")
+        time.sleep(3)  # Rate limit: pause between cities
 
     out_path = os.path.join(OUTPUT_DIR, "openmeteo_airquality_wb.json")
     with open(out_path, 'w') as f:

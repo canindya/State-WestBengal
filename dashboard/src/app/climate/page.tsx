@@ -53,7 +53,7 @@ export default function ClimatePage() {
       </div>
 
       {/* District-wise Annual Rainfall */}
-      <ChartCard title="District-wise Annual Rainfall" subtitle="Average annual rainfall (mm) across 23 districts" data={sortedRainfall as unknown as Record<string, unknown>[]}>
+      <ChartCard title="District-wise Annual Rainfall" subtitle="Average annual rainfall (mm) across 23 districts" source="India Meteorological Department" data={sortedRainfall as unknown as Record<string, unknown>[]}>
         <ResponsiveContainer width="100%" height={500}>
           <BarChart data={sortedRainfall} layout="vertical">
             <CartesianGrid strokeDasharray="3 3" />
@@ -71,7 +71,7 @@ export default function ClimatePage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Monthly Rainfall Pattern */}
-        <ChartCard title="Monthly Rainfall Pattern" subtitle="State average rainfall by month (mm)" data={data.monthlyRainfall as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Monthly Rainfall Pattern" subtitle="State average rainfall by month (mm)" source="India Meteorological Department" data={data.monthlyRainfall as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={data.monthlyRainfall}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -84,7 +84,7 @@ export default function ClimatePage() {
         </ChartCard>
 
         {/* Seasonal Rainfall Radar */}
-        <ChartCard title="Seasonal Rainfall Distribution" subtitle="Top 5 vs Bottom 5 districts by season">
+        <ChartCard title="Seasonal Rainfall Distribution" subtitle="Top 5 vs Bottom 5 districts by season" source="India Meteorological Department">
           <ResponsiveContainer width="100%" height={300}>
             <RadarChart data={[
               { season: 'Monsoon', high: wettestDistrict.monsoon, low: driestDistrict.monsoon },
@@ -106,7 +106,7 @@ export default function ClimatePage() {
 
       {/* Temperature Trend */}
       <div className="mt-6">
-        <ChartCard title="Temperature Trend (State Average)" subtitle={`Max, min, and average temperature over time (\u00B0C). Latest: ${latestTemp.avgTemp}\u00B0C avg (${latestTemp.year})`} data={data.temperatureTrend as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Temperature Trend (State Average)" subtitle={`Max, min, and average temperature over time (\u00B0C). Latest: ${latestTemp.avgTemp}\u00B0C avg (${latestTemp.year})`} source="IMD / Open-Meteo Archive API" data={data.temperatureTrend as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={data.temperatureTrend}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -124,7 +124,7 @@ export default function ClimatePage() {
 
       {/* Extreme Weather Events */}
       <div className="mt-6">
-        <ChartCard title="Recent Extreme Weather Events" subtitle="Major cyclones, floods, and heat waves (2020-2024)">
+        <ChartCard title="Recent Extreme Weather Events" subtitle="Major cyclones, floods, and heat waves (2020-2024)" source="IMD, NDMA Reports">
           <div className="space-y-3">
             {data.extremeEvents.map((event, i) => (
               <div key={i} className="flex items-start gap-3 p-3 rounded-lg border border-border bg-card-hover">

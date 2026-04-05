@@ -70,7 +70,7 @@ export default function BudgetPage() {
       </div>
 
       {/* Revenue vs Expenditure */}
-      <ChartCard title="Revenue vs Expenditure" subtitle="Total receipts and spending over time (\u20B9 Crores)" data={revExpData as Record<string, unknown>[]}>
+      <ChartCard title="Revenue vs Expenditure" subtitle="Total receipts and spending over time (\u20B9 Crores)" source="PRS India, WB Finance Department" data={revExpData as Record<string, unknown>[]}>
         <ResponsiveContainer width="100%" height={350}>
           <ComposedChart data={revExpData}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -86,7 +86,7 @@ export default function BudgetPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Sector Expenditure */}
-        <ChartCard title={`Expenditure by Sector (${data.sectorExpenditure[0]?.year})`} subtitle="Where the state spends its money" data={data.sectorExpenditure as unknown as Record<string, unknown>[]}>
+        <ChartCard title={`Expenditure by Sector (${data.sectorExpenditure[0]?.year})`} subtitle="Where the state spends its money" source="PRS India, WB Budget Documents" data={data.sectorExpenditure as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={[...data.sectorExpenditure].sort((a, b) => b.amount - a.amount)} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
@@ -103,7 +103,7 @@ export default function BudgetPage() {
         </ChartCard>
 
         {/* Revenue Sources */}
-        <ChartCard title={`Revenue Sources (${latest.year})`} subtitle="Own tax, non-tax, and central transfers">
+        <ChartCard title={`Revenue Sources (${latest.year})`} subtitle="Own tax, non-tax, and central transfers" source="PRS India, WB Finance Department">
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={[
               { source: 'Own Tax Revenue', amount: latest.ownTax },
@@ -126,7 +126,7 @@ export default function BudgetPage() {
 
       {/* Capital vs Revenue Expenditure */}
       <div className="mt-6">
-        <ChartCard title="Capital vs Revenue Expenditure" subtitle="Revenue expenditure (recurring) vs capital expenditure (asset-building)" data={capRevData as Record<string, unknown>[]}>
+        <ChartCard title="Capital vs Revenue Expenditure" subtitle="Revenue expenditure (recurring) vs capital expenditure (asset-building)" source="PRS India, WB Finance Department" data={capRevData as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={capRevData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -143,7 +143,7 @@ export default function BudgetPage() {
 
       {/* Fiscal Indicators */}
       <div className="mt-6">
-        <ChartCard title="Fiscal Health Indicators" subtitle="Deficit ratios and debt as % of GSDP (FRBM target: 3.0% fiscal deficit)" data={fiscalData as Record<string, unknown>[]}>
+        <ChartCard title="Fiscal Health Indicators" subtitle="Deficit ratios and debt as % of GSDP (FRBM target: 3.0% fiscal deficit)" source="PRS India, CAG Audit Reports" data={fiscalData as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={fiscalData}>
               <CartesianGrid strokeDasharray="3 3" />

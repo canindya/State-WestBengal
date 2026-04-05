@@ -1,11 +1,11 @@
 {
   "yearly": [
-    { "year": 2018, "total": 143925, "ipc": 99415, "sll": 44510, "rate": 155.2 },
-    { "year": 2019, "total": 152345, "ipc": 105678, "sll": 46667, "rate": 163.0 },
-    { "year": 2020, "total": 138230, "ipc": 95420, "sll": 42810, "rate": 146.8 },
-    { "year": 2021, "total": 160834, "ipc": 112590, "sll": 48244, "rate": 169.5 },
-    { "year": 2022, "total": 175920, "ipc": 123450, "sll": 52470, "rate": 184.2 },
-    { "year": 2023, "total": 182345, "ipc": 128640, "sll": 53705, "rate": 189.8 }
+    { "year": 2018, "total": 298420, "ipc": 108350, "sll": 190070, "rate": 322.0 },
+    { "year": 2019, "total": 317540, "ipc": 113680, "sll": 203860, "rate": 339.8 },
+    { "year": 2020, "total": 267130, "ipc": 95420, "sll": 171710, "rate": 283.6 },
+    { "year": 2021, "total": 342850, "ipc": 125590, "sll": 217260, "rate": 361.3 },
+    { "year": 2022, "total": 385240, "ipc": 135120, "sll": 250120, "rate": 402.8 },
+    { "year": 2023, "total": 396870, "ipc": 138640, "sll": 258230, "rate": 411.5 }
   ],
   "categories": [
     { "category": "Theft", "count": 25340, "year": 2023 },
@@ -34,18 +34,18 @@
     { "category": "Cyber Crimes", "count": 4560, "year": 2023 }
   ],
   "districtWise": [
-    { "district": "Kolkata", "total": 28450, "rate": 632.6 },
-    { "district": "North 24 Parganas", "total": 18920, "rate": 189.0 },
-    { "district": "South 24 Parganas", "total": 14560, "rate": 178.6 },
-    { "district": "Howrah", "total": 9870, "rate": 203.5 },
-    { "district": "Hooghly", "total": 8340, "rate": 151.1 },
-    { "district": "Barddhaman (Purba)", "total": 8120, "rate": 167.9 },
-    { "district": "Nadia", "total": 7450, "rate": 144.1 },
-    { "district": "Murshidabad", "total": 12340, "rate": 173.7 },
-    { "district": "Medinipur (Paschim)", "total": 9560, "rate": 160.9 },
-    { "district": "Medinipur (Purba)", "total": 7230, "rate": 141.9 },
-    { "district": "Malda", "total": 6890, "rate": 172.3 },
-    { "district": "Darjeeling", "total": 4120, "rate": 223.1 },
-    { "district": "Jalpaiguri", "total": 5680, "rate": 146.6 }
+    { "district": "Kolkata", "total": 58920, "rate": 1310.8 },
+    { "district": "North 24 Parganas", "total": 42560, "rate": 425.2 },
+    { "district": "South 24 Parganas", "total": 31240, "rate": 383.1 },
+    { "district": "Howrah", "total": 21340, "rate": 439.8 },
+    { "district": "Hooghly", "total": 17890, "rate": 324.1 },
+    { "district": "Barddhaman (Purba)", "total": 18240, "rate": 377.1 },
+    { "district": "Nadia", "total": 16780, "rate": 324.6 },
+    { "district": "Murshidabad", "total": 25680, "rate": 361.5 },
+    { "district": "Medinipur (Paschim)", "total": 20450, "rate": 344.1 },
+    { "district": "Medinipur (Purba)", "total": 16120, "rate": 316.4 },
+    { "district": "Malda", "total": 14560, "rate": 364.2 },
+    { "district": "Darjeeling", "total": 8920, "rate": 482.9 },
+    { "district": "Jalpaiguri", "total": 12340, "rate": 318.7 }
   ]
 }

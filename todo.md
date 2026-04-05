@@ -52,25 +52,36 @@
 - [x] Fix .sort() mutation on frozen React state arrays (budget, education pages)
 - [x] Replace unreadable Crime Categories treemap with horizontal bar chart
 
-## Phase 3: Data Quality & Real Data
-- [ ] Run Open-Meteo pipeline for real weather/AQI data (10 WB cities, 2015-2026)
-- [ ] Obtain real WB district boundary GeoJSON (replace simplified rectangles)
-- [ ] Cross-verify curated data against primary sources (Census, NCRB, NFHS-5, UDISE+, PRS India)
-- [ ] Add data vintage labels on each chart (e.g. "Source: Census 2011", "NFHS-5 2019-21")
-- [ ] Expand AQI data with more cities and daily granularity
+## Phase 3: Data Quality & Real Data — COMPLETE
+- [x] Run Open-Meteo pipeline for real weather/AQI data (10 WB cities, 2015-2026)
+- [x] Obtain real WB district boundary GeoJSON (replace simplified rectangles)
+- [x] Cross-verify curated data against primary sources (Census, NCRB, NFHS-5, UDISE+, PRS India)
+- [x] Add data vintage labels on each chart (e.g. "Source: Census 2011", "NFHS-5 2019-21")
+- [x] Expand AQI data with more cities and daily granularity
+- [x] Create weather transform script (convert raw Open-Meteo weather data to climate_wb.json)
 
 ## Phase 4: Deployment & Polish
-- [ ] GitHub Pages deployment workflow (.github/workflows/deploy.yml)
-- [ ] Set NEXT_PUBLIC_BASE_PATH=/State-WestBengal for production build
+- [x] GitHub Pages deployment workflow (.github/workflows/deploy.yml)
+- [x] Set NEXT_PUBLIC_BASE_PATH=/State-WestBengal for production build
 - [ ] Create GitHub repo (canindya/State-WestBengal) and push
-- [ ] Mobile responsive testing across breakpoints
+- [x] Mobile responsive testing across breakpoints (nav breakpoint fix md→lg)
 - [ ] Lighthouse performance audit and optimization
 
+## Phase 3.5: Census 2011 Data Replacement — COMPLETE
+- [x] Replace all Census 2011 demographics charts with NFHS-5 (2019-21) district indicators
+- [x] Replace population pyramid with RGI 2011 vs 2026 projected comparison
+- [x] Add SRS vital statistics trend (2010-2023) replacing urban/rural trend
+- [x] Add household amenities, female literacy, child stunting charts (NFHS-5)
+- [x] Update map choropleth: 5 NFHS-5 metrics replacing 4 Census metrics
+- [x] Update home page StatCards (population, literacy, sex ratio) to modern sources
+- [x] Update GeoJSON properties with NFHS-5 indicators on all 23 districts
+- [x] Update overview JSON, i18n footer, SEO descriptions
+- [x] Add data source banner explaining data currency on demographics page
+
 ## Phase 5: Enhancements
-- [ ] Bengali language support (complete bn.json translations)
 - [ ] Cross-domain correlations page (e.g. literacy vs crime rate, rainfall vs agriculture)
 - [ ] Data export functionality (CSV download on all charts)
 - [ ] Historical comparison slider on map page
 - [ ] Search by district name
 - [ ] Google Analytics integration
-- [ ] SEO meta tags for each page
+- [x] SEO meta tags for each page (title template, OG/Twitter cards, per-route metadata)

@@ -73,7 +73,7 @@ export default function EducationPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Schools by Type */}
-        <ChartCard title="Schools by Type & Management" subtitle="Government vs private schools at each level" data={schoolsByType as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Schools by Type & Management" subtitle="Government vs private schools at each level" source="UDISE+ 2024-25" data={schoolsByType as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={schoolsByType}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -88,7 +88,7 @@ export default function EducationPage() {
         </ChartCard>
 
         {/* Enrollment by Level */}
-        <ChartCard title="Enrollment by Level & Gender" subtitle="Students in thousands (boys vs girls)" data={enrollmentByLevel as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Enrollment by Level & Gender" subtitle="Students in thousands (boys vs girls)" source="UDISE+ 2024-25" data={enrollmentByLevel as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={enrollmentByLevel}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -105,7 +105,7 @@ export default function EducationPage() {
 
       {/* Infrastructure */}
       <div className="mt-6">
-        <ChartCard title="School Infrastructure" subtitle="Percentage of schools with each facility (UDISE+ 2024-25)" data={data.infrastructure as unknown as Record<string, unknown>[]}>
+        <ChartCard title="School Infrastructure" subtitle="Percentage of schools with each facility (UDISE+ 2024-25)" source="UDISE+ 2024-25" data={data.infrastructure as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={[...data.infrastructure].sort((a, b) => b.percentage - a.percentage)} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
@@ -124,7 +124,7 @@ export default function EducationPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Learning Outcomes */}
-        <ChartCard title="Learning Outcomes: WB vs National" subtitle="ASER 2024 — percentage of children achieving each benchmark" data={learningComparison as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Learning Outcomes: WB vs National" subtitle="ASER 2024 — percentage of children achieving each benchmark" source="ASER 2024" data={learningComparison as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={learningComparison} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
@@ -139,7 +139,7 @@ export default function EducationPage() {
         </ChartCard>
 
         {/* Teacher Metrics */}
-        <ChartCard title="Pupil-Teacher Ratio by District" subtitle="Lower is better (RTE norm: 30:1 for primary)" data={data.teacherMetrics as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Pupil-Teacher Ratio by District" subtitle="Lower is better (RTE norm: 30:1 for primary)" source="UDISE+ 2024-25" data={data.teacherMetrics as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={[...data.teacherMetrics].sort((a, b) => b.pupilTeacherRatio - a.pupilTeacherRatio)} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
@@ -158,7 +158,7 @@ export default function EducationPage() {
 
       {/* Management Split Pie */}
       <div className="mt-6">
-        <ChartCard title="School Management Distribution" subtitle="Government vs Private management across all school types">
+        <ChartCard title="School Management Distribution" subtitle="Government vs Private management across all school types" source="UDISE+ 2024-25">
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
