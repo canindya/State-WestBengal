@@ -6,11 +6,12 @@ import type { TourismData } from '@/lib/types';
 import PageHeader from '@/components/layout/PageHeader';
 import StatCard from '@/components/layout/StatCard';
 import ChartCard from '@/components/layout/ChartCard';
-import { COLORS } from '@/lib/colors';
+import { COLORS, dimmedColor } from '@/lib/colors';
+import { AXIS_PROPS, GRID_PROPS, GRID_PROPS_VERTICAL } from '@/lib/chartDefaults';
 import { useTranslation } from '@/i18n/useTranslation';
 import {
   BarChart, Bar, PieChart, Pie,
-  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Cell,
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList,
 } from 'recharts';
 
 export default function TourismPage() {
@@ -28,6 +29,7 @@ export default function TourismPage() {
   if (!data) return <div className="text-center py-20 text-muted">{t('tourism.loading')}</div>;
 
   const km = data.keyMetrics;
+  const latestArrivals = data.foreignArrivals[data.foreignArrivals.length - 1];
 
   return (
     <div>
@@ -35,55 +37,49 @@ export default function TourismPage() {
         title={t('tourism.pageTitle')}
         description={t('tourism.pageDesc')}
         accent="durga"
+        story="West Bengal is India's #2 state for foreign tourist arrivals — 3.12 million visitors in 2024, nearly double the pre-COVID peak. Durga Puja alone generates $4.53 billion in economic activity. The ceiling is air connectivity: Kolkata gets fewer than 10% of Delhi's international flights. The brand is already in place; the runway slots aren't."
       />
 
-      {/* Stat cards */}
+      {/* Stat cards — cooled to 2 colours: durga (page accent) + mustard */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
         <StatCard label="Foreign Tourists 2024" value={`${km.foreignArrivalsMillion}M`} subtitle={`Rank #${km.rankForeignArrivals} in India`} color="durga" />
-        <StatCard label="Share of India" value={`${km.sharePct}%`} subtitle="of foreign arrivals" color="shantiniketan" />
-        <StatCard label="YoY Growth" value={`+${km.yoyGrowthPct}%`} subtitle="2023 → 2024" color="sundarbans" />
+        <StatCard label="Share of India" value={`${km.sharePct}%`} subtitle="of foreign arrivals" color="mustard" />
+        <StatCard label="YoY Growth" value={`+${km.yoyGrowthPct}%`} subtitle="2023 → 2024" color="durga" />
         <StatCard label="Durga Puja Impact" value={`$${km.durgaPujaEconomicImpactBillionUsd}B`} subtitle="UNESCO ICH (2021)" color="mustard" />
-        <StatCard label="Community Pujas" value={`${(km.communityPujasCount / 1000).toFixed(1)}K`} subtitle="across Bengal" color="twilight" />
-        <StatCard label="UNESCO Sites" value="3" subtitle="ICH + 2 WHS" color="tea" />
+        <StatCard label="Community Pujas" value={`${(km.communityPujasCount / 1000).toFixed(1)}K`} subtitle="across Bengal" color="durga" />
+        <StatCard label="UNESCO Sites" value="3" subtitle="ICH + 2 WHS" color="mustard" />
       </div>
 
-      {/* Gateway narrative */}
-      <div className="rounded-xl border-l-4 border-durga bg-card p-5 mb-8">
-        <h3 className="text-lg font-semibold mb-1">The Gateway Nobody Sees</h3>
-        <p className="text-sm text-muted">
-          West Bengal is India&rsquo;s <span className="text-foreground font-semibold">#2 destination</span> for foreign tourists — but Kolkata receives only
-          <span className="text-foreground font-semibold"> {km.kolkataIntlFlightsDaily} international flights/day</span> versus Delhi&rsquo;s {km.delhiIntlFlightsDaily} and Mumbai&rsquo;s {km.mumbaiIntlFlightsDaily}.
-          Air connectivity is the single biggest unlock for tourism here.
-        </p>
-      </div>
-
-      {/* Foreign Arrivals Trend */}
+      {/* Foreign Arrivals Trend — takeaway title, highlight latest year */}
       <ChartCard
-        title="Foreign Tourist Arrivals"
-        subtitle="Millions per year (2019 → 2024)"
+        title="Arrivals nearly doubled the pre-COVID peak"
+        subtitle="Foreign tourist arrivals, millions per year (2019 → 2024)"
         source="India Tourism Data Compendium 2025, Ministry of Tourism"
-        insight="A full recovery from the COVID crash — and then some. 2024 arrivals are nearly twice the 2019 baseline. Bengal didn't just rebound; it broke its own ceiling."
-        data={data.foreignArrivals as unknown as Record<string, unknown>[]}
+        insight="The COVID crash took arrivals to near-zero in 2020-21. The rebound has been complete and then some — 2024 sits at 3.12 M, well beyond the 1.65 M pre-pandemic level. Bengal didn't just recover; it broke its own ceiling."
       >
         <ResponsiveContainer width="100%" height={320}>
-          <BarChart data={data.foreignArrivals}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="year" tick={{ fontSize: 11 }} />
-            <YAxis tickFormatter={(v) => `${v}M`} />
+          <BarChart data={data.foreignArrivals} margin={{ top: 30, right: 20, bottom: 10, left: 0 }}>
+            <CartesianGrid {...GRID_PROPS} />
+            <XAxis dataKey="year" {...AXIS_PROPS} />
+            <YAxis {...AXIS_PROPS} tickFormatter={(v) => `${v}M`} />
             <Tooltip formatter={(v) => `${Number(v).toFixed(2)}M`} />
-            <Bar dataKey="million" name="Foreign arrivals (M)" fill={COLORS.durgaVermillion} radius={[4, 4, 0, 0]} />
+            <Bar dataKey="million" radius={[4, 4, 0, 0]}>
+              {data.foreignArrivals.map((row) => (
+                <Cell key={row.year} fill={row.year === latestArrivals.year ? COLORS.durgaVermillion : dimmedColor(COLORS.durgaVermillion)} />
+              ))}
+              <LabelList dataKey="million" position="top" fontSize={11} fill="var(--fg)" formatter={(v: unknown) => `${Number(v).toFixed(2)}M`} />
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </ChartCard>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-        {/* India share donut */}
+        {/* India share — kept as donut since 2 slices read fine, but no label overlap */}
         <ChartCard
-          title="Share of India's Foreign Arrivals"
-          subtitle="West Bengal captures ~15% of all foreign visits"
+          title="1 in 7 foreign tourists to India visits West Bengal"
+          subtitle="West Bengal's share of India's foreign arrivals"
           source="Ministry of Tourism, GoI (2024)"
-          insight="Roughly 1 in 7 foreign tourists entering India visits West Bengal — remarkable for a state with just one major international gateway. The brand is stronger than the infrastructure."
-          data={data.indiaShare as unknown as Record<string, unknown>[]}
+          insight="Remarkable for a state with just one major international gateway. The brand is visibly stronger than the infrastructure — a hint that unlocking capacity would pay off quickly."
         >
           <ResponsiveContainer width="100%" height={320}>
             <PieChart>
@@ -98,31 +94,31 @@ export default function TourismPage() {
                 label={({ name, percent }) => `${name}: ${((percent ?? 0) * 100).toFixed(1)}%`}
               >
                 <Cell fill={COLORS.durgaVermillion} />
-                <Cell fill={COLORS.text.muted} />
+                <Cell fill={dimmedColor(COLORS.gangaBlue)} />
               </Pie>
               <Tooltip formatter={(v) => `${v}%`} />
             </PieChart>
           </ResponsiveContainer>
         </ChartCard>
 
-        {/* Daily international flights comparison */}
+        {/* Daily international flights — highlight Kolkata (the story), dim the rest */}
         <ChartCard
-          title="International Flights per Day"
-          subtitle="Kolkata vs other Indian metros"
+          title="Kolkata gets 51 international flights a day — Delhi has 590"
+          subtitle="International flights per day, Indian metros"
           source="DGCA / Airport International Schedules"
-          insight="Kolkata has fewer than 10% of Delhi's international flights — despite being the #2 state for foreign arrivals. The single biggest bottleneck to tourism growth isn't demand; it's runway slots."
-          data={data.internationalFlightsDaily as unknown as Record<string, unknown>[]}
+          insight="The single biggest bottleneck to tourism growth isn't demand; it's runway slots. Doubling Kolkata's international capacity would likely pay back inside a decade given the existing demand signal."
         >
           <ResponsiveContainer width="100%" height={320}>
-            <BarChart data={data.internationalFlightsDaily} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" />
-              <YAxis type="category" dataKey="city" width={90} tick={{ fontSize: 11 }} />
+            <BarChart data={data.internationalFlightsDaily} layout="vertical" margin={{ top: 10, right: 60, bottom: 10, left: 0 }}>
+              <CartesianGrid {...GRID_PROPS_VERTICAL} />
+              <XAxis type="number" {...AXIS_PROPS} />
+              <YAxis type="category" dataKey="city" width={90} {...AXIS_PROPS} />
               <Tooltip formatter={(v) => `${v} flights/day`} />
-              <Bar dataKey="flights" name="Daily flights" radius={[0, 4, 4, 0]}>
+              <Bar dataKey="flights" radius={[0, 4, 4, 0]}>
                 {data.internationalFlightsDaily.map((row) => (
-                  <Cell key={row.city} fill={row.city === 'Kolkata' ? COLORS.durgaVermillion : COLORS.gangaBlue} />
+                  <Cell key={row.city} fill={row.city === 'Kolkata' ? COLORS.durgaVermillion : dimmedColor(COLORS.gangaBlue)} />
                 ))}
+                <LabelList dataKey="flights" position="right" fontSize={11} fill="var(--fg)" />
               </Bar>
             </BarChart>
           </ResponsiveContainer>
@@ -131,7 +127,7 @@ export default function TourismPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* UNESCO badges */}
-        <ChartCard title="UNESCO Recognition" subtitle="Heritage that draws the world" source="UNESCO World Heritage Centre" insight="Three UNESCO recognitions across three categories — intangible culture, natural heritage, industrial heritage. Few states anywhere in India match that breadth.">
+        <ChartCard title="Three UNESCO recognitions across three categories" subtitle="Intangible heritage, natural heritage, industrial heritage" source="UNESCO World Heritage Centre" insight="Few states anywhere in India match that breadth. Durga Puja (2021, intangible cultural heritage), the Sundarbans (1987, world heritage site), the Darjeeling Himalayan Railway (1999, world heritage site).">
           <div className="space-y-3">
             {data.unescoSites.map((site) => (
               <div key={site.name} className="flex items-start gap-3 rounded-lg border border-border bg-card-hover p-3">
@@ -147,21 +143,25 @@ export default function TourismPage() {
           </div>
         </ChartCard>
 
-        {/* Top source countries */}
+        {/* Top source countries — dim all except top 3 */}
         <ChartCard
-          title="Top Source Countries"
-          subtitle="Where foreign visitors come from (indicative share)"
+          title="US, UK and Bangladesh drive most arrivals"
+          subtitle="Top source countries (indicative share of foreign visitors)"
           source="Ministry of Tourism, WB Tourism Department"
-          insight="US, UK, and Bangladesh dominate — diaspora traffic and the neighbourhood together. Growth markets like Southeast Asia and the Gulf are still under-tapped."
-          data={data.topSourceCountries as unknown as Record<string, unknown>[]}
+          insight="Diaspora traffic and the neighbourhood together dominate. Growth markets like Southeast Asia and the Gulf are still under-tapped — and not coincidentally, also under-served by direct flights to Kolkata."
         >
           <ResponsiveContainer width="100%" height={260}>
-            <BarChart data={data.topSourceCountries} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" tickFormatter={(v) => `${v}%`} />
-              <YAxis type="category" dataKey="country" width={110} tick={{ fontSize: 11 }} />
+            <BarChart data={data.topSourceCountries} layout="vertical" margin={{ top: 10, right: 60, bottom: 10, left: 0 }}>
+              <CartesianGrid {...GRID_PROPS_VERTICAL} />
+              <XAxis type="number" {...AXIS_PROPS} tickFormatter={(v) => `${v}%`} />
+              <YAxis type="category" dataKey="country" width={110} {...AXIS_PROPS} />
               <Tooltip formatter={(v) => `${v}%`} />
-              <Bar dataKey="share" name="Share" fill={COLORS.shantiniketan} radius={[0, 4, 4, 0]} />
+              <Bar dataKey="share" radius={[0, 4, 4, 0]}>
+                {data.topSourceCountries.map((_, i) => (
+                  <Cell key={i} fill={i < 3 ? COLORS.shantiniketan : dimmedColor(COLORS.shantiniketan)} />
+                ))}
+                <LabelList dataKey="share" position="right" fontSize={11} fill="var(--fg)" formatter={(v: unknown) => `${v}%`} />
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>

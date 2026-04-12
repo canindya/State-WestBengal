@@ -4,6 +4,35 @@ All notable changes to the West Bengal State Dashboard will be documented in thi
 
 ---
 
+## 2026-04-13 — Storytelling-with-Data full dashboard sweep
+
+Informed by Cole Nussbaumer Knaflic's four books (Storytelling with Data, Before & After, Storytelling with You, Let's Practice!). Every chart on every page was rewritten to follow SWD principles: takeaway titles, focused colour, quiet chart chrome, direct labels instead of legends, and per-page narrative blocks.
+
+### Added
+- **`src/lib/chartDefaults.ts`**: shared Recharts prop spreads (`AXIS_PROPS`, `AXIS_PROPS_SMALL`, `GRID_PROPS`, `GRID_PROPS_VERTICAL`) — removes default tick lines and axis lines, enforces a consistent `3 3` dashed grid, shifts all chart chrome through CSS variables so themes stay consistent.
+- **`highlightColors()`, `highlightColorsBy()`, `dimmedColor()`** in `src/lib/colors.ts`: palette-aware focus helpers. Dim unfocused bars to ~40% opacity (`+ 66` hex alpha) while keeping highlighted bars at full brightness — preserves the Bengal palette as the brand while creating SWD-style visual hierarchy.
+- **`story` prop on `PageHeader`**: optional 3-sentence lede paragraph rendered below the page description. Every page now opens with its Big Idea before any chart loads.
+
+### Changed
+- **Takeaway chart titles everywhere** (~52 charts across 11 pages). Titles used to describe the axes ("GSDP Growth", "Hospital Beds by District", "Foreign Tourist Arrivals") — they now state the conclusion ("GSDP has more than doubled in a decade", "Kolkata dominates the bed count — rural districts trail far behind", "Arrivals nearly doubled the pre-COVID peak"). Subtitles were rewritten as terse "what you're looking at" metadata lines.
+- **Directional chart subtitles**: subtitles across all chart pages now describe what to look at, not just the axis units.
+- **Pies and radars replaced with horizontal bars** in four places:
+  - `/economy` — GSDP Sector Composition: pie → sorted horizontal bar
+  - `/education` — School Management Distribution: pie → horizontal bar
+  - `/health` — Immunization Coverage: radar → sorted horizontal bar
+  - `/climate` — Seasonal Rainfall Distribution: radar → grouped horizontal bars
+- **Single-element highlighting** applied to ~20 single-series bar charts. Examples: the latest BGBS edition highlighted against earlier ones; Kolkata highlighted in flights-per-day and hospital-beds charts; the #1 export highlighted against the rest; the top-3 worst stunting districts highlighted in red against the rest.
+- **Direct end-labels replaced legends** on multi-series line and area charts in `/health` (IMR/MMR trends), `/demographics` (vital statistics), `/crime` (crime trend), `/transport` (vehicle trend + accident trend), `/budget` (fiscal indicators), `/climate` (temperature trend).
+- **Reference lines** replaced inline target series on `/health` IMR/MMR trend charts and `/budget` fiscal indicators chart — cleaner, more SWD-orthodox.
+- **Shared `AXIS_PROPS` / `GRID_PROPS` spreads** applied to every XAxis, YAxis, and CartesianGrid across all 11 chart pages. Removes default tickLine and axisLine; enforces a consistent dashed grid.
+- **Stat cards cooled from 6 colours to 2 per page**: each page now uses its accent colour plus one neutral (e.g. health page = tea + sundarbans; economy = mustard + tea; tourism = durga + mustard). The 4 hero narrative cards on the landing page keep their 4 distinct colours as the intentional brand moment.
+- **Per-page "story" blocks** added to every PageHeader: economy, tourism, investment, health, demographics, education, crime, transport, budget, climate, environment. Each a 3-sentence lede that sets up the page's Big Idea.
+
+### Removed
+- **`Legend` component** removed from most charts — replaced by direct end-labels or simple custom legend strips below the chart that match the editorial tone.
+
+---
+
 ## 2026-04-13 — Issues.pdf bug sweep
 
 ### Fixed

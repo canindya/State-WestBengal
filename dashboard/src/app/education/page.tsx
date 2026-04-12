@@ -1,16 +1,17 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { loadEducation } from '@/lib/data';
 import type { EducationData } from '@/lib/types';
 import PageHeader from '@/components/layout/PageHeader';
 import StatCard from '@/components/layout/StatCard';
 import ChartCard from '@/components/layout/ChartCard';
-import { COLORS } from '@/lib/colors';
+import { COLORS, dimmedColor } from '@/lib/colors';
+import { AXIS_PROPS, GRID_PROPS, GRID_PROPS_VERTICAL } from '@/lib/chartDefaults';
 import { useTranslation } from '@/i18n/useTranslation';
 import {
-  BarChart, Bar, PieChart, Pie,
-  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Cell,
+  BarChart, Bar,
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LabelList,
 } from 'recharts';
 
 export default function EducationPage() {
@@ -47,14 +48,17 @@ export default function EducationPage() {
     Girls: e.girls / 1000,
   }));
 
-  // Management split for pie
+  // Management split: pie → horizontal bar
   const managementSplit = [
     { name: 'Government', value: govtSchools },
     { name: 'Private', value: totalSchools - govtSchools },
   ];
 
-  // Learning outcomes: WB vs National
-  const learningComparison = data.learningOutcomes;
+  // Infrastructure sorted low-to-high (so gaps are visible at the top)
+  const infraSorted = [...data.infrastructure].sort((a, b) => a.percentage - b.percentage);
+
+  // Pupil-teacher ratio: worst first (most important)
+  const ptrSorted = [...data.teacherMetrics].sort((a, b) => b.pupilTeacherRatio - a.pupilTeacherRatio);
 
   return (
     <div>
@@ -62,60 +66,84 @@ export default function EducationPage() {
         title={t('education.pageTitle')}
         description={t('education.pageDesc')}
         accent="mustard"
+        story="West Bengal's literacy rate has climbed past 82%, and its 67,000+ schools reach every district. But learning outcomes tell a harder story — on ASER reading and arithmetic benchmarks, WB still trails the national average. The system has solved access; the next decade is about solving quality."
       />
 
+      {/* Stat cards — cooled to 2 colours: mustard (page accent) + ganga */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         <StatCard label="Total Schools" value={totalSchools.toLocaleString()} subtitle="All levels combined" color="mustard" />
         <StatCard label="Total Enrollment" value={`${(totalEnrollment / 1000000).toFixed(1)}M`} subtitle="Students across all levels" color="ganga" />
-        <StatCard label="Government Schools" value={`${govtPct}%`} subtitle={`${govtSchools.toLocaleString()} schools`} color="sundarbans" />
-        <StatCard label="Computer Labs" value={`${data.infrastructure.find(i => i.metric === 'Computer Lab')?.percentage || 0}%`} subtitle="Schools with computer labs" color="twilight" />
+        <StatCard label="Government Schools" value={`${govtPct}%`} subtitle={`${govtSchools.toLocaleString()} schools`} color="mustard" />
+        <StatCard label="Computer Labs" value={`${data.infrastructure.find(i => i.metric === 'Computer Lab')?.percentage || 0}%`} subtitle="Schools with computer labs" color="ganga" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Schools by Type */}
-        <ChartCard title="Schools by Type & Management" subtitle="Government vs private schools at each level" source="UDISE+ 2024-25" insight="Government schools dominate every level, especially primary. Private provision is thin and concentrated in urban areas — meaning state capacity, not private choice, will determine quality." data={schoolsByType as unknown as Record<string, unknown>[]}>
+        {/* Schools by Type — grouped bars, private dimmed */}
+        <ChartCard
+          title="Government schools dominate every level"
+          subtitle="School count by type and management"
+          source="UDISE+ 2024-25"
+          insight="Private provision is thin and concentrated in urban areas — meaning state capacity, not private choice, determines quality across most of the state."
+        >
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={schoolsByType}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="type" tick={{ fontSize: 11 }} />
-              <YAxis tickFormatter={(v) => `${(v / 1000).toFixed(0)}K`} />
+            <BarChart data={schoolsByType} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
+              <CartesianGrid {...GRID_PROPS} />
+              <XAxis dataKey="type" {...AXIS_PROPS} />
+              <YAxis {...AXIS_PROPS} tickFormatter={(v) => `${(v / 1000).toFixed(0)}K`} />
               <Tooltip formatter={(v) => Number(v).toLocaleString()} />
-              <Legend />
-              <Bar dataKey="Government" fill={COLORS.gangaBlue} />
-              <Bar dataKey="Private" fill={COLORS.shantiniketan} />
+              <Bar dataKey="Government" fill={COLORS.mustardYellow} />
+              <Bar dataKey="Private" fill={dimmedColor(COLORS.mustardYellow)} />
             </BarChart>
           </ResponsiveContainer>
+          <div className="mt-3 flex gap-4 text-xs text-muted justify-center">
+            <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded" style={{ background: COLORS.mustardYellow }} /> Government</span>
+            <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded opacity-40" style={{ background: COLORS.mustardYellow }} /> Private</span>
+          </div>
         </ChartCard>
 
         {/* Enrollment by Level */}
-        <ChartCard title="Enrollment by Level & Gender" subtitle="Students in thousands (boys vs girls)" source="UDISE+ 2024-25" insight="Gender parity at primary level is essentially complete — girls match or exceed boys. The drop-off comes at secondary and higher secondary, where the gap reappears and fewer students continue at all." data={enrollmentByLevel as unknown as Record<string, unknown>[]}>
+        <ChartCard
+          title="Gender parity at primary — but drops at higher secondary"
+          subtitle="Enrollment in thousands, boys vs girls"
+          source="UDISE+ 2024-25"
+          insight="Girls match or exceed boys in primary enrollment. The drop-off comes at secondary and higher secondary, where the gap reappears and fewer students continue at all — the real challenge is retention, not initial access."
+        >
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={enrollmentByLevel}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="level" tick={{ fontSize: 10 }} />
-              <YAxis tickFormatter={(v) => `${v}K`} />
+            <BarChart data={enrollmentByLevel} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
+              <CartesianGrid {...GRID_PROPS} />
+              <XAxis dataKey="level" {...AXIS_PROPS} />
+              <YAxis {...AXIS_PROPS} tickFormatter={(v) => `${v}K`} />
               <Tooltip formatter={(v) => `${Number(v).toFixed(0)}K students`} />
-              <Legend />
               <Bar dataKey="Boys" fill={COLORS.gangaBlue} />
               <Bar dataKey="Girls" fill={COLORS.durgaVermillion} />
             </BarChart>
           </ResponsiveContainer>
+          <div className="mt-3 flex gap-4 text-xs text-muted justify-center">
+            <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded" style={{ background: COLORS.gangaBlue }} /> Boys</span>
+            <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded" style={{ background: COLORS.durgaVermillion }} /> Girls</span>
+          </div>
         </ChartCard>
       </div>
 
       {/* Infrastructure */}
       <div className="mt-6">
-        <ChartCard title="School Infrastructure" subtitle="Percentage of schools with each facility (UDISE+ 2024-25)" source="UDISE+ 2024-25" insight="Basic amenities (toilets, drinking water, electricity) are now near-universal. The next-gen infrastructure — computer labs, internet, libraries — is the new frontier and it lags badly." data={data.infrastructure as unknown as Record<string, unknown>[]}>
+        <ChartCard
+          title="Basics are universal — the next-gen infrastructure lags"
+          subtitle="School infrastructure coverage (%), lowest first"
+          source="UDISE+ 2024-25"
+          insight="Toilets, drinking water, and electricity are near-universal — that's the access story. Computer labs, internet, and libraries remain sparse — that's the quality frontier."
+        >
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={[...data.infrastructure].sort((a, b) => b.percentage - a.percentage)} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" domain={[0, 100]} tickFormatter={(v) => `${v}%`} />
-              <YAxis type="category" dataKey="metric" width={130} tick={{ fontSize: 10 }} />
+            <BarChart data={infraSorted} layout="vertical" margin={{ top: 10, right: 40, bottom: 10, left: 0 }}>
+              <CartesianGrid {...GRID_PROPS_VERTICAL} />
+              <XAxis type="number" domain={[0, 100]} {...AXIS_PROPS} tickFormatter={(v) => `${v}%`} />
+              <YAxis type="category" dataKey="metric" width={130} {...AXIS_PROPS} />
               <Tooltip formatter={(v) => `${v}%`} />
-              <Bar dataKey="percentage" name="% Schools" radius={[0, 4, 4, 0]}>
-                {[...data.infrastructure].sort((a, b) => b.percentage - a.percentage).map((d, i) => (
-                  <Cell key={i} fill={d.percentage >= 90 ? COLORS.sundarbansGreen : d.percentage >= 60 ? COLORS.mustardYellow : COLORS.durgaVermillion} />
+              <Bar dataKey="percentage" radius={[0, 4, 4, 0]}>
+                {infraSorted.map((d, i) => (
+                  <Cell key={i} fill={d.percentage < 60 ? COLORS.durgaVermillion : d.percentage >= 90 ? COLORS.sundarbansGreen : dimmedColor(COLORS.mustardYellow)} />
                 ))}
+                <LabelList dataKey="percentage" position="right" fontSize={10} fill="var(--fg)" formatter={(v: unknown) => `${v}%`} />
               </Bar>
             </BarChart>
           </ResponsiveContainer>
@@ -124,56 +152,72 @@ export default function EducationPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Learning Outcomes */}
-        <ChartCard title="Learning Outcomes: WB vs National" subtitle="ASER 2024 — percentage of children achieving each benchmark" source="ASER 2024" insight="The uncomfortable truth: WB trails the national average on reading and arithmetic benchmarks. Literacy rate is high, but learning — the thing literacy is supposed to measure — still has a lot of ground to cover." data={learningComparison as unknown as Record<string, unknown>[]}>
+        <ChartCard
+          title="WB trails the national average on ASER benchmarks"
+          subtitle="Learning outcomes (%), WB vs national average"
+          source="ASER 2024"
+          insight="The uncomfortable truth: literacy rate is high, but learning — the thing literacy is supposed to measure — still has a lot of ground to cover. These are the indicators that matter for tomorrow's workforce."
+        >
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={learningComparison} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" domain={[0, 80]} tickFormatter={(v) => `${v}%`} />
-              <YAxis type="category" dataKey="indicator" width={130} tick={{ fontSize: 9 }} />
+            <BarChart data={data.learningOutcomes} layout="vertical" margin={{ top: 10, right: 40, bottom: 10, left: 0 }}>
+              <CartesianGrid {...GRID_PROPS_VERTICAL} />
+              <XAxis type="number" domain={[0, 80]} {...AXIS_PROPS} tickFormatter={(v) => `${v}%`} />
+              <YAxis type="category" dataKey="indicator" width={130} {...AXIS_PROPS} tick={{ fontSize: 9 }} />
               <Tooltip formatter={(v) => `${v}%`} />
-              <Legend />
-              <Bar dataKey="wb" name="West Bengal" fill={COLORS.gangaBlue} />
-              <Bar dataKey="national" name="National Avg" fill={COLORS.shantiniketan} />
+              <Bar dataKey="wb" fill={COLORS.durgaVermillion} />
+              <Bar dataKey="national" fill={dimmedColor(COLORS.gangaBlue)} />
             </BarChart>
           </ResponsiveContainer>
+          <div className="mt-3 flex gap-4 text-xs text-muted justify-center">
+            <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded" style={{ background: COLORS.durgaVermillion }} /> West Bengal</span>
+            <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded opacity-40" style={{ background: COLORS.gangaBlue }} /> National</span>
+          </div>
         </ChartCard>
 
         {/* Teacher Metrics */}
-        <ChartCard title="Pupil-Teacher Ratio by District" subtitle="Lower is better (RTE norm: 30:1 for primary)" source="UDISE+ 2024-25" insight="Most districts are now within the RTE norm. The spread is narrow — teacher deployment has equalised across the state, even if learning outcomes have not caught up." data={data.teacherMetrics as unknown as Record<string, unknown>[]}>
+        <ChartCard
+          title="Pupil-teacher ratio is within norm across most districts"
+          subtitle="Worst-first ranking; RTE norm for primary is 30:1"
+          source="UDISE+ 2024-25"
+          insight="Teacher deployment has equalised across the state. The spread is narrow, which is a genuine success — even if learning outcomes have not caught up to the improvement in staffing."
+        >
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={[...data.teacherMetrics].sort((a, b) => b.pupilTeacherRatio - a.pupilTeacherRatio)} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" />
-              <YAxis type="category" dataKey="district" width={120} tick={{ fontSize: 10 }} />
+            <BarChart data={ptrSorted} layout="vertical" margin={{ top: 10, right: 40, bottom: 10, left: 0 }}>
+              <CartesianGrid {...GRID_PROPS_VERTICAL} />
+              <XAxis type="number" {...AXIS_PROPS} />
+              <YAxis type="category" dataKey="district" width={120} {...AXIS_PROPS} tick={{ fontSize: 10 }} />
               <Tooltip />
-              <Bar dataKey="pupilTeacherRatio" name="Pupil-Teacher Ratio" radius={[0, 4, 4, 0]}>
-                {[...data.teacherMetrics].sort((a, b) => b.pupilTeacherRatio - a.pupilTeacherRatio).map((d, i) => (
-                  <Cell key={i} fill={d.pupilTeacherRatio > 40 ? COLORS.durgaVermillion : d.pupilTeacherRatio > 30 ? COLORS.mustardYellow : COLORS.sundarbansGreen} />
+              <Bar dataKey="pupilTeacherRatio" radius={[0, 4, 4, 0]}>
+                {ptrSorted.map((d, i) => (
+                  <Cell key={i} fill={d.pupilTeacherRatio > 40 ? COLORS.durgaVermillion : dimmedColor(COLORS.mustardYellow)} />
                 ))}
+                <LabelList dataKey="pupilTeacherRatio" position="right" fontSize={10} fill="var(--fg)" />
               </Bar>
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>
       </div>
 
-      {/* Management Split Pie */}
+      {/* Management Split — pie → horizontal bar */}
       <div className="mt-6">
-        <ChartCard title="School Management Distribution" subtitle="Government vs Private management across all school types" source="UDISE+ 2024-25" insight="Roughly 4 out of 5 schools are run directly by government or local bodies. That's both a strength (access) and a vulnerability (quality depends entirely on state execution).">
-          <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie
-                data={managementSplit}
-                cx="50%"
-                cy="50%"
-                outerRadius={100}
-                dataKey="value"
-                label={({ name, percent }) => `${name} ${((percent ?? 0) * 100).toFixed(1)}%`}
-              >
-                <Cell fill={COLORS.gangaBlue} />
-                <Cell fill={COLORS.shantiniketan} />
-              </Pie>
+        <ChartCard
+          title="4 in 5 schools are government-run"
+          subtitle="Share of schools by management type"
+          source="UDISE+ 2024-25"
+          insight="Both a strength (universal access) and a vulnerability (quality depends entirely on state execution). Unlike states where private schools absorb a large share of demand, WB's quality story is almost entirely a public-sector story."
+        >
+          <ResponsiveContainer width="100%" height={180}>
+            <BarChart data={managementSplit} layout="vertical" margin={{ top: 10, right: 100, bottom: 10, left: 0 }}>
+              <CartesianGrid {...GRID_PROPS_VERTICAL} />
+              <XAxis type="number" {...AXIS_PROPS} tickFormatter={(v) => `${(v / 1000).toFixed(0)}K`} />
+              <YAxis type="category" dataKey="name" width={110} {...AXIS_PROPS} />
               <Tooltip formatter={(v) => Number(v).toLocaleString()} />
-            </PieChart>
+              <Bar dataKey="value" radius={[0, 4, 4, 0]}>
+                <Cell fill={COLORS.mustardYellow} />
+                <Cell fill={dimmedColor(COLORS.mustardYellow)} />
+                <LabelList dataKey="value" position="right" fontSize={11} fill="var(--fg)" formatter={(v: unknown) => `${Number(v).toLocaleString()} schools`} />
+              </Bar>
+            </BarChart>
           </ResponsiveContainer>
         </ChartCard>
       </div>

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Process — West Bengal State Dashboard</title>
+<style>
+  :root {
+    --bg: #0F1419;
+    --fg: #E8EAED;
+    --card: #1E2A3A;
+    --card-h: #243447;
+    --bdr: #2D3748;
+    --mute: #9AA0A6;
+    --sundarbans: #2D7D46;
+    --ganga: #2B6E99;
+    --shantiniketan: #C4873B;
+    --durga: #D94F3D;
+    --mustard: #D4A824;
+    --terracotta: #A0522D;
+    --twilight: #7B68AE;
+    --tea: #5A8F6A;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #F8F9FA;
+      --fg: #1A1A2E;
+      --card: #FFFFFF;
+      --card-h: #F0F1F3;
+      --bdr: #E2E4E8;
+      --mute: #6B7280;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Geist", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 1.25rem 6rem;
+  }
+  .eyebrow {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--mute);
+    margin-bottom: 0.5rem;
+  }
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.05;
+    margin: 0 0 1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  h1 .accent { color: var(--mustard); }
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin: 3.5rem 0 0.75rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--bdr);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  h2:first-of-type { border-top: 0; padding-top: 0; margin-top: 2rem; }
+  h3 {
+    font-size: 1.25rem;
+    margin: 2rem 0 0.5rem;
+    font-weight: 700;
+    color: var(--fg);
+  }
+  h4 {
+    font-size: 1rem;
+    margin: 1.25rem 0 0.5rem;
+    font-weight: 600;
+    color: var(--mustard);
+  }
+  p { margin: 0 0 1rem; color: var(--fg); }
+  p.lede {
+    font-size: 1.125rem;
+    color: var(--mute);
+    max-width: 60ch;
+  }
+  a {
+    color: var(--ganga);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--ganga) 30%, transparent);
+  }
+  a:hover { border-bottom-color: var(--ganga); }
+  ul, ol { padding-left: 1.5rem; margin: 0 0 1rem; }
+  li { margin: 0.35rem 0; }
+  ul li::marker { color: var(--mute); }
+  ol li::marker { color: var(--mustard); font-weight: 700; }
+  strong { color: var(--fg); font-weight: 600; }
+  em { color: var(--mute); }
+  blockquote {
+    margin: 1rem 0 1.5rem;
+    padding: 0.75rem 1rem;
+    border-left: 3px solid var(--mustard);
+    background: color-mix(in srgb, var(--card-h) 60%, transparent);
+    border-radius: 0.5rem;
+    font-style: italic;
+    color: var(--fg);
+  }
+  blockquote p { margin: 0; }
+  code {
+    font-family: "Geist Mono", "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 0.875em;
+    padding: 0.1rem 0.35rem;
+    background: var(--card-h);
+    border: 1px solid var(--bdr);
+    border-radius: 0.25rem;
+    color: var(--fg);
+  }
+  pre {
+    background: var(--card);
+    border: 1px solid var(--bdr);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.85rem;
+  }
+  pre code { background: none; border: 0; padding: 0; }
+
+  /* Card surface for important callouts */
+  .hero-card {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--bdr);
+    border-left: 4px solid var(--mustard);
+    border-radius: 1rem;
+    background: var(--card);
+  }
+  .hero-card .meta {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--mute);
+  }
+
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 2rem;
+    font-size: 0.925rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid var(--bdr);
+  }
+  th {
+    background: var(--card-h);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--mute);
+  }
+  td { color: var(--fg); }
+  td code { font-size: 0.85em; }
+
+  /* Color-swatch pills for palette table */
+  .swatch {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 999px;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+    border: 1px solid var(--bdr);
+  }
+
+  /* Pillar grid */
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin: 1rem 0 2rem;
+  }
+  @media (min-width: 700px) {
+    .pillars { grid-template-columns: 1fr 1fr; }
+  }
+  .pillar {
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--bdr);
+    border-left: 4px solid var(--ganga);
+    border-radius: 0.75rem;
+    background: var(--card);
+  }
+  .pillar:nth-child(1) { border-left-color: var(--mustard); }
+  .pillar:nth-child(2) { border-left-color: var(--durga); }
+  .pillar:nth-child(3) { border-left-color: var(--twilight); }
+  .pillar:nth-child(4) { border-left-color: var(--shantiniketan); }
+  .pillar:nth-child(5) { border-left-color: var(--sundarbans); }
+  .pillar h4 { margin: 0 0 0.35rem; color: var(--fg); }
+  .pillar p { margin: 0; font-size: 0.9rem; color: var(--mute); }
+
+  /* "So what?" callout — replicates the in-app look */
+  .sowhat {
+    margin: 1rem 0 1.5rem;
+    padding: 0.75rem 1rem;
+    border-left: 2px solid var(--mustard);
+    background: color-mix(in srgb, var(--card-h) 60%, transparent);
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .sowhat .label {
+    color: var(--mustard);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.7rem;
+    margin-right: 0.4rem;
+  }
+
+  /* Nav chip */
+  .toc {
+    position: sticky;
+    top: 1rem;
+    background: var(--card);
+    border: 1px solid var(--bdr);
+    border-radius: 1rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 2.5rem;
+    font-size: 0.8rem;
+  }
+  .toc strong {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--mute);
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+  }
+  .toc ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.35rem 1rem;
+  }
+  @media (min-width: 700px) {
+    .toc ol { grid-template-columns: 1fr 1fr; }
+  }
+  .toc li { margin: 0; }
+  .toc a {
+    color: var(--mute);
+    border-bottom: 0;
+    display: block;
+    padding: 0.2rem 0;
+  }
+  .toc a:hover { color: var(--fg); }
+  .toc a::before {
+    content: counter(step) ". ";
+    color: var(--mustard);
+    font-weight: 700;
+    margin-right: 0.25rem;
+  }
+  .toc ol { counter-reset: step; }
+  .toc li { counter-increment: step; }
+
+  /* Chip row for principles */
+  .chips {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    margin: 1rem 0 2rem;
+  }
+  @media (min-width: 700px) {
+    .chips { grid-template-columns: 1fr 1fr; }
+  }
+  .chip {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--bdr);
+    border-radius: 0.75rem;
+    background: var(--card);
+    font-size: 0.9rem;
+  }
+  .chip .num {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    background: var(--mustard);
+    color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+
+  /* Timeline for iterative journey */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.625rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 2px;
+    background: var(--bdr);
+  }
+  .phase {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+  .phase::before {
+    content: '';
+    position: absolute;
+    left: -1.7rem;
+    top: 0.5rem;
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 999px;
+    background: var(--mustard);
+    border: 2px solid var(--bg);
+  }
+  .phase h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.05rem;
+    color: var(--fg);
+  }
+  .phase .tag {
+    font-size: 0.7rem;
+    color: var(--mustard);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-right: 0.5rem;
+  }
+  .phase p {
+    margin: 0.35rem 0 0;
+    font-size: 0.9rem;
+    color: var(--mute);
+  }
+
+  /* Footer pill */
+  .footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--bdr);
+    font-size: 0.8rem;
+    color: var(--mute);
+    text-align: center;
+  }
+  .footer a { color: var(--mute); border-bottom: 0; }
+  .footer a:hover { color: var(--fg); }
+</style>
+</head>
+<body>
+<main class="container">
+
+  <div class="eyebrow">West Bengal State Dashboard</div>
+  <h1>Design <span class="accent">Process</span></h1>
+  <p class="lede">How a public-data portal was built editorial-first — from a magazine-style landing page to 52 "So what?" insights across every chart.</p>
+
+  <div class="hero-card">
+    <p class="meta">A companion document</p>
+    <p style="margin-top:0.5rem;">This document covers the <strong>design process</strong>: the editorial approach, the visual system, the iterative journey, and the lessons learned. For architectural decisions, data sources, and the Python pipeline, see the sister document <a href="DESIGN.md">DESIGN.md</a>.</p>
+  </div>
+
+  <nav class="toc" aria-label="Table of contents">
+    <strong>Contents</strong>
+    <ol>
+      <li><a href="#brief">The Brief</a></li>
+      <li><a href="#inspiration">Inspiration</a></li>
+      <li><a href="#pillars">Design Pillars</a></li>
+      <li><a href="#visual">Visual Design System</a></li>
+      <li><a href="#components">Component Patterns</a></li>
+      <li><a href="#ia">Information Architecture</a></li>
+      <li><a href="#sowhat">The "So what?" Pattern</a></li>
+      <li><a href="#journey">Iterative Journey</a></li>
+      <li><a href="#lessons">Lessons Learned</a></li>
+      <li><a href="#principles">Design Principles</a></li>
+      <li><a href="#next">What's Next</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="brief">1. The Brief</h2>
+  <p>Build a single interactive portal that tells the story of West Bengal through open data — one that works for an <strong>insider</strong> (a Bengali wanting pride-worthy numbers), an <strong>outsider</strong> (an investor or tourist wanting a quick understanding), and a <strong>researcher</strong> (wanting sourced facts with district-level depth).</p>
+  <p>The north star was <strong>not</strong> "another government dashboard." It was an <strong>editorial data portal</strong> — every page leading with a fact, every chart earning its place, every interpretation sourced.</p>
+
+  <h2 id="inspiration">2. Inspiration</h2>
+  <p>The project is a direct philosophical descendant of the <a href="https://canindya.github.io/City-Kolkata" target="_blank" rel="noopener">Kolkata City Dashboard</a>.</p>
+
+  <h4>What we borrowed</h4>
+  <ul>
+    <li><strong>Typographic hero</strong> — bold stacked headline statements, not carousels or illustrations.</li>
+    <li><strong>Fact-first section cards</strong> — each card leads with a number or surprising fact, not a generic description.</li>
+    <li><strong>Thematic grouping</strong> — sections organised by story, not by database schema.</li>
+    <li><strong>Honest tone</strong> — show strengths <em>and</em> challenges. No cheerleading.</li>
+    <li><strong>Design-system primitives</strong> — same CSS custom-property naming (<code>--bg</code>, <code>--fg</code>, <code>--card</code>, <code>--card-h</code>, <code>--bdr</code>, <code>--mute</code>), same max-width (<code>max-w-7xl</code>), same Geist font.</li>
+  </ul>
+
+  <h4>What we diverged on</h4>
+  <ul>
+    <li><strong>District-level disaggregation</strong>: Kolkata is a city portrait. Ours adds 23 districts — every NFHS-5 indicator, crime rate, literacy number rankable by district.</li>
+    <li><strong>Bengal cultural palette</strong>: Instead of Kolkata-specific hues, a palette drawn from the whole state — Sundarbans, Ganga, Shantiniketan, Durga Puja sindoor, mustard fields, Bishnupur terracotta, twilight, Darjeeling tea.</li>
+    <li><strong>"So what?" on every chart</strong>: Every Recharts visualization ships with a short editorial callout explaining what the numbers <em>mean</em>, not just what they are.</li>
+  </ul>
+
+  <h2 id="pillars">3. Design Pillars</h2>
+  <div class="pillars">
+    <div class="pillar">
+      <h4>Editorial, not encyclopedic</h4>
+      <p>Lead with facts. Every section card carries a real number or a surprising statement, not a bullet list of features.</p>
+    </div>
+    <div class="pillar">
+      <h4>Data-dense but scannable</h4>
+      <p>Content density matters more than animations. A reader should walk away with three takeaways from every page.</p>
+    </div>
+    <div class="pillar">
+      <h4>Honest</h4>
+      <p>Show the comeback <em>and</em> the decline. Show Kolkata as India's safest metro <em>and</em> the rural under-reporting. Credibility comes from admission.</p>
+    </div>
+    <div class="pillar">
+      <h4>Culturally grounded</h4>
+      <p>Palette, fonts, language, and imagery all resonate with Bengal. A reader from Birbhum should feel this was made for them.</p>
+    </div>
+    <div class="pillar">
+      <h4>Mobile-first</h4>
+      <p>If it doesn't render cleanly at 375 px width, it doesn't ship. Every chart wrapped in <code>ResponsiveContainer</code>, every grid with <code>grid-cols-1</code> base breakpoints.</p>
+    </div>
+  </div>
+
+  <h2 id="visual">4. Visual Design System</h2>
+
+  <h3>4.1 Colors</h3>
+  <p>Theme tokens live as CSS custom properties in <code>globals.css</code> and are exposed to Tailwind v4 via <code>@theme inline</code>. Both dark and light modes are first-class.</p>
+
+  <h4>Theme tokens</h4>
+  <table>
+    <thead><tr><th>Token</th><th>Dark</th><th>Light</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td><code>--bg</code></td><td><code>#0F1419</code></td><td><code>#F8F9FA</code></td><td>Page background</td></tr>
+      <tr><td><code>--fg</code></td><td><code>#E8EAED</code></td><td><code>#1A1A2E</code></td><td>Body text</td></tr>
+      <tr><td><code>--card</code></td><td><code>#1E2A3A</code></td><td><code>#FFFFFF</code></td><td>Card surface</td></tr>
+      <tr><td><code>--card-h</code></td><td><code>#243447</code></td><td><code>#F0F1F3</code></td><td>Card hover fill</td></tr>
+      <tr><td><code>--bdr</code></td><td><code>#2D3748</code></td><td><code>#E2E4E8</code></td><td>Borders, dividers</td></tr>
+      <tr><td><code>--mute</code></td><td><code>#9AA0A6</code></td><td><code>#6B7280</code></td><td>Captions, subtitles</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Bengal accent palette</h4>
+  <table>
+    <thead><tr><th>Token</th><th>Hex</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><span class="swatch" style="background:#2D7D46"></span>sundarbans</td><td><code>#2D7D46</code></td><td>Mangrove green — health, environment</td></tr>
+      <tr><td><span class="swatch" style="background:#2B6E99"></span>ganga</td><td><code>#2B6E99</code></td><td>River blue — primary actions, economy</td></tr>
+      <tr><td><span class="swatch" style="background:#C4873B"></span>shantiniketan</td><td><code>#C4873B</code></td><td>Laterite ochre — demographics, people</td></tr>
+      <tr><td><span class="swatch" style="background:#D94F3D"></span>durga</td><td><code>#D94F3D</code></td><td>Vermillion — alerts, tourism, AQI</td></tr>
+      <tr><td><span class="swatch" style="background:#D4A824"></span>mustard</td><td><code>#D4A824</code></td><td>Mustard field — economy headlines, "So what?" callouts</td></tr>
+      <tr><td><span class="swatch" style="background:#A0522D"></span>terracotta</td><td><code>#A0522D</code></td><td>Bishnupur temples — transport</td></tr>
+      <tr><td><span class="swatch" style="background:#7B68AE"></span>twilight</td><td><code>#7B68AE</code></td><td>Evening sky — culture, crime</td></tr>
+      <tr><td><span class="swatch" style="background:#5A8F6A"></span>tea</td><td><code>#5A8F6A</code></td><td>Darjeeling tea — health supporting</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4.2 Typography</h3>
+  <ul>
+    <li><strong>Family</strong>: Geist Sans + Geist Mono. Falls back to <code>system-ui</code>.</li>
+    <li><strong>Bengali</strong>: Noto Sans Bengali, loaded for the i18n layer.</li>
+    <li><strong>Hierarchy</strong>: Hero h1 is the biggest (<code>text-4xl → text-6xl</code>), stepping down through page h1, section h2, card h3, stat values, stat labels, body.</li>
+    <li><strong><code>tabular-nums</code></strong> is applied to every numeric display so digits align vertically across rows.</li>
+  </ul>
+
+  <h3>4.3 Spacing, Radius, Surfaces</h3>
+  <ul>
+    <li>Container: <code>max-w-7xl</code> (80 rem / 1280 px), <code>px-4</code>.</li>
+    <li>Card radius: <code>rounded-2xl</code> everywhere (softer than stock <code>rounded-xl</code>).</li>
+    <li>Accent stripe: <code>border-l-4</code> with a palette colour on section cards and stat hero cards.</li>
+    <li>Hover: <code>hover:bg-card-hover</code> — subtle fill shift, no scale transforms, no shadows on dark mode.</li>
+    <li>Dividers: <code>border-t border-border</code> for section separators, never horizontal rules.</li>
+  </ul>
+
+  <h2 id="components">5. Component Patterns</h2>
+
+  <h3>5.1 StatCard</h3>
+  <p>The atomic unit of numeric display. Accepts <code>string | number | null | undefined</code> as <code>value</code>. Raw numbers are auto-formatted through <code>fmtCompact</code>. <code>null</code> / <code>undefined</code> render as <code>—</code>. <strong>Never <code>NaN</code>, never <code>undefined</code>, never raw 10-digit numbers.</strong></p>
+  <p>When a <code>tooltip</code> prop is provided, the card renders a small discoverable <strong>"i" info badge</strong> in the top-right corner, cursor-help style. This is how acronyms like IMR / MMR / TFR get explained without cluttering the label.</p>
+
+  <h3>5.2 ChartCard</h3>
+  <p>The wrapper around every Recharts visualization. Layout top to bottom: <strong>title → subtitle → chart → insight callout → source line</strong>. The insight field is mandatory in spirit — every chart in the dashboard ships with one.</p>
+
+  <div class="sowhat">
+    <span class="label">So what?</span>
+    This callout style — mustard left-border, soft fill, uppercase label — is reused identically in every chart card across the dashboard. It's the single highest-impact design pattern in the portal.
+  </div>
+
+  <h3>5.3 PageHeader</h3>
+  <p>A left-bordered block with the page title and description. The border colour is a page-level accent (<code>border-mustard</code> for Economy, <code>border-durga</code> for Tourism). This single vertical stripe is the only persistent visual identity a page carries.</p>
+
+  <h3>5.4 ComparisonBar</h3>
+  <p>A custom dual-bar renderer for "West Bengal vs India" comparisons. Rows get <code>higherIsBetter</code> metadata; the WB bar is green if winning on that metric, red if losing. The India bar is always Ganga blue. Reusable across Economy, Health, Tourism pages.</p>
+
+  <h3>5.5 Navbar</h3>
+  <p>Sticky top nav with grouped dropdowns. <strong>Six top-level entries</strong> — Home · People ▾ · Economy ▾ · Culture ▾ · Environment ▾ · Map — each dropdown click-to-open (not hover) for touch compatibility. The parent group highlights when any child route is active. On mobile, groups become collapsible sections; the group containing the current route auto-expands.</p>
+
+  <h2 id="ia">6. Information Architecture</h2>
+  <p>Fourteen pages organised into five thematic groups. Each group carries a one-sentence tagline that sets the mood before the cards load.</p>
+
+  <table>
+    <thead><tr><th>Group</th><th>Tagline</th><th>Pages</th></tr></thead>
+    <tbody>
+      <tr><td><strong>People & Society</strong></td><td><em>100 million lives, 23 districts, one demographic transition.</em></td><td>Demographics · Health · Education · Crime & Safety</td></tr>
+      <tr><td><strong>Economy & Business</strong></td><td><em>From 10.5% to 5.6% of India — now staging a comeback.</em></td><td>Economy · Investment & Business · Budget & Finance · Transport</td></tr>
+      <tr><td><strong>Culture & Tourism</strong></td><td><em>Three Nobel Laureates. Three UNESCO recognitions. One Bengal.</em></td><td>Culture & Heritage · Tourism</td></tr>
+      <tr><td><strong>Environment & Climate</strong></td><td><em>Mangroves, monsoons, and the air over a hundred million.</em></td><td>Climate · Air Quality</td></tr>
+      <tr><td><strong>Geographic</strong></td><td><em>Twenty-three districts, five indicators, one interactive map.</em></td><td>District Map</td></tr>
+    </tbody>
+  </table>
+
+  <p>Section cards follow a strict pattern: <strong>fact-based description</strong>, not feature list. Examples:</p>
+  <ul>
+    <li><strong>Demographics</strong> — "10.1 Cr people, TFR 1.6 — below replacement, density 1,029/km²."</li>
+    <li><strong>Health</strong> — "IMR 19 vs India 27 — already past the SDG U5MR target."</li>
+    <li><strong>Crime & Safety</strong> — "46 violent crimes per lakh state-wide, but Kolkata is India's safest metro."</li>
+  </ul>
+
+  <h2 id="sowhat">7. The "So what?" Pattern</h2>
+  <p>Every chart across the dashboard carries a short editorial interpretation below the visualization and above the source line. <strong>52 insights across 11 pages.</strong> Examples:</p>
+
+  <div class="sowhat">
+    <span class="label">IMR trend</span>
+    IMR has dropped by roughly a third in a decade. West Bengal is already ahead of the national average — the question now is closing the remaining gap to the SDG target of 12.
+  </div>
+
+  <div class="sowhat">
+    <span class="label">International flights</span>
+    Kolkata has fewer than 10% of Delhi's international flights — despite being the #2 state for foreign arrivals. The single biggest bottleneck to tourism growth isn't demand; it's runway slots.
+  </div>
+
+  <div class="sowhat">
+    <span class="label">Learning outcomes</span>
+    The uncomfortable truth: WB trails the national average on reading and arithmetic benchmarks. Literacy rate is high, but learning — the thing literacy is supposed to measure — still has a lot of ground to cover.
+  </div>
+
+  <p>These callouts are the single highest-impact design pattern in the dashboard. They turn raw charts into editorial content that a casual reader can understand in seconds.</p>
+
+  <h2 id="journey">8. Iterative Journey</h2>
+  <div class="timeline">
+    <div class="phase">
+      <h3><span class="tag">Phase 1</span> MVP scaffold</h3>
+      <p>Next.js 16 + Tailwind v4 + Recharts + Leaflet. 10 pages scaffolded. Six built out with initial charts (Landing, Climate, Air Quality, Budget, Health, Map). Curated JSON across all domains. Initial cultural palette.</p>
+    </div>
+    <div class="phase">
+      <h3><span class="tag">Phase 2</span> Secondary pages</h3>
+      <p>Demographics, Education, Crime, Transport built to parity. 40+ Recharts visualizations total. First mobile responsive sweep.</p>
+    </div>
+    <div class="phase">
+      <h3><span class="tag">Phase 3</span> Data quality and modernization</h3>
+      <p>Replaced Census 2011 with NFHS-5 (2019-21), RGI 2026 projections, and SRS (2010-2023) vital statistics. Real district GeoJSON. Open-Meteo API. GitHub Actions Pages deployment. SEO metadata per route.</p>
+    </div>
+    <div class="phase">
+      <h3><span class="tag">Phase 4</span> Narrative pages</h3>
+      <p>Gap analysis revealed missing editorial dimensions. Four new pages — Economy, Tourism, Investment, Culture — with new curated data files and a reusable <code>ComparisonBar</code> component.</p>
+    </div>
+    <div class="phase">
+      <h3><span class="tag">Phase 5</span> Visual refresh (City-Kolkata inspiration)</h3>
+      <p>The largest design pass. Magazine-style editorial hero with stacked statements. Seasonal tagline rotating by month. Four narrative hero cards (Growing / Welcoming / Building / Remembering). Thematic section grouping. Grouped navbar dropdowns. <code>rounded-2xl</code> softened radii. <code>tabular-nums</code> everywhere. Introduced <code>src/lib/format.ts</code>. YAxis widths tightened for mobile.</p>
+    </div>
+    <div class="phase">
+      <h3><span class="tag">Phase 6</span> Editorial polish</h3>
+      <p>52 "So what?" insights added across every chart. CSV download button removed. Section cards rewritten with fact-based copy. "i" info badge added to StatCard for acronym tooltips.</p>
+    </div>
+    <div class="phase">
+      <h3><span class="tag">Phase 7</span> Bug sweep (Issues.pdf)</h3>
+      <p>A screenshot PDF flagged seven issues in the rendered UI. All fixed in a single pass, including a JSX-attribute escape bug class (<code>\u20B9</code>, <code>\u2192</code>, <code>\u00B2</code> rendering literally), a tagline alignment fix, a chart readability rework (Household Amenities), and discoverable IMR/MMR tooltips.</p>
+    </div>
+  </div>
+
+  <h2 id="lessons">9. Lessons Learned</h2>
+
+  <h3>9.1 JSX attributes are not JavaScript strings</h3>
+  <p>JSX double-quoted attribute values (<code>subtitle="... \u20B9 ..."</code>) do <strong>not</strong> interpret unicode escapes. Only JavaScript string literals and template literals do. Use real unicode characters in JSX text and attribute strings — <code>₹</code>, <code>→</code>, <code>²</code>, <code>·</code>, <code>—</code>.</p>
+
+  <h3>9.2 React 19 freezes state arrays</h3>
+  <p><code>array.sort()</code> on a value read from <code>useState</code> throws "Cannot assign to read only property." Always spread first: <code>[...array].sort((a, b) =&gt; ...)</code>.</p>
+
+  <h3>9.3 <code>.catch()</code> is mandatory</h3>
+  <p>Pages using <code>loadData().then(setData)</code> without a <code>.catch()</code> silently swallowed fetch errors, leaving the page stuck on "Loading...". Every data-loading page now has both <code>.catch()</code> and an error state display.</p>
+
+  <h3>9.4 Flat navigation doesn't scale past ~10 items</h3>
+  <p>14 flat nav items overflowed the desktop bar at <code>lg</code> (1024 px). The fix wasn't smaller fonts — it was <strong>grouping</strong>. Six top-level dropdowns is discoverable; 14 links is noise.</p>
+
+  <h3>9.5 Treemaps hide small categories</h3>
+  <p>Recharts Treemap rendered tiny cells for minor crime categories where labels couldn't fit. Replaced with a horizontal bar chart: every category visible, every label legible, sortable at a glance.</p>
+
+  <h3>9.6 One chart, one story</h3>
+  <p>The Household Amenities chart tried to compare 23 districts across 3 metrics in a single vertical bar chart (69 bars). Unreadable. Rewrote as three separate sorted bar charts in a responsive grid — each chart answers one question. <strong>Don't overload a single chart to save card space.</strong></p>
+
+  <h3>9.7 Acronyms need a hover surface</h3>
+  <p>IMR, MMR, TFR, GSDP — any non-obvious three-letter code on a stat card needs an explanation. A bare HTML <code>title</code> attribute isn't discoverable. Adding a small "i" badge in the top-right corner signals hoverability without cluttering the label.</p>
+
+  <h3>9.8 Format helpers eliminate whole bug classes</h3>
+  <p>Introducing <code>src/lib/format.ts</code> with <code>fmtNum</code>, <code>fmtCompact</code>, <code>fmtInr</code>, <code>fmtLakhCr</code>, <code>fmtPct</code> let us delete dozens of ad-hoc <code>.toFixed()</code> calls and guarantee that <code>null</code> / <code>undefined</code> / <code>NaN</code> all render as <code>—</code>.</p>
+
+  <h2 id="principles">10. Design Principles in One Page</h2>
+  <div class="chips">
+    <div class="chip"><span class="num">1</span><span><strong>Lead with the fact.</strong> Every card, every section, every insight leads with a real number or a surprising statement.</span></div>
+    <div class="chip"><span class="num">2</span><span><strong>One card, one idea.</strong> If a reader can't state the takeaway in one sentence, the card is doing too much.</span></div>
+    <div class="chip"><span class="num">3</span><span><strong>Honest over flattering.</strong> Show the declines, the gaps, the under-reporting. Credibility is the currency.</span></div>
+    <div class="chip"><span class="num">4</span><span><strong>Palette is meaning.</strong> Sundarbans green signals health and environment. Vermillion signals alerts. Mustard signals the editorial voice.</span></div>
+    <div class="chip"><span class="num">5</span><span><strong>Typography is hierarchy.</strong> Let font size and weight do the work, not borders or backgrounds.</span></div>
+    <div class="chip"><span class="num">6</span><span><strong>Every chart ships with an interpretation.</strong> "So what?" is not optional.</span></div>
+    <div class="chip"><span class="num">7</span><span><strong>Every number has a source.</strong> The source line is part of the contract with the reader.</span></div>
+    <div class="chip"><span class="num">8</span><span><strong>Every route has a citation.</strong> No marketing page. No vibes-only "About" page.</span></div>
+    <div class="chip"><span class="num">9</span><span><strong>Mobile first, desktop second.</strong> If it doesn't work at 375 px, it doesn't ship.</span></div>
+    <div class="chip"><span class="num">10</span><span><strong>No dead ends.</strong> Every card links somewhere. Every page has nav back. Every chart has a page-level source.</span></div>
+  </div>
+
+  <h2 id="next">11. What's Next</h2>
+  <p>Gaps still open in future phases:</p>
+  <ul>
+    <li>Cross-domain correlations page (literacy vs crime, rainfall vs agriculture).</li>
+    <li>Historical comparison slider on the map page.</li>
+    <li>District search.</li>
+    <li>Google Analytics integration.</li>
+    <li>Lighthouse performance pass.</li>
+    <li>A Python fetcher for MoSPI / IBEF / WBIDC / Tourism Ministry, replacing curated JSON in the narrative pages.</li>
+  </ul>
+  <p>The skeleton is stable. The next phase is about <strong>deepening the interpretation</strong>, not widening the surface area.</p>
+
+  <div class="footer">
+    <p>Generated from <a href="DESIGN-PROCESS.md">DESIGN-PROCESS.md</a> · See also <a href="DESIGN.md">DESIGN.md</a> (architecture) and <a href="CHANGELOG.md">CHANGELOG.md</a> · <a href="https://github.com/canindya/State-WestBengal">GitHub repository</a></p>
+  </div>
+
+</main>
+</body>
+</html>

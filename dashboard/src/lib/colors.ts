@@ -100,6 +100,56 @@ export function getAQILabel(aqi: number): string {
   return 'Hazardous';
 }
 
+/**
+ * Return an array of palette colours where every index is dimmed (40% opacity
+ * via an 8-bit hex alpha suffix) except `highlightIndex`, which is rendered at
+ * full opacity. This is the SWD focus-attention pattern — one element bright,
+ * everything else quiet — but expressed through the Bengal palette rather
+ * than a neutral grey, so cultural identity is preserved.
+ *
+ * Usage:
+ *   {data.map((_, i) => (
+ *     <Cell key={i} fill={highlightColors(data.length, highlightIdx)[i]} />
+ *   ))}
+ */
+export function highlightColors(
+  count: number,
+  highlightIndex: number = -1,
+  palette: readonly string[] = COLORS.chart,
+): string[] {
+  return Array.from({ length: count }, (_, i) => {
+    const base = palette[i % palette.length];
+    if (i === highlightIndex) return base;
+    return base + '66'; // 0x66 = 102/255 = ~40% opacity
+  });
+}
+
+/**
+ * Return an array of palette colours where entries matching `predicate` are
+ * rendered full-opacity and the rest are dimmed to 40%. Useful when the
+ * highlighted entry is identified by data content (e.g. "the Kolkata row")
+ * rather than by index.
+ */
+export function highlightColorsBy<T>(
+  items: T[],
+  predicate: (item: T, index: number) => boolean,
+  palette: readonly string[] = COLORS.chart,
+): string[] {
+  return items.map((item, i) => {
+    const base = palette[i % palette.length];
+    return predicate(item, i) ? base : base + '66';
+  });
+}
+
+/**
+ * Dim a single base colour to ~40% via an 8-bit hex alpha suffix.
+ * Use for cases where every bar uses the SAME palette colour but the
+ * highlighted one should pop and the rest recede.
+ */
+export function dimmedColor(hex: string): string {
+  return hex + '66';
+}
+
 export function getWarmingColor(anomaly: number): string {
   const { warming } = COLORS;
   if (anomaly < -1.5) return warming.cold;
