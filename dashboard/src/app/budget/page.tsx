@@ -70,7 +70,7 @@ export default function BudgetPage() {
       </div>
 
       {/* Revenue vs Expenditure */}
-      <ChartCard title="Revenue vs Expenditure" subtitle="Total receipts and spending over time (\u20B9 Crores)" source="PRS India, WB Finance Department" data={revExpData as Record<string, unknown>[]}>
+      <ChartCard title="Revenue vs Expenditure" subtitle="Total receipts and spending over time (₹ Crores)" source="PRS India, WB Finance Department" insight="Expenditure has outpaced revenue every single year. The fiscal deficit is structural, not a response to any single shock — and any return to discipline must start with the revenue side." data={revExpData as Record<string, unknown>[]}>
         <ResponsiveContainer width="100%" height={350}>
           <ComposedChart data={revExpData}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -86,14 +86,14 @@ export default function BudgetPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Sector Expenditure */}
-        <ChartCard title={`Expenditure by Sector (${data.sectorExpenditure[0]?.year})`} subtitle="Where the state spends its money" source="PRS India, WB Budget Documents" data={data.sectorExpenditure as unknown as Record<string, unknown>[]}>
+        <ChartCard title={`Expenditure by Sector (${data.sectorExpenditure[0]?.year})`} subtitle="Where the state spends its money" source="PRS India, WB Budget Documents" insight="Education, social welfare, health, and pensions absorb the bulk of spending — a typical welfare-first fiscal structure. Infrastructure and capital-formation sectors get what's left over." data={data.sectorExpenditure as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={[...data.sectorExpenditure].sort((a, b) => b.amount - a.amount)} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" tickFormatter={(v) => `${(v / 1000).toFixed(0)}K Cr`} />
-              <YAxis type="category" dataKey="sector" width={140} tick={{ fontSize: 10 }} />
+              <YAxis type="category" dataKey="sector" width={110} tick={{ fontSize: 9 }} />
               <Tooltip formatter={(v) => `\u20B9${Number(v).toLocaleString()} Cr`} />
-              <Bar dataKey="amount" name="\u20B9 Crores">
+              <Bar dataKey="amount" name="₹ Crores">
                 {[...data.sectorExpenditure].sort((a, b) => b.amount - a.amount).map((_, i) => (
                   <Cell key={i} fill={COLORS.chart[i % COLORS.chart.length]} />
                 ))}
@@ -103,7 +103,7 @@ export default function BudgetPage() {
         </ChartCard>
 
         {/* Revenue Sources */}
-        <ChartCard title={`Revenue Sources (${latest.year})`} subtitle="Own tax, non-tax, and central transfers" source="PRS India, WB Finance Department">
+        <ChartCard title={`Revenue Sources (${latest.year})`} subtitle="Own tax, non-tax, and central transfers" source="PRS India, WB Finance Department" insight="Central transfers and shared taxes form the largest chunk — making the state unusually dependent on Union finances. Expanding own-tax revenue is the only path to fiscal autonomy.">
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={[
               { source: 'Own Tax Revenue', amount: latest.ownTax },
@@ -114,7 +114,7 @@ export default function BudgetPage() {
               <XAxis type="number" tickFormatter={(v) => `\u20B9${(v / 1000).toFixed(0)}K Cr`} />
               <YAxis type="category" dataKey="source" width={130} tick={{ fontSize: 11 }} />
               <Tooltip formatter={(v) => `\u20B9${Number(v).toLocaleString()} Cr`} />
-              <Bar dataKey="amount" name="\u20B9 Crores" radius={[0, 4, 4, 0]}>
+              <Bar dataKey="amount" name="₹ Crores" radius={[0, 4, 4, 0]}>
                 <Cell fill={COLORS.gangaBlue} />
                 <Cell fill={COLORS.shantiniketan} />
                 <Cell fill={COLORS.sundarbansGreen} />
@@ -126,7 +126,7 @@ export default function BudgetPage() {
 
       {/* Capital vs Revenue Expenditure */}
       <div className="mt-6">
-        <ChartCard title="Capital vs Revenue Expenditure" subtitle="Revenue expenditure (recurring) vs capital expenditure (asset-building)" source="PRS India, WB Finance Department" data={capRevData as Record<string, unknown>[]}>
+        <ChartCard title="Capital vs Revenue Expenditure" subtitle="Revenue expenditure (recurring) vs capital expenditure (asset-building)" source="PRS India, WB Finance Department" insight="Capital expenditure — the kind that builds roads, hospitals, and power lines — hovers below 15% of the total budget. The rest is recurring: salaries, pensions, interest, subsidies." data={capRevData as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={capRevData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -143,7 +143,7 @@ export default function BudgetPage() {
 
       {/* Fiscal Indicators */}
       <div className="mt-6">
-        <ChartCard title="Fiscal Health Indicators" subtitle="Deficit ratios and debt as % of GSDP (FRBM target: 3.0% fiscal deficit)" source="PRS India, CAG Audit Reports" data={fiscalData as Record<string, unknown>[]}>
+        <ChartCard title="Fiscal Health Indicators" subtitle="Deficit ratios and debt as % of GSDP (FRBM target: 3.0% fiscal deficit)" source="PRS India, CAG Audit Reports" insight="Fiscal deficit hovers near the FRBM limit, and debt-to-GSDP — while elevated — is trending down as GSDP grows faster than borrowings. Headroom is slowly rebuilding." data={fiscalData as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={fiscalData}>
               <CartesianGrid strokeDasharray="3 3" />

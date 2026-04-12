@@ -4,6 +4,79 @@ All notable changes to the West Bengal State Dashboard will be documented in thi
 
 ---
 
+## 2026-04-13 — Issues.pdf bug sweep
+
+### Fixed
+- **Issue 1 — GSDP Growth subtitle** (`economy/page.tsx`): "\u20B9 lakh crore" rendering as literal text. Replaced with `₹ lakh crore`. Root cause: JSX *attribute* strings (double-quoted) don't interpret `\uXXXX` escapes — only JS string literals and template literals do. Prior assumption was wrong.
+- **Issue 2 — Tourism YoY Growth subtitle**: "2023 \u2192 2024" rendering literally → `2023 → 2024`.
+- **Issue 3 — Map page Area stat card**: "88,752 km\u00B2" rendering literally → `88,752 km²`.
+- **Issue 7 — Foreign Tourist Arrivals subtitle**: "Millions per year (2019 \u2192 2024)" rendering literally → `Millions per year (2019 → 2024)`.
+- **Bonus escape-bug sweep**: Same bug class found and fixed in `budget/page.tsx` (Revenue vs Expenditure subtitle, 2 Bar legend names), `investment/page.tsx` (BGBS subtitle), `environment/page.tsx` (Pollutant units `µg/m³`). All 9 JSX-attribute escape instances fixed.
+- **Issue 4 — Homepage section group tagline alignment**: Taglines ("100 million lives…", "From 10.5% to 5.6%…") were right-aligned next to the group `h2` via `flex items-baseline justify-between`. Changed to stack below the header, left-aligned — now `h2` on top, muted italic tagline on the line below.
+- **Issue 5 — Household Amenities chart unreadable**: Original chart had 23 districts × 3 metrics in a single vertical bar chart — 69 bars crammed together, impossible to read. Reworked as three separate horizontal bar charts arranged in a responsive grid (1 col on mobile, 3 cols on desktop), each sorted independently by its own metric. Districts now clearly rankable per dimension, leaders and laggards immediately visible.
+- **Issue 6 — IMR / MMR need hover explanation**: Added `tooltip` prop content on `/health` stat cards (IMR: "Infant Mortality Rate — infant deaths per 1,000 live births, lower is better"; MMR: "Maternal Mortality Ratio — maternal deaths per 100,000 live births, lower is better"). Also added TFR tooltip on `/demographics`. Enhanced `StatCard` to render a small discoverable "i" info badge in the top-right corner whenever a `tooltip` is provided, cursor-help style, so the hoverable surface is obvious (not hidden behind a bare HTML title attribute).
+
+---
+
+## 2026-04-12 — Visual refresh, numeric safety, mobile polish
+
+### Added
+- **`src/lib/format.ts`** — safe numeric formatters (`fmtNum`, `fmtCompact`, `fmtInr`, `fmtLakhCr`, `fmtPct`, `fmtMillion`, `fmtAxis`) that return `—` for null / undefined / non-finite values instead of raw `NaN`
+- **Editorial landing page** — magazine-style stacked headline ("Growing at 10.5% YoY. #2 in India for foreign tourists. Three Nobel Laureates."), seasonal tagline that rotates by month, hero chip showing population / area / districts
+- **4 hero narrative cards** — "Growing / Welcoming / Building / Remembering" each linking to their respective section with prominent headline metric
+- **Thematic section groups** on the landing page — People & Society · Economy & Business · Culture & Tourism · Environment & Climate · Geographic (replaces the flat 13-card grid)
+- **`tabular-nums`** on all StatCard values for aligned number rendering
+- **Auto-formatting in StatCard** — passing a raw `number` now renders via `fmtCompact` automatically; `null` / `undefined` render as `—`
+
+### Changed
+- **Navbar desktop breakpoint**: `lg` (1024px) → `xl` (1280px). The 14 nav items were overflowing on laptops; narrower screens now get the hamburger menu which handles them cleanly.
+- **ChartCard and StatCard**: `rounded-xl` → `rounded-2xl` for a softer editorial feel
+- **PageHeader**: h1 sized up from `text-xl/2xl/3xl` to `text-2xl/3xl/4xl` with `tracking-tight`
+- **StatCard label**: now uses `uppercase tracking-wide` for magazine-style section labels
+- **YAxis label widths tightened** on vertical bar charts for mobile legibility:
+  - `climate/page.tsx` district rainfall: 140 → 100
+  - `crime/page.tsx` crime categories: 160 → 115, special categories: 180 → 120, district rates: 140 → 100
+  - `demographics/page.tsx` female literacy & stunting: 140 → 100
+  - `budget/page.tsx` sector expenditure: 140 → 110
+  - `transport/page.tsx` road network: 150 → 110
+  - `education/page.tsx` learning outcomes: 170 → 130
+
+### Removed
+- **CSV download button on charts**: The `↓ CSV` button in `ChartCard` header has been removed. The `data` and `filename` props on `ChartCard` remain typed (now `@deprecated`) so existing callers don't break, but nothing is rendered and the `downloadCSV` / `slugify` helpers and the `useTranslation` hook have been dropped from the component.
+
+### Added (Chart insights)
+- **"So what?" takeaways**: Every chart across the dashboard now carries a short editorial interpretation — 52 insights across 11 pages (economy, tourism, investment, demographics, health, education, crime, transport, budget, climate, environment). Each insight explains the meaning of the chart in 1-2 sentences, not the mechanics, so a casual reader can understand why the visualization matters.
+- **ChartCard `insight` prop**: new optional prop renders a mustard-accent callout ("SO WHAT?  …") between the chart and the source line. Left-border accent, `bg-card-hover/60` background, `text-xs leading-relaxed` body for unobtrusive presence.
+
+### Changed (Homepage cards — City-Kolkata style)
+- **Section cards rewritten** with concise fact-based copy inspired by Kolkata City Dashboard (e.g. "IMR 19 vs India 27 — already past the SDG U5MR target" instead of generic "Infrastructure, maternal & child health…"). Every card leads with a real number or a surprising fact, not a feature list.
+- **Card layout upgraded**: flex column with title → leading-relaxed description → "Explore →" CTA at the bottom. CTA dims to muted state, brightens on group hover.
+- Title typography tightened (`tracking-tight`, `text-base sm:text-lg font-semibold`) to match the editorial hero.
+
+### Changed (Navbar)
+- **Grouped navbar dropdowns**: Collapsed 14 flat nav items into 6 top-level entries with click-to-open dropdowns:
+  - Home (standalone)
+  - **People** → Demographics, Health, Education, Crime
+  - **Economy** → Economy, Investment, Budget, Transport
+  - **Culture** → Tourism, Culture
+  - **Environment** → Climate, Air Quality
+  - Map (standalone)
+- Desktop breakpoint restored from `xl` back to `lg` (1024px) — 6 groups fit comfortably
+- Dropdowns: click to open (not hover, for touch compatibility), close on outside click, close on route change, parent highlights as active when any child route matches
+- Mobile menu: groups render as collapsible sections with indented children, auto-expand the group containing the current route, `max-h-[700px]` transition
+- i18n: added `nav.section.people/economy/culture/environment` keys in English and Bengali
+
+### Fixed
+- **JSX escape-sequence rendering**: Unicode escapes like `\u20B9` (₹), `\u2014` (—), `\u2192` (→), `\u00b7` (·), `\u00b2` (²) were being written as literal backslash-u sequences inside JSX text nodes on the landing, economy, investment, and culture pages, rendering as visible `\u20B9...` strings in the browser. JSX text is not JavaScript, so escapes don't interpret there — replaced all 15 instances with actual unicode characters.
+
+### Verified
+- `npm run build` passes all 14 static routes with TypeScript strict mode
+- All pages scanned for `NaN` in rendered HTML — 0 instances
+- All pages scanned for raw 7+ digit numbers — 0 instances
+- Theme infrastructure already matches Kolkata City Dashboard exactly (same CSS variable names, same hex values, same Geist font, same `max-w-7xl` container) — visual refresh is editorial only
+
+---
+
 ## 2026-04-12 — Phase 4: Economy, Tourism, Investment, Culture pages
 
 ### Added

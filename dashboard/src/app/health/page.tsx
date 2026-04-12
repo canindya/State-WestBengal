@@ -57,15 +57,15 @@ export default function HealthPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
         <StatCard label="Hospital Beds" value={totalBeds.toLocaleString()} subtitle="Across reporting districts" color="tea" />
         <StatCard label="Doctors" value={totalDoctors.toLocaleString()} subtitle="Govt sector" color="ganga" />
-        <StatCard label="IMR" value={data.indicators.imr.value.toString()} subtitle="Per 1,000 live births (NFHS-5)" color="durga" />
-        <StatCard label="MMR" value={data.indicators.mmr.value.toString()} subtitle="Per 100,000 live births" color="shantiniketan" />
+        <StatCard label="IMR" value={data.indicators.imr.value.toString()} subtitle="Per 1,000 live births (NFHS-5)" color="durga" tooltip="Infant Mortality Rate — number of infant deaths (under 1 year) per 1,000 live births in a given year. Lower is better." />
+        <StatCard label="MMR" value={data.indicators.mmr.value.toString()} subtitle="Per 100,000 live births" color="shantiniketan" tooltip="Maternal Mortality Ratio — number of maternal deaths (during pregnancy or within 42 days of termination) per 100,000 live births. Lower is better." />
         <StatCard label="Full Immunization" value={`${data.indicators.immunization.value}%`} subtitle="Children 12-23 months" color="sundarbans" />
         <StatCard label="Institutional Delivery" value={`${data.indicators.institutionalDelivery}%`} subtitle="NFHS-5" color="mustard" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Infrastructure by District */}
-        <ChartCard title="Hospital Beds by District" subtitle="Top 12 districts by number of hospital beds" source="NHM West Bengal" data={topInfra as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Hospital Beds by District" subtitle="Top 12 districts by number of hospital beds" source="NHM West Bengal" insight="Beds follow population centres — Kolkata dominates, the rest trail. Per-capita availability in rural districts is less than half the Kolkata figure, and referral patterns reflect it." data={topInfra as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={topInfra} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
@@ -80,7 +80,7 @@ export default function HealthPage() {
         </ChartCard>
 
         {/* Immunization Coverage Radar */}
-        <ChartCard title="Immunization Coverage" subtitle="Percentage of children (12-23 months) immunized by vaccine type" source="NFHS-5 (2019-21)">
+        <ChartCard title="Immunization Coverage" subtitle="Percentage of children (12-23 months) immunized by vaccine type" source="NFHS-5 (2019-21)" insight="Coverage is above 85% on every major antigen — a genuine public-health success that the IMR numbers are now catching up with. Routine immunization is working.">
           <ResponsiveContainer width="100%" height={400}>
             <RadarChart data={immunizationData}>
               <PolarGrid />
@@ -95,7 +95,7 @@ export default function HealthPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* IMR Trend */}
-        <ChartCard title="Infant Mortality Rate Trend" subtitle="Deaths per 1,000 live births (SDG target: 12)" source="SRS, NFHS-5 (2019-21)" data={data.indicators.imr.trend as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Infant Mortality Rate Trend" subtitle="Deaths per 1,000 live births (SDG target: 12)" source="SRS, NFHS-5 (2019-21)" insight="IMR has dropped by roughly a third in a decade. West Bengal is already ahead of the national average — the question now is closing the remaining gap to the SDG target of 12." data={data.indicators.imr.trend as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={data.indicators.imr.trend}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -110,7 +110,7 @@ export default function HealthPage() {
         </ChartCard>
 
         {/* MMR Trend */}
-        <ChartCard title="Maternal Mortality Ratio Trend" subtitle="Deaths per 100,000 live births (SDG target: 70)" source="SRS, NFHS-5 (2019-21)" data={data.indicators.mmr.trend as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Maternal Mortality Ratio Trend" subtitle="Deaths per 100,000 live births (SDG target: 70)" source="SRS, NFHS-5 (2019-21)" insight="MMR is already below the 2030 SDG target of 70, and the curve is still pointing down. The combination of high institutional delivery (93%) and expanded maternal care is doing the work." data={data.indicators.mmr.trend as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={data.indicators.mmr.trend}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -126,7 +126,7 @@ export default function HealthPage() {
 
       {/* Nutrition Indicators */}
       <div className="mt-6">
-        <ChartCard title="Nutrition Indicators (NFHS-5)" subtitle="Percentage of children and adults affected" source="NFHS-5 (2019-21)" data={nutritionData as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Nutrition Indicators (NFHS-5)" subtitle="Percentage of children and adults affected" source="NFHS-5 (2019-21)" insight="Stunting and wasting are gradually improving, but anaemia remains stubbornly high — especially among women. It's the one indicator where WB's social welfare machinery hasn't moved the needle." data={nutritionData as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={nutritionData}>
               <CartesianGrid strokeDasharray="3 3" />

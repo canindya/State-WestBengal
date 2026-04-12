@@ -72,12 +72,12 @@ export default function TransportPage() {
       </div>
 
       {/* Road Network Breakdown */}
-      <ChartCard title="Road Network by Type" subtitle="Length in kilometers" source="MoRTH — Basic Road Statistics of India" data={data.roadNetwork as unknown as Record<string, unknown>[]}>
+      <ChartCard title="Road Network by Type" subtitle="Length in kilometers" source="MoRTH — Basic Road Statistics of India" insight="National and state highways are a small fraction of the total. Village and district roads do the heavy lifting — and their maintenance quality is what actually determines how fast goods and people move." data={data.roadNetwork as unknown as Record<string, unknown>[]}>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={data.roadNetwork} layout="vertical">
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis type="number" tickFormatter={(v) => `${(v / 1000).toFixed(0)}K km`} />
-            <YAxis type="category" dataKey="type" width={150} tick={{ fontSize: 10 }} />
+            <YAxis type="category" dataKey="type" width={110} tick={{ fontSize: 9 }} />
             <Tooltip formatter={(v) => `${Number(v).toLocaleString()} km`} />
             <Bar dataKey="length" name="Length (km)" radius={[0, 4, 4, 0]}>
               {data.roadNetwork.map((_, i) => (
@@ -90,7 +90,7 @@ export default function TransportPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Vehicle Registration Trend */}
-        <ChartCard title="Vehicle Registration Trend" subtitle="Vehicles in millions by type (2018-2024)" source="VAHAN Dashboard, MoRTH" data={vehicleTrend as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Vehicle Registration Trend" subtitle="Vehicles in millions by type (2018-2024)" source="VAHAN Dashboard, MoRTH" insight="Two-wheelers remain the workhorse of mobility; car growth is steady but modest. Commercial vehicle registrations are the quietest segment — consistent with relatively flat freight growth." data={vehicleTrend as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
             <AreaChart data={vehicleTrend}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -106,7 +106,7 @@ export default function TransportPage() {
         </ChartCard>
 
         {/* EV Adoption */}
-        <ChartCard title="Electric Vehicle Adoption" subtitle="EV registrations growing exponentially" source="VAHAN Dashboard" data={evTrend as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Electric Vehicle Adoption" subtitle="EV registrations growing exponentially" source="VAHAN Dashboard" insight="EVs are still a rounding error in the total fleet — but the growth curve is almost vertical. Exponential off a tiny base is how every auto disruption starts." data={evTrend as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={evTrend}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -121,7 +121,7 @@ export default function TransportPage() {
 
       {/* Public Transport */}
       <div className="mt-6">
-        <ChartCard title="Public Transport Fleet & Ridership" subtitle="Major public transport modes in West Bengal" source="WB Transport Department" data={data.publicTransport as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Public Transport Fleet & Ridership" subtitle="Major public transport modes in West Bengal" source="WB Transport Department" insight="Suburban rail and the Kolkata Metro together move millions every day — they are the backbone of the city's mobility. Buses carry the quieter majority across the state." data={data.publicTransport as unknown as Record<string, unknown>[]}>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {data.publicTransport.map((pt, i) => (
               <div key={pt.mode} className="rounded-lg border border-border bg-card-hover p-4">
@@ -138,7 +138,7 @@ export default function TransportPage() {
 
       {/* Road Accidents */}
       <div className="mt-6">
-        <ChartCard title="Road Accident Trends" subtitle="Total accidents, deaths, and injuries (2018-2023)" source="MoRTH — Road Accidents in India" data={accidentTrend as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Road Accident Trends" subtitle="Total accidents, deaths, and injuries (2018-2023)" source="MoRTH — Road Accidents in India" insight="Fatalities are trending down, but injuries remain stubbornly high. Two-wheeler riders and pedestrians — India's most vulnerable road users — still bear the brunt." data={accidentTrend as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
             <LineChart data={accidentTrend}>
               <CartesianGrid strokeDasharray="3 3" />

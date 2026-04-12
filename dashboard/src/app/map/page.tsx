@@ -120,7 +120,7 @@ export default function MapPage() {
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
         <StatCard label="Districts" value="23" color="ganga" />
-        <StatCard label="Area" value="88,752 km\u00B2" color="sundarbans" />
+        <StatCard label="Area" value="88,752 km²" color="sundarbans" />
         <StatCard label="Viewing" value={metricConfig.label} color="shantiniketan" />
         <StatCard label="Hovered" value={hoveredDistrict || 'None'} color="tea" />
       </div>

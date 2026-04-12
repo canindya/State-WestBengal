@@ -51,8 +51,9 @@ export default function InvestmentPage() {
       {/* BGBS Timeline */}
       <ChartCard
         title="Bengal Global Business Summit — Proposals Over Time"
-        subtitle="Investment proposals per edition (\u20B9 lakh crore)"
+        subtitle="Investment proposals per edition (₹ lakh crore)"
         source="WBIDC / BGBS official records"
+        insight="Proposals have nearly doubled since the first summit. The trajectory is the story — but the real question is execution. 68% of the ₹19L Cr cumulative ask has been realised, which is high by Indian summit standards."
         data={data.bgbsEditions as unknown as Record<string, unknown>[]}
       >
         <ResponsiveContainer width="100%" height={320}>
@@ -76,13 +77,14 @@ export default function InvestmentPage() {
           title="Major Corporate Commitments"
           subtitle="Notable investments announced / under execution"
           source="BGBS 2025, Business Standard, company disclosures"
+          insight="Reliance alone is committing ₹50K Cr — larger than all BGBS 2015 proposals combined. When a single private player outweighs a whole summit edition, the private sector has started to believe."
           data={sortedInvestments as unknown as Record<string, unknown>[]}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {sortedInvestments.map((inv, i) => (
               <div key={inv.company} className="rounded-lg border border-border bg-card-hover p-4">
                 <p className="text-sm font-semibold" style={{ color: COLORS.chart[i % COLORS.chart.length] }}>{inv.company}</p>
-                <p className="text-2xl font-bold mt-1">\u20B9{(inv.amountCr / 1000).toFixed(1)}K Cr</p>
+                <p className="text-2xl font-bold mt-1">₹{(inv.amountCr / 1000).toFixed(1)}K Cr</p>
                 <p className="text-xs text-muted mt-1">{inv.sector}</p>
                 <p className="text-xs text-muted mt-2 italic">{inv.note}</p>
               </div>
@@ -93,7 +95,7 @@ export default function InvestmentPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Industrial infra stats */}
-        <ChartCard title="Industrial Infrastructure" subtitle="Ready ecosystem for new investors" source="WBIDC, WEBEL">
+        <ChartCard title="Industrial Infrastructure" subtitle="Ready ecosystem for new investors" source="WBIDC, WEBEL" insight="200+ industrial parks and 22 SEZs — the physical readiness is there. The constraint has always been converting proposals into ribbon-cuttings, not finding a place to break ground.">
           <div className="grid grid-cols-2 gap-3">
             <div className="rounded-lg border border-border bg-card-hover p-3">
               <p className="text-xs text-muted">Industrial Parks</p>
@@ -123,7 +125,7 @@ export default function InvestmentPage() {
         </ChartCard>
 
         {/* Key sectors chips */}
-        <ChartCard title="Key Industry Sectors" subtitle="Established and emerging strengths" source="IBEF West Bengal">
+        <ChartCard title="Key Industry Sectors" subtitle="Established and emerging strengths" source="IBEF West Bengal" insight="A diversified base spanning legacy strengths (jute, tea, leather, steel) and new-economy bets (IT, data centres, green energy). Diversification is insurance — no single sector collapse can sink the state.">
           <div className="flex flex-wrap gap-2">
             {data.keySectors.map((sector, i) => (
               <span
@@ -136,7 +138,7 @@ export default function InvestmentPage() {
             ))}
           </div>
           <div className="mt-6 rounded-lg border-l-2 border-tea bg-card-hover p-3">
-            <p className="text-xs text-muted">Zero industrial strikes since 2010-11 \u2014 among the most stable labour environments in India.</p>
+            <p className="text-xs text-muted">Zero industrial strikes since 2010-11 — among the most stable labour environments in India.</p>
           </div>
         </ChartCard>
       </div>

@@ -41,7 +41,7 @@ export default function TourismPage() {
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
         <StatCard label="Foreign Tourists 2024" value={`${km.foreignArrivalsMillion}M`} subtitle={`Rank #${km.rankForeignArrivals} in India`} color="durga" />
         <StatCard label="Share of India" value={`${km.sharePct}%`} subtitle="of foreign arrivals" color="shantiniketan" />
-        <StatCard label="YoY Growth" value={`+${km.yoyGrowthPct}%`} subtitle="2023 \u2192 2024" color="sundarbans" />
+        <StatCard label="YoY Growth" value={`+${km.yoyGrowthPct}%`} subtitle="2023 → 2024" color="sundarbans" />
         <StatCard label="Durga Puja Impact" value={`$${km.durgaPujaEconomicImpactBillionUsd}B`} subtitle="UNESCO ICH (2021)" color="mustard" />
         <StatCard label="Community Pujas" value={`${(km.communityPujasCount / 1000).toFixed(1)}K`} subtitle="across Bengal" color="twilight" />
         <StatCard label="UNESCO Sites" value="3" subtitle="ICH + 2 WHS" color="tea" />
@@ -60,8 +60,9 @@ export default function TourismPage() {
       {/* Foreign Arrivals Trend */}
       <ChartCard
         title="Foreign Tourist Arrivals"
-        subtitle="Millions per year (2019 \u2192 2024)"
+        subtitle="Millions per year (2019 → 2024)"
         source="India Tourism Data Compendium 2025, Ministry of Tourism"
+        insight="A full recovery from the COVID crash — and then some. 2024 arrivals are nearly twice the 2019 baseline. Bengal didn't just rebound; it broke its own ceiling."
         data={data.foreignArrivals as unknown as Record<string, unknown>[]}
       >
         <ResponsiveContainer width="100%" height={320}>
@@ -81,6 +82,7 @@ export default function TourismPage() {
           title="Share of India's Foreign Arrivals"
           subtitle="West Bengal captures ~15% of all foreign visits"
           source="Ministry of Tourism, GoI (2024)"
+          insight="Roughly 1 in 7 foreign tourists entering India visits West Bengal — remarkable for a state with just one major international gateway. The brand is stronger than the infrastructure."
           data={data.indiaShare as unknown as Record<string, unknown>[]}
         >
           <ResponsiveContainer width="100%" height={320}>
@@ -108,6 +110,7 @@ export default function TourismPage() {
           title="International Flights per Day"
           subtitle="Kolkata vs other Indian metros"
           source="DGCA / Airport International Schedules"
+          insight="Kolkata has fewer than 10% of Delhi's international flights — despite being the #2 state for foreign arrivals. The single biggest bottleneck to tourism growth isn't demand; it's runway slots."
           data={data.internationalFlightsDaily as unknown as Record<string, unknown>[]}
         >
           <ResponsiveContainer width="100%" height={320}>
@@ -128,7 +131,7 @@ export default function TourismPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* UNESCO badges */}
-        <ChartCard title="UNESCO Recognition" subtitle="Heritage that draws the world" source="UNESCO World Heritage Centre">
+        <ChartCard title="UNESCO Recognition" subtitle="Heritage that draws the world" source="UNESCO World Heritage Centre" insight="Three UNESCO recognitions across three categories — intangible culture, natural heritage, industrial heritage. Few states anywhere in India match that breadth.">
           <div className="space-y-3">
             {data.unescoSites.map((site) => (
               <div key={site.name} className="flex items-start gap-3 rounded-lg border border-border bg-card-hover p-3">
@@ -149,6 +152,7 @@ export default function TourismPage() {
           title="Top Source Countries"
           subtitle="Where foreign visitors come from (indicative share)"
           source="Ministry of Tourism, WB Tourism Department"
+          insight="US, UK, and Bangladesh dominate — diaspora traffic and the neighbourhood together. Growth markets like Southeast Asia and the Gulf are still under-tapped."
           data={data.topSourceCountries as unknown as Record<string, unknown>[]}
         >
           <ResponsiveContainer width="100%" height={260}>

@@ -54,7 +54,7 @@ export default function EconomyPage() {
         <h3 className="text-lg font-semibold mb-1">The Comeback State</h3>
         <p className="text-sm text-muted">
           Once <span className="text-foreground font-semibold">{km.gdpShare1960Pct}%</span> of India&rsquo;s GDP in 1960-61, West Bengal&rsquo;s share has fallen to <span className="text-foreground font-semibold">{km.gdpShareIndiaPct}%</span> today.
-          But GSDP has more than doubled in a decade — from \u20B98.03L Cr in 2015-16 to \u20B9{gsdpLatest.valueLakhCr}L Cr in 2024-25.
+          But GSDP has more than doubled in a decade — from ₹8.03L Cr in 2015-16 to ₹{gsdpLatest.valueLakhCr}L Cr in 2024-25.
           Industrial growth ({km.industrialGrowthPct}%) now outpaces the national average ({km.nationalIndustrialGrowthPct}%), and MSMEs rank #{km.msmeRank} nationally.
         </p>
       </div>
@@ -62,8 +62,9 @@ export default function EconomyPage() {
       {/* GSDP Timeline */}
       <ChartCard
         title="GSDP Growth"
-        subtitle="Gross State Domestic Product, \u20B9 lakh crore (2015-16 to 2024-25)"
+        subtitle="Gross State Domestic Product, ₹ lakh crore (2015-16 to 2024-25)"
         source="MoSPI / RBI Handbook of Statistics on Indian States"
+        insight="GSDP has more than doubled in a decade. The 2020-21 COVID dip was shallow and the recovery sharp — FY25 is nearly 50% above the 2019 pre-pandemic level."
         data={data.gsdpTimeline as unknown as Record<string, unknown>[]}
       >
         <ResponsiveContainer width="100%" height={320}>
@@ -83,6 +84,7 @@ export default function EconomyPage() {
           title="GSDP Sector Composition"
           subtitle="Share of services, industry, agriculture"
           source="MoSPI / NITI Aayog"
+          insight="Services dominate at 55% — typical of a post-industrial state. Industry is the smallest of the three legs; reversing that gap is the entire manufacturing-led growth case for West Bengal."
           data={data.sectorSplit as unknown as Record<string, unknown>[]}
         >
           <ResponsiveContainer width="100%" height={320}>
@@ -110,6 +112,7 @@ export default function EconomyPage() {
           title="Top Export Commodities"
           subtitle="Major export categories (indicative share %)"
           source="IBEF West Bengal Presentation"
+          insight="Engineering goods and gems lead the value chart, but legacy strengths (tea, rice, leather) still matter for employment. A diversified basket — less vulnerable to single-sector shocks than export monocultures."
           data={data.topExports as unknown as Record<string, unknown>[]}
         >
           <ResponsiveContainer width="100%" height={320}>
@@ -134,6 +137,7 @@ export default function EconomyPage() {
           title="West Bengal vs India"
           subtitle="Key macro indicators side-by-side"
           source="MoSPI, NITI Aayog MPI 2023, PRS India"
+          insight="WB beats the national average on per-capita income, poverty rate, and industrial growth. Fiscal deficit is the one metric where the state is modestly worse — a reminder that a growing economy still needs disciplined finances."
         >
           <ComparisonBar rows={data.comparisonIndia} />
           <div className="mt-4 flex gap-4 text-xs text-muted">
@@ -153,7 +157,7 @@ export default function EconomyPage() {
         </div>
         <div className="rounded-xl border border-border bg-card p-4">
           <p className="text-xs text-muted">Own Tax Revenue</p>
-          <p className="text-2xl font-bold text-sundarbans">\u20B9{(km.ownTaxRevenueCr / 1000).toFixed(0)}K Cr</p>
+          <p className="text-2xl font-bold text-sundarbans">₹{(km.ownTaxRevenueCr / 1000).toFixed(0)}K Cr</p>
           <p className="text-xs text-muted mt-1">2024-25 (PRS India)</p>
         </div>
         <div className="rounded-xl border border-border bg-card p-4">

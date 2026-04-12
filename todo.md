@@ -78,6 +78,18 @@
 - [x] Update overview JSON, i18n footer, SEO descriptions
 - [x] Add data source banner explaining data currency on demographics page
 
+## Phase 4.6: Visual Refresh & Polish — COMPLETE
+- [x] Create `src/lib/format.ts` safe numeric formatters (fmtNum, fmtCompact, fmtInr, fmtLakhCr, fmtPct)
+- [x] Landing page: magazine-style editorial hero with stacked headlines + seasonal tagline
+- [x] Landing page: 4 hero narrative cards (Growing/Welcoming/Building/Remembering)
+- [x] Landing page: thematic section groups (People, Economy, Culture, Environment, Geographic)
+- [x] StatCard auto-formats numeric values, uppercase labels, tabular-nums
+- [x] ChartCard + StatCard rounded-2xl for editorial polish
+- [x] PageHeader larger h1 with tracking-tight
+- [x] Navbar lg → xl breakpoint to fit 14 items
+- [x] Tighten YAxis widths on 7 vertical bar charts for mobile (140-180 → 100-130)
+- [x] Verify build passes + no NaN in rendered HTML
+
 ## Phase 4.5: Narrative Pages (from WEST_BENGAL_DASHBOARD_PLAN.md) — COMPLETE
 - [x] /economy page — GSDP timeline, sector pie, exports, WB vs India comparison, Comeback narrative
 - [x] /tourism page — Foreign arrivals, UNESCO sites, flights comparison, Durga Puja impact

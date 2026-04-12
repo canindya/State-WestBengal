@@ -55,7 +55,7 @@ export default function CrimePage() {
       </div>
 
       {/* Yearly Crime Trend */}
-      <ChartCard title="Crime Trend (2018-2023)" subtitle="Total cognizable crimes registered in West Bengal" source="NCRB — Crime in India 2023" data={data.yearly as unknown as Record<string, unknown>[]}>
+      <ChartCard title="Crime Trend (2018-2023)" subtitle="Total cognizable crimes registered in West Bengal" source="NCRB — Crime in India 2023" insight="IPC crimes have tracked roughly flat, but Special & Local Law (SLL) cases have grown — partly reflecting better reporting of previously hidden offences, partly new categories of enforcement." data={data.yearly as unknown as Record<string, unknown>[]}>
         <ResponsiveContainer width="100%" height={350}>
           <LineChart data={data.yearly}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -72,12 +72,12 @@ export default function CrimePage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Crime Categories */}
-        <ChartCard title={`Crime Categories (${latestYear.year})`} subtitle="Major crime types by number of cases reported" source="NCRB — Crime in India 2023" data={categoryData as unknown as Record<string, unknown>[]}>
+        <ChartCard title={`Crime Categories (${latestYear.year})`} subtitle="Major crime types by number of cases reported" source="NCRB — Crime in India 2023" insight="Crimes against women and property crimes together dominate the caseload. The pattern is structural, not episodic — it doesn't change year to year, which tells you enforcement isn't moving the underlying drivers." data={categoryData as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={500}>
             <BarChart data={categoryData} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" tickFormatter={(v) => `${(v / 1000).toFixed(0)}K`} />
-              <YAxis type="category" dataKey="category" width={160} tick={{ fontSize: 10 }} />
+              <YAxis type="category" dataKey="category" width={115} tick={{ fontSize: 9 }} />
               <Tooltip formatter={(v) => Number(v).toLocaleString()} />
               <Bar dataKey="count" name="Cases" radius={[0, 4, 4, 0]}>
                 {categoryData.map((_, i) => (
@@ -89,12 +89,12 @@ export default function CrimePage() {
         </ChartCard>
 
         {/* Special Categories */}
-        <ChartCard title={`Special Category Crimes (${latestYear.year})`} subtitle="Crimes against women, children, SC/ST, and seniors" source="NCRB — Crime in India 2023" data={data.specialCategories as unknown as Record<string, unknown>[]}>
+        <ChartCard title={`Special Category Crimes (${latestYear.year})`} subtitle="Crimes against women, children, SC/ST, and seniors" source="NCRB — Crime in India 2023" insight="Crimes against women are the single largest special-category, dwarfing crimes against children and SC/ST. NCRB numbers almost certainly understate the true scale, but even the recorded figures are alarming." data={data.specialCategories as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={data.specialCategories} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" tickFormatter={(v) => `${(v / 1000).toFixed(0)}K`} />
-              <YAxis type="category" dataKey="category" width={180} tick={{ fontSize: 10 }} />
+              <YAxis type="category" dataKey="category" width={120} tick={{ fontSize: 9 }} />
               <Tooltip formatter={(v) => Number(v).toLocaleString()} />
               <Bar dataKey="count" name="Cases" radius={[0, 4, 4, 0]}>
                 {data.specialCategories.map((_, i) => (
@@ -108,12 +108,12 @@ export default function CrimePage() {
 
       {/* District-wise Crime Rate */}
       <div className="mt-6">
-        <ChartCard title="District-wise Crime Rate" subtitle="Crimes per 100,000 population (reporting districts)" source="NCRB — Crime in India 2023" data={districtCrime as unknown as Record<string, unknown>[]}>
+        <ChartCard title="District-wise Crime Rate" subtitle="Crimes per 100,000 population (reporting districts)" source="NCRB — Crime in India 2023" insight="Urban districts show higher rates — but that's often a reporting story, not a safety one. Dense cities have more police stations per resident and more willingness to register a case. Rural under-reporting is the hidden iceberg." data={districtCrime as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={districtCrime} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" />
-              <YAxis type="category" dataKey="district" width={140} tick={{ fontSize: 10 }} />
+              <YAxis type="category" dataKey="district" width={100} tick={{ fontSize: 9 }} />
               <Tooltip formatter={(v) => `${v} per 100K`} />
               <Bar dataKey="rate" name="Crime Rate (per 100K)" radius={[0, 4, 4, 0]}>
                 {districtCrime.map((d, i) => (

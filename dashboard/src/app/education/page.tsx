@@ -73,7 +73,7 @@ export default function EducationPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Schools by Type */}
-        <ChartCard title="Schools by Type & Management" subtitle="Government vs private schools at each level" source="UDISE+ 2024-25" data={schoolsByType as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Schools by Type & Management" subtitle="Government vs private schools at each level" source="UDISE+ 2024-25" insight="Government schools dominate every level, especially primary. Private provision is thin and concentrated in urban areas — meaning state capacity, not private choice, will determine quality." data={schoolsByType as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={schoolsByType}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -88,7 +88,7 @@ export default function EducationPage() {
         </ChartCard>
 
         {/* Enrollment by Level */}
-        <ChartCard title="Enrollment by Level & Gender" subtitle="Students in thousands (boys vs girls)" source="UDISE+ 2024-25" data={enrollmentByLevel as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Enrollment by Level & Gender" subtitle="Students in thousands (boys vs girls)" source="UDISE+ 2024-25" insight="Gender parity at primary level is essentially complete — girls match or exceed boys. The drop-off comes at secondary and higher secondary, where the gap reappears and fewer students continue at all." data={enrollmentByLevel as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={enrollmentByLevel}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -105,7 +105,7 @@ export default function EducationPage() {
 
       {/* Infrastructure */}
       <div className="mt-6">
-        <ChartCard title="School Infrastructure" subtitle="Percentage of schools with each facility (UDISE+ 2024-25)" source="UDISE+ 2024-25" data={data.infrastructure as unknown as Record<string, unknown>[]}>
+        <ChartCard title="School Infrastructure" subtitle="Percentage of schools with each facility (UDISE+ 2024-25)" source="UDISE+ 2024-25" insight="Basic amenities (toilets, drinking water, electricity) are now near-universal. The next-gen infrastructure — computer labs, internet, libraries — is the new frontier and it lags badly." data={data.infrastructure as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={[...data.infrastructure].sort((a, b) => b.percentage - a.percentage)} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
@@ -124,12 +124,12 @@ export default function EducationPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Learning Outcomes */}
-        <ChartCard title="Learning Outcomes: WB vs National" subtitle="ASER 2024 — percentage of children achieving each benchmark" source="ASER 2024" data={learningComparison as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Learning Outcomes: WB vs National" subtitle="ASER 2024 — percentage of children achieving each benchmark" source="ASER 2024" insight="The uncomfortable truth: WB trails the national average on reading and arithmetic benchmarks. Literacy rate is high, but learning — the thing literacy is supposed to measure — still has a lot of ground to cover." data={learningComparison as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={learningComparison} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" domain={[0, 80]} tickFormatter={(v) => `${v}%`} />
-              <YAxis type="category" dataKey="indicator" width={170} tick={{ fontSize: 9 }} />
+              <YAxis type="category" dataKey="indicator" width={130} tick={{ fontSize: 9 }} />
               <Tooltip formatter={(v) => `${v}%`} />
               <Legend />
               <Bar dataKey="wb" name="West Bengal" fill={COLORS.gangaBlue} />
@@ -139,7 +139,7 @@ export default function EducationPage() {
         </ChartCard>
 
         {/* Teacher Metrics */}
-        <ChartCard title="Pupil-Teacher Ratio by District" subtitle="Lower is better (RTE norm: 30:1 for primary)" source="UDISE+ 2024-25" data={data.teacherMetrics as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Pupil-Teacher Ratio by District" subtitle="Lower is better (RTE norm: 30:1 for primary)" source="UDISE+ 2024-25" insight="Most districts are now within the RTE norm. The spread is narrow — teacher deployment has equalised across the state, even if learning outcomes have not caught up." data={data.teacherMetrics as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={[...data.teacherMetrics].sort((a, b) => b.pupilTeacherRatio - a.pupilTeacherRatio)} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" />
@@ -158,7 +158,7 @@ export default function EducationPage() {
 
       {/* Management Split Pie */}
       <div className="mt-6">
-        <ChartCard title="School Management Distribution" subtitle="Government vs Private management across all school types" source="UDISE+ 2024-25">
+        <ChartCard title="School Management Distribution" subtitle="Government vs Private management across all school types" source="UDISE+ 2024-25" insight="Roughly 4 out of 5 schools are run directly by government or local bodies. That's both a strength (access) and a vulnerability (quality depends entirely on state execution).">
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie

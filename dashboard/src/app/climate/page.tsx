@@ -53,12 +53,12 @@ export default function ClimatePage() {
       </div>
 
       {/* District-wise Annual Rainfall */}
-      <ChartCard title="District-wise Annual Rainfall" subtitle="Average annual rainfall (mm) across 23 districts" source="India Meteorological Department" data={sortedRainfall as unknown as Record<string, unknown>[]}>
+      <ChartCard title="District-wise Annual Rainfall" subtitle="Average annual rainfall (mm) across 23 districts" source="India Meteorological Department" insight="Coastal and Himalayan foothill districts are wettest; the western laterite belt (Purulia, Bankura) receives less than half the state's wettest district. A 3× gap inside one state — different agricultures, different economies." data={sortedRainfall as unknown as Record<string, unknown>[]}>
         <ResponsiveContainer width="100%" height={500}>
           <BarChart data={sortedRainfall} layout="vertical">
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis type="number" tickFormatter={(v) => `${v} mm`} />
-            <YAxis type="category" dataKey="district" width={140} tick={{ fontSize: 10 }} />
+            <YAxis type="category" dataKey="district" width={100} tick={{ fontSize: 9 }} />
             <Tooltip formatter={(v) => `${v} mm`} />
             <Bar dataKey="annual" name="Annual Rainfall (mm)" radius={[0, 4, 4, 0]}>
               {sortedRainfall.map((d, i) => (
@@ -71,7 +71,7 @@ export default function ClimatePage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Monthly Rainfall Pattern */}
-        <ChartCard title="Monthly Rainfall Pattern" subtitle="State average rainfall by month (mm)" source="India Meteorological Department" data={data.monthlyRainfall as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Monthly Rainfall Pattern" subtitle="State average rainfall by month (mm)" source="India Meteorological Department" insight="Three-quarters of the annual rainfall arrives in just four months (Jun-Sep). The rest of the year is a deficit — which is why water storage, not total precipitation, is the real agricultural constraint." data={data.monthlyRainfall as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={data.monthlyRainfall}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -84,7 +84,7 @@ export default function ClimatePage() {
         </ChartCard>
 
         {/* Seasonal Rainfall Radar */}
-        <ChartCard title="Seasonal Rainfall Distribution" subtitle="Top 5 vs Bottom 5 districts by season" source="India Meteorological Department">
+        <ChartCard title="Seasonal Rainfall Distribution" subtitle="Top 5 vs Bottom 5 districts by season" source="India Meteorological Department" insight="Monsoon rainfall absolutely dominates — pre-monsoon and winter rainfall are thin by comparison. The wettest districts stay wetter in every season, and the dry districts stay drier.">
           <ResponsiveContainer width="100%" height={300}>
             <RadarChart data={[
               { season: 'Monsoon', high: wettestDistrict.monsoon, low: driestDistrict.monsoon },
@@ -106,7 +106,7 @@ export default function ClimatePage() {
 
       {/* Temperature Trend */}
       <div className="mt-6">
-        <ChartCard title="Temperature Trend (State Average)" subtitle={`Max, min, and average temperature over time (\u00B0C). Latest: ${latestTemp.avgTemp}\u00B0C avg (${latestTemp.year})`} source="IMD / Open-Meteo Archive API" data={data.temperatureTrend as unknown as Record<string, unknown>[]}>
+        <ChartCard title="Temperature Trend (State Average)" subtitle={`Max, min, and average temperature over time (\u00B0C). Latest: ${latestTemp.avgTemp}\u00B0C avg (${latestTemp.year})`} source="IMD / Open-Meteo Archive API" insight="The state-average temperature has drifted upward by roughly half a degree in three decades — consistent with national warming. Small numbers, big consequences for agriculture, disease vectors, and coastal communities." data={data.temperatureTrend as unknown as Record<string, unknown>[]}>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={data.temperatureTrend}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -124,7 +124,7 @@ export default function ClimatePage() {
 
       {/* Extreme Weather Events */}
       <div className="mt-6">
-        <ChartCard title="Recent Extreme Weather Events" subtitle="Major cyclones, floods, and heat waves (2020-2024)" source="IMD, NDMA Reports">
+        <ChartCard title="Recent Extreme Weather Events" subtitle="Major cyclones, floods, and heat waves (2020-2024)" source="IMD, NDMA Reports" insight="Cyclones and floods aren't isolated incidents any more — the list gets longer every year. Disaster preparedness, not disaster response, is where the investment case now sits.">
           <div className="space-y-3">
             {data.extremeEvents.map((event, i) => (
               <div key={i} className="flex items-start gap-3 p-3 rounded-lg border border-border bg-card-hover">

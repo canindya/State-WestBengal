@@ -14,7 +14,13 @@
     "economy": "Economy",
     "tourism": "Tourism",
     "investment": "Investment",
-    "culture": "Culture"
+    "culture": "Culture",
+    "section": {
+      "people": "People",
+      "economy": "Economy",
+      "culture": "Culture",
+      "environment": "Environment"
+    }
   },
   "common": {
     "loading": "Loading",

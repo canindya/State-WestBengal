@@ -43,7 +43,7 @@ export default function CulturePage() {
       {/* Tagore quote */}
       <div className="mb-8 rounded-xl border-l-4 border-twilight bg-card p-6">
         <p className="text-lg italic text-foreground">&ldquo;{data.quote.text}&rdquo;</p>
-        <p className="mt-2 text-sm text-muted">\u2014 {data.quote.author}, <span className="italic">{data.quote.source}</span></p>
+        <p className="mt-2 text-sm text-muted">— {data.quote.author}, <span className="italic">{data.quote.source}</span></p>
       </div>
 
       {/* Nobel Laureates Timeline */}
