@@ -5,11 +5,15 @@ import { useTranslation } from '@/i18n/useTranslation';
 import StatCard from '@/components/layout/StatCard';
 
 const SECTIONS = [
+  { href: '/economy', title: 'Economy', desc: 'GSDP trends, sector split, exports, MSMEs, WB vs India', color: 'mustard' },
   { href: '/demographics', title: 'People & Demographics', desc: 'Population, districts, urban-rural split, social categories', color: 'shantiniketan' },
-  { href: '/climate', title: 'Climate & Environment', desc: 'Rainfall, temperature trends, extreme weather events', color: 'sundarbans' },
-  { href: '/environment', title: 'Air Quality', desc: 'AQI monitoring across major cities, pollutant breakdown', color: 'durga' },
+  { href: '/tourism', title: 'Tourism', desc: 'Foreign arrivals, UNESCO sites, Durga Puja economy', color: 'durga' },
+  { href: '/investment', title: 'Investment & Business', desc: 'BGBS proposals, major commitments, industrial ecosystem', color: 'ganga' },
+  { href: '/culture', title: 'Culture & Heritage', desc: 'Nobel laureates, iconic figures, art forms, destinations', color: 'twilight' },
   { href: '/health', title: 'Health', desc: 'Healthcare infrastructure, maternal & child health, disease burden', color: 'tea' },
   { href: '/education', title: 'Education', desc: 'School infrastructure, enrollment, learning outcomes', color: 'mustard' },
+  { href: '/climate', title: 'Climate & Environment', desc: 'Rainfall, temperature trends, extreme weather events', color: 'sundarbans' },
+  { href: '/environment', title: 'Air Quality', desc: 'AQI monitoring across major cities, pollutant breakdown', color: 'durga' },
   { href: '/crime', title: 'Crime & Safety', desc: 'Crime statistics, trends, special categories', color: 'twilight' },
   { href: '/transport', title: 'Transport', desc: 'Road network, vehicles, public transport, road safety', color: 'terracotta' },
   { href: '/budget', title: 'Budget & Finance', desc: 'Revenue, expenditure, fiscal deficits, debt', color: 'ganga' },
@@ -42,15 +46,21 @@ export default function HomePage() {
       </div>
 
       {/* Key Stats Ribbon */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-3 mb-10">
-        <StatCard label={t('home.stat_population')} value="10.3 Cr" subtitle="2024 projection" color="ganga" />
-        <StatCard label={t('home.stat_density')} value="10.1 Cr" subtitle="RGI Projection 2026" color="shantiniketan" />
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-6">
+        <StatCard label={t('home.stat_population')} value="10.1 Cr" subtitle="RGI Projection 2026" color="ganga" />
+        <StatCard label={t('home.stat_gsdp')} value="\u20B918.2L Cr" subtitle="2024-25 \u2014 Rank #4" color="mustard" />
         <StatCard label={t('home.stat_literacy')} value="76.1%" subtitle="Female 15-49 (NFHS-5)" color="sundarbans" />
         <StatCard label={t('home.stat_sexRatio')} value="973" subtitle="at birth (NFHS-5)" color="durga" />
-        <StatCard label={t('home.stat_gsdp')} value="\u20B915.4L Cr" subtitle="2024-25 (est.)" color="mustard" />
         <StatCard label={t('home.stat_hdi')} value="0.641" subtitle="Rank 28 (2021)" color="tea" />
         <StatCard label={t('home.stat_forest')} value="18.93%" subtitle="ISFR 2023" color="sundarbans" />
-        <StatCard label={t('home.stat_roads')} value="115.5" subtitle="km per 100 km\u00B2" color="terracotta" />
+      </div>
+
+      {/* Narrative stats ribbon */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-3 mb-10">
+        <StatCard label="Foreign Tourists" value="3.12M" subtitle="2024 \u2014 #2 in India" color="durga" />
+        <StatCard label="BGBS 2025 Proposals" value="\u20B94.4L Cr" subtitle="212 MoUs signed" color="ganga" />
+        <StatCard label="Nobel Laureates" value="3" subtitle="Tagore \u00b7 Sen \u00b7 Banerjee" color="twilight" />
+        <StatCard label="UNESCO Sites" value="3" subtitle="Durga Puja \u00b7 Sundarbans \u00b7 DHR" color="shantiniketan" />
       </div>
 
       {/* Section Cards */}

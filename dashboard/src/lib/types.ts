@@ -115,6 +115,86 @@ export interface BudgetData {
   fiscalIndicators: { year: string; fiscalDeficit: number; revenueDeficit: number; debtGsdpRatio: number }[];
 }
 
+// Economy
+export interface EconomyData {
+  gsdpTimeline: { year: string; valueLakhCr: number }[];
+  sectorSplit: { sector: string; percentage: number }[];
+  topExports: { name: string; rank: number; share: number }[];
+  comparisonIndia: { metric: string; wb: number; india: number; unit: string; higherIsBetter: boolean }[];
+  keyMetrics: {
+    gsdpRank: number;
+    gdpShareIndiaPct: number;
+    gdpShare1960Pct: number;
+    perCapitaIncomeInr: number;
+    povertyRatePct: number;
+    nationalPovertyPct: number;
+    msmeUnitsLakh: number;
+    msmeRank: number;
+    industrialGrowthPct: number;
+    nationalIndustrialGrowthPct: number;
+    exportsBillionUsd: number;
+    debtGsdpRatioPct: number;
+    ownTaxRevenueCr: number;
+    fiscalDeficitPctGsdp: number;
+  };
+  sources: string[];
+}
+
+// Tourism
+export interface TourismData {
+  foreignArrivals: { year: number; million: number }[];
+  indiaShare: { name: string; value: number }[];
+  internationalFlightsDaily: { city: string; flights: number }[];
+  topSourceCountries: { country: string; share: number }[];
+  unescoSites: { name: string; type: string; year: number }[];
+  keyMetrics: {
+    foreignArrivalsMillion: number;
+    rankForeignArrivals: number;
+    sharePct: number;
+    yoyGrowthPct: number;
+    durgaPujaEconomicImpactBillionUsd: number;
+    communityPujasCount: number;
+    kolkataIntlFlightsDaily: number;
+    delhiIntlFlightsDaily: number;
+    mumbaiIntlFlightsDaily: number;
+  };
+  sources: string[];
+}
+
+// Investment
+export interface InvestmentData {
+  bgbsEditions: { year: number; proposalsLakhCr: number }[];
+  majorInvestments: { company: string; amountCr: number; sector: string; note: string }[];
+  industrialInfra: {
+    industrialParks: number;
+    itParks: number;
+    electronicsParks: number;
+    siliconValleyHubCompanies: number;
+    dataCentres: number;
+    sezs: number;
+    strikesSince2011: number;
+  };
+  keySectors: string[];
+  keyMetrics: {
+    cumulativeProposalsLakhCr: number;
+    realizedLakhCr: number;
+    mous2025: number;
+    latestEditionYear: number;
+    latestEditionProposalsLakhCr: number;
+  };
+  sources: string[];
+}
+
+// Culture
+export interface CultureData {
+  nobelLaureates: { name: string; field: string; year: number; connection: string }[];
+  iconicFigures: { name: string; domain: string; note: string }[];
+  artForms: { name: string; type: string; recognition: string }[];
+  destinations: { name: string; type: string; highlight: string; bestSeason: string }[];
+  quote: { text: string; author: string; source: string };
+  sources: string[];
+}
+
 // GeoJSON district feature
 export interface DistrictFeature {
   type: 'Feature';

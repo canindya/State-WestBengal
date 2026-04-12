@@ -1,0 +1,57 @@
+{
+  "gsdpTimeline": [
+    { "year": "2015-16", "valueLakhCr": 8.03 },
+    { "year": "2016-17", "valueLakhCr": 8.93 },
+    { "year": "2017-18", "valueLakhCr": 10.21 },
+    { "year": "2018-19", "valueLakhCr": 11.51 },
+    { "year": "2019-20", "valueLakhCr": 12.54 },
+    { "year": "2020-21", "valueLakhCr": 12.41 },
+    { "year": "2021-22", "valueLakhCr": 14.16 },
+    { "year": "2022-23", "valueLakhCr": 15.36 },
+    { "year": "2023-24", "valueLakhCr": 17.02 },
+    { "year": "2024-25", "valueLakhCr": 18.15 }
+  ],
+  "sectorSplit": [
+    { "sector": "Services", "percentage": 54.9 },
+    { "sector": "Industry", "percentage": 24.0 },
+    { "sector": "Agriculture", "percentage": 17.1 },
+    { "sector": "Other", "percentage": 4.0 }
+  ],
+  "topExports": [
+    { "name": "Engineering Goods", "rank": 1, "share": 28 },
+    { "name": "Gems & Jewellery", "rank": 2, "share": 18 },
+    { "name": "Tea", "rank": 3, "share": 12 },
+    { "name": "Rice & Food Products", "rank": 4, "share": 10 },
+    { "name": "Leather & Products", "rank": 5, "share": 9 },
+    { "name": "Petroleum Products", "rank": 6, "share": 8 }
+  ],
+  "comparisonIndia": [
+    { "metric": "Per Capita Income (\u20B9 thousand)", "wb": 203, "india": 198, "unit": "\u20B9K", "higherIsBetter": true },
+    { "metric": "Poverty Rate (%)", "wb": 11.89, "india": 14.96, "unit": "%", "higherIsBetter": false },
+    { "metric": "Industrial Growth (%)", "wb": 7.3, "india": 6.2, "unit": "%", "higherIsBetter": true },
+    { "metric": "Fiscal Deficit (% of GSDP)", "wb": 3.6, "india": 3.2, "unit": "%", "higherIsBetter": false }
+  ],
+  "keyMetrics": {
+    "gsdpRank": 4,
+    "gdpShareIndiaPct": 5.6,
+    "gdpShare1960Pct": 10.5,
+    "perCapitaIncomeInr": 203095,
+    "povertyRatePct": 11.89,
+    "nationalPovertyPct": 14.96,
+    "msmeUnitsLakh": 88.67,
+    "msmeRank": 2,
+    "industrialGrowthPct": 7.3,
+    "nationalIndustrialGrowthPct": 6.2,
+    "exportsBillionUsd": 12.67,
+    "debtGsdpRatioPct": 38.0,
+    "ownTaxRevenueCr": 102349,
+    "fiscalDeficitPctGsdp": 3.6
+  },
+  "sources": [
+    "MoSPI (Ministry of Statistics & Programme Implementation)",
+    "RBI Handbook of Statistics on Indian States",
+    "IBEF West Bengal Presentation",
+    "PRS India Budget Analysis 2024-25",
+    "NITI Aayog MPI 2023"
+  ]
+}

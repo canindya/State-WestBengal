@@ -1,0 +1,56 @@
+{
+  "bgbsEditions": [
+    { "year": 2015, "proposalsLakhCr": 2.43 },
+    { "year": 2016, "proposalsLakhCr": 2.53 },
+    { "year": 2018, "proposalsLakhCr": 2.19 },
+    { "year": 2019, "proposalsLakhCr": 2.84 },
+    { "year": 2022, "proposalsLakhCr": 3.42 },
+    { "year": 2023, "proposalsLakhCr": 3.76 },
+    { "year": 2025, "proposalsLakhCr": 4.40 }
+  ],
+  "majorInvestments": [
+    { "company": "Reliance Industries", "amountCr": 50000, "sector": "Retail, Jio, New Energy", "note": "Plans to double investment by end of decade" },
+    { "company": "JSW Group", "amountCr": 16000, "sector": "Power (1600 MW at Salboni)", "note": "Expandable to 3200 MW" },
+    { "company": "Ambuja Neotia", "amountCr": 15000, "sector": "Healthcare, Hospitality, Real Estate", "note": "5-year plan" },
+    { "company": "Haldia Petrochemicals", "amountCr": 8500, "sector": "Polycarbonate plant", "note": "Announced Mar 2025" },
+    { "company": "ITC", "amountCr": 4500, "sector": "AI Centre of Excellence", "note": "New Town, Kolkata" },
+    { "company": "Adani Ports", "amountCr": 3500, "sector": "Port mechanization", "note": "Syama Prasad Mookerjee Port" }
+  ],
+  "industrialInfra": {
+    "industrialParks": 200,
+    "itParks": 22,
+    "electronicsParks": 2,
+    "siliconValleyHubCompanies": 41,
+    "dataCentres": 11,
+    "sezs": 22,
+    "strikesSince2011": 0
+  },
+  "keySectors": [
+    "IT / ITES",
+    "Leather",
+    "Tea",
+    "Jute",
+    "Steel",
+    "Cement",
+    "Textiles",
+    "FMCG",
+    "Foundry",
+    "Hosiery",
+    "Food Processing",
+    "Green Energy"
+  ],
+  "keyMetrics": {
+    "cumulativeProposalsLakhCr": 19,
+    "realizedLakhCr": 13,
+    "mous2025": 212,
+    "latestEditionYear": 2025,
+    "latestEditionProposalsLakhCr": 4.40
+  },
+  "sources": [
+    "Bengal Global Business Summit 2025",
+    "WBIDC (West Bengal Industrial Development Corporation)",
+    "IBEF West Bengal Presentation",
+    "Business Standard",
+    "GoodReturns"
+  ]
+}

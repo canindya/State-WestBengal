@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Interactive web dashboard visualizing open data for West Bengal, India across **10 domains**: demographics, climate & environment, air quality, health, education, crime & safety, transport, budget & finance, and geographic mapping. Built from 30+ open data sources. Supports dark and light themes.
+Interactive web dashboard visualizing open data for West Bengal, India across **14 domains**: economy, demographics, tourism, investment, culture & heritage, climate & environment, air quality, health, education, crime & safety, transport, budget & finance, and geographic mapping. Built from 30+ open data sources. Supports dark and light themes.
 
 Inspired by and modeled after the Kolkata City Dashboard: https://canindya.github.io/City-Kolkata
 
@@ -61,6 +61,10 @@ cp ../data/geojson/*.geojson ../dashboard/public/data/
 | `crime_wb.json` | `/crime` | NCRB state crime statistics |
 | `transport_wb.json` | `/transport` | Roads, vehicles, public transport |
 | `budget_wb.json` | `/budget` | Revenue, expenditure, deficits |
+| `economy_wb.json` | `/economy` | GSDP timeline, sectors, exports, WB vs India |
+| `tourism_wb.json` | `/tourism` | Foreign arrivals, UNESCO, flights, sources |
+| `investment_wb.json` | `/investment` | BGBS editions, major commitments, industrial infra |
+| `culture_wb.json` | `/culture` | Nobel laureates, figures, art forms, destinations |
 | `districts_wb.geojson` | `/map` | 23 district boundaries |
 
 ## Dashboard (Next.js)
@@ -91,11 +95,15 @@ npm run build          # Production build + type check
 npx next start -p 3000 # Serve production build
 ```
 
-### Pages (10 routes)
+### Pages (14 routes)
 | Route | Title | Description |
 |-------|-------|-------------|
-| `/` | Landing | Key stats ribbon, 9 section cards, data source grid |
+| `/` | Landing | Key stats ribbon, 13 section cards, narrative ribbon, data source grid |
+| `/economy` | Economy | GSDP trend, sector pie, exports, WB vs India comparison, Comeback narrative |
 | `/demographics` | People & Demographics | Population pyramid, district density, urban/rural |
+| `/tourism` | Tourism | Foreign arrivals, UNESCO sites, flight connectivity, Durga Puja impact |
+| `/investment` | Investment & Business | BGBS timeline, major commitments, industrial ecosystem, key sectors |
+| `/culture` | Culture & Heritage | Nobel laureates, iconic figures, art forms, 12 destinations |
 | `/climate` | Climate & Environment | Rainfall, temperature trends, extreme weather |
 | `/environment` | Air Quality | Multi-city AQI, pollutants, health advisories |
 | `/health` | Health | Infrastructure, maternal/child health, disease burden |
@@ -129,4 +137,5 @@ cd dashboard && npm run build && npx next start -p 3000
 
 ## Session History
 - **Session 1** (2026-04-04): Project setup and full build — scaffolded Next.js 16 app, created shared infrastructure (theme, colors, components, i18n), all 10 page routes with full chart content, curated JSON data for all domains, Python data pipeline for Open-Meteo API. Built Phase 1 (Landing, Climate, Air Quality, Budget, Health, Map) and Phase 2 (Demographics, Education, Crime, Transport) pages with 40+ Recharts visualizations. Fixed .sort() state mutation bugs, added error handling to all pages, replaced unreadable crime treemap with bar chart. Documentation files created (CLAUDE.md, DESIGN.md, todo.md, CHANGELOG.md).
+- **Session 3** (2026-04-12): Phase 4.5 — closed the narrative gap from `WEST_BENGAL_DASHBOARD_PLAN.md`. Built 4 new pages (/economy, /tourism, /investment, /culture), 4 curated JSON data files, a reusable `ComparisonBar` component, and added landing-page narrative stat ribbon + 4 new section cards. Updated navbar, i18n (English + Bengali), types, loaders. Dashboard now covers 14 domains (up from 10), with full WB "story" coverage: economic decline/comeback, tourism surge, BGBS investments, Nobel laureates & heritage destinations. Data sourcing is hybrid — curated JSON from plan now, Python fetchers deferred.
 - **Session 2** (2026-04-05): Phase 3 complete + Phase 4 progress + Census 2011 replacement. Data quality: added source labels to all 30+ charts, real WB GeoJSON, Open-Meteo pipeline, weather transform. Deployment: GitHub Actions workflow, SEO metadata, responsive fixes. **Major data modernization**: replaced all Census 2011 charts/data with NFHS-5 (2019-21) district indicators, RGI Population Projections (2026), and SRS vital statistics (2010-2023). Demographics page rebuilt with 6 new charts. Map page updated to 5 NFHS-5 choropleth metrics. Crime data corrected (SLL undercount). Data source banner added.

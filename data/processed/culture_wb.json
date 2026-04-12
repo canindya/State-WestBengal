@@ -1,0 +1,53 @@
+{
+  "nobelLaureates": [
+    { "name": "Rabindranath Tagore", "field": "Literature", "year": 1913, "connection": "Born in Kolkata; founded Visva-Bharati University at Shantiniketan; wrote the national anthems of India and Bangladesh" },
+    { "name": "Amartya Sen", "field": "Economics", "year": 1998, "connection": "Born in Shantiniketan; educated at Presidency College, Kolkata; recognised for work on welfare economics" },
+    { "name": "Abhijit Vinayak Banerjee", "field": "Economics", "year": 2019, "connection": "Born in Kolkata; studied at Presidency College and JNU; awarded for experimental approach to alleviating global poverty" }
+  ],
+  "iconicFigures": [
+    { "name": "Swami Vivekananda", "domain": "Spiritual Leader", "note": "1893 Chicago speech; founded Ramakrishna Mission" },
+    { "name": "Satyajit Ray", "domain": "Filmmaker", "note": "Academy Honorary Award; director of Pather Panchali" },
+    { "name": "Subhas Chandra Bose", "domain": "Freedom Fighter", "note": "Netaji; founder of the Indian National Army" },
+    { "name": "Mother Teresa", "domain": "Humanitarian", "note": "Nobel Peace Prize 1979; lived and served in Kolkata" },
+    { "name": "Jagadish Chandra Bose", "domain": "Scientist", "note": "Pioneer of radio waves and plant biology" },
+    { "name": "Satyendra Nath Bose", "domain": "Physicist", "note": "Bose-Einstein statistics; the boson is named after him" },
+    { "name": "Mrinal Sen", "domain": "Filmmaker", "note": "Pioneer of Indian parallel cinema" },
+    { "name": "Jhumpa Lahiri", "domain": "Author", "note": "Pulitzer Prize winner for Interpreter of Maladies" },
+    { "name": "Kazi Nazrul Islam", "domain": "Poet", "note": "Rebel Poet; national poet of Bangladesh" }
+  ],
+  "artForms": [
+    { "name": "Durga Puja", "type": "Festival", "recognition": "UNESCO Intangible Cultural Heritage (2021)" },
+    { "name": "Baul Music", "type": "Music", "recognition": "UNESCO Masterpiece of Oral Heritage" },
+    { "name": "Patachitra", "type": "Painting", "recognition": "Traditional scroll painting, GI tagged" },
+    { "name": "Kantha Embroidery", "type": "Textile", "recognition": "Traditional running-stitch art" },
+    { "name": "Dokra Metalwork", "type": "Craft", "recognition": "Lost-wax metal casting, tribal art" },
+    { "name": "Terracotta Temples", "type": "Architecture", "recognition": "Bishnupur temple complex" },
+    { "name": "Rabindra Sangeet", "type": "Music", "recognition": "Songs composed by Tagore" },
+    { "name": "Tollywood", "type": "Cinema", "recognition": "Bengali film industry, Tollygunge" }
+  ],
+  "destinations": [
+    { "name": "Kolkata", "type": "City", "highlight": "Cultural capital, Victoria Memorial, Howrah Bridge", "bestSeason": "Oct-Feb" },
+    { "name": "Darjeeling", "type": "Hill Station", "highlight": "Tea gardens, Himalayan views, Toy Train (UNESCO)", "bestSeason": "Mar-May, Oct-Nov" },
+    { "name": "Sundarbans", "type": "Nature", "highlight": "Largest mangrove forest, Royal Bengal Tiger", "bestSeason": "Oct-Mar" },
+    { "name": "Shantiniketan", "type": "Heritage", "highlight": "Tagore's Visva-Bharati, art village", "bestSeason": "Oct-Feb" },
+    { "name": "Siliguri", "type": "Gateway", "highlight": "Gateway to Northeast India, trade hub", "bestSeason": "Oct-Mar" },
+    { "name": "Murshidabad", "type": "Heritage", "highlight": "Nawabi architecture, Hazarduari Palace", "bestSeason": "Oct-Feb" },
+    { "name": "Digha", "type": "Beach", "highlight": "Bay of Bengal seaside resort", "bestSeason": "Oct-Feb" },
+    { "name": "Bishnupur", "type": "Heritage", "highlight": "Terracotta temples, Malla dynasty", "bestSeason": "Oct-Mar" },
+    { "name": "Kalimpong", "type": "Hill Station", "highlight": "Monasteries, flower nurseries", "bestSeason": "Mar-May, Oct-Nov" },
+    { "name": "Cooch Behar", "type": "Heritage", "highlight": "Rajbari Palace, Koch dynasty", "bestSeason": "Oct-Feb" },
+    { "name": "Jaldapara", "type": "Wildlife", "highlight": "One-horned rhinoceros, elephant safari", "bestSeason": "Oct-May" },
+    { "name": "Mandarmani", "type": "Beach", "highlight": "Longest driveable beach in India", "bestSeason": "Oct-Feb" }
+  ],
+  "quote": {
+    "text": "Where the mind is without fear and the head is held high; Where knowledge is free...",
+    "author": "Rabindranath Tagore",
+    "source": "Gitanjali"
+  },
+  "sources": [
+    "UNESCO",
+    "Nobel Foundation",
+    "West Bengal Heritage Commission",
+    "WB Tourism Department"
+  ]
+}

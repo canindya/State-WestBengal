@@ -78,6 +78,17 @@
 - [x] Update overview JSON, i18n footer, SEO descriptions
 - [x] Add data source banner explaining data currency on demographics page
 
+## Phase 4.5: Narrative Pages (from WEST_BENGAL_DASHBOARD_PLAN.md) — COMPLETE
+- [x] /economy page — GSDP timeline, sector pie, exports, WB vs India comparison, Comeback narrative
+- [x] /tourism page — Foreign arrivals, UNESCO sites, flights comparison, Durga Puja impact
+- [x] /investment page — BGBS timeline, major commitments, industrial infra, key sectors
+- [x] /culture page — Nobel laureates, iconic figures, art forms, destinations grid
+- [x] ComparisonBar reusable component
+- [x] Landing page narrative stat ribbon + 4 new section cards
+- [x] Navbar + i18n for new routes (English + Bengali)
+- [x] 4 new curated JSON data files
+- [ ] (Deferred) Python fetchers for MoSPI/IBEF/WBIDC/Tourism Ministry — hybrid approach, curated data in place
+
 ## Phase 5: Enhancements
 - [ ] Cross-domain correlations page (e.g. literacy vs crime rate, rainfall vs agriculture)
 - [ ] Data export functionality (CSV download on all charts)

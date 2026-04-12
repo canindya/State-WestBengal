@@ -9,6 +9,10 @@ import type {
   TransportData,
   BudgetData,
   DistrictGeoJSON,
+  EconomyData,
+  TourismData,
+  InvestmentData,
+  CultureData,
 } from './types';
 
 const BASE = (process.env.NEXT_PUBLIC_BASE_PATH || '') + '/data';
@@ -36,3 +40,7 @@ export const loadCrime = () => fetchJSON<CrimeData>('crime_wb.json');
 export const loadTransport = () => fetchJSON<TransportData>('transport_wb.json');
 export const loadBudget = () => fetchJSON<BudgetData>('budget_wb.json');
 export const loadDistricts = () => fetchJSON<DistrictGeoJSON>('districts_wb.geojson');
+export const loadEconomy = () => fetchJSON<EconomyData>('economy_wb.json');
+export const loadTourism = () => fetchJSON<TourismData>('tourism_wb.json');
+export const loadInvestment = () => fetchJSON<InvestmentData>('investment_wb.json');
+export const loadCulture = () => fetchJSON<CultureData>('culture_wb.json');

@@ -8,7 +8,11 @@ import { useTranslation } from '@/i18n/useTranslation';
 
 const NAV_ITEMS = [
   { href: '/', labelKey: 'nav.home' },
+  { href: '/economy', labelKey: 'nav.economy' },
   { href: '/demographics', labelKey: 'nav.people' },
+  { href: '/tourism', labelKey: 'nav.tourism' },
+  { href: '/investment', labelKey: 'nav.investment' },
+  { href: '/culture', labelKey: 'nav.culture' },
   { href: '/climate', labelKey: 'nav.climate' },
   { href: '/environment', labelKey: 'nav.airQuality' },
   { href: '/health', labelKey: 'nav.health' },

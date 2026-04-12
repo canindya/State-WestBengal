@@ -4,6 +4,29 @@ All notable changes to the West Bengal State Dashboard will be documented in thi
 
 ---
 
+## 2026-04-12 — Phase 4: Economy, Tourism, Investment, Culture pages
+
+### Added
+- **4 new pages** closing the narrative gap from `WEST_BENGAL_DASHBOARD_PLAN.md`:
+  - `/economy` — GSDP timeline (2015-16 to 2024-25), sector pie, top exports bar, WB vs India comparison rows, "Comeback State" narrative callout, fiscal stat strip
+  - `/tourism` — Foreign arrivals trend 2019-2024, WB share of India (14.92%), international flights/day comparison (Kolkata 51 vs Delhi 590 vs Mumbai 516), UNESCO sites, top source countries
+  - `/investment` — BGBS editions timeline (2015-2025), major corporate commitments (Reliance, JSW, Ambuja Neotia, Haldia, ITC, Adani), industrial infrastructure grid, key sectors chips
+  - `/culture` — Tagore quote, Nobel laureates timeline (Tagore, Sen, Banerjee), 9 iconic figures, 8 art forms, 12 destinations grid with type tags
+- **4 new JSON data files** (curated from plan sources): `economy_wb.json`, `tourism_wb.json`, `investment_wb.json`, `culture_wb.json`
+- **`ComparisonBar` component** (`src/components/layout/ComparisonBar.tsx`) — reusable WB vs India dual bar with win/lose coloring
+- **New type interfaces**: `EconomyData`, `TourismData`, `InvestmentData`, `CultureData`
+- **New data loaders**: `loadEconomy`, `loadTourism`, `loadInvestment`, `loadCulture` in `src/lib/data.ts`
+- **Landing page narrative ribbon**: new stat cards for Foreign Tourists (3.12M, #2), BGBS ₹4.4L Cr, Nobel Laureates (3), UNESCO Sites (3)
+- **Landing page section cards**: 4 new entries (Economy, Tourism, Investment, Culture) in the section grid
+- **Navbar**: 4 new routes wired into desktop and mobile menus
+- **i18n**: English + Bengali labels for all 4 new pages
+
+### Changed
+- **Landing page**: GSDP stat card updated from ₹15.4L Cr → ₹18.2L Cr (2024-25), stat ribbon reorganised into 6-col primary + 4-col narrative layout
+- **Data sourcing approach (Phase 4)**: curated JSON hardcoded from plan's "Key data points" sections; Python fetchers for MoSPI / IBEF / WBIDC / Ministry of Tourism deferred to a later phase
+
+---
+
 ## 2026-04-05 — Phase 3: Data quality, modern sources, deployment prep
 
 ### Added

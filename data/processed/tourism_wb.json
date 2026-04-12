@@ -1,0 +1,52 @@
+{
+  "foreignArrivals": [
+    { "year": 2019, "million": 1.65 },
+    { "year": 2020, "million": 0.35 },
+    { "year": 2021, "million": 0.42 },
+    { "year": 2022, "million": 1.80 },
+    { "year": 2023, "million": 2.70 },
+    { "year": 2024, "million": 3.12 }
+  ],
+  "indiaShare": [
+    { "name": "West Bengal", "value": 14.92 },
+    { "name": "Rest of India", "value": 85.08 }
+  ],
+  "internationalFlightsDaily": [
+    { "city": "Delhi", "flights": 590 },
+    { "city": "Mumbai", "flights": 516 },
+    { "city": "Bengaluru", "flights": 180 },
+    { "city": "Chennai", "flights": 150 },
+    { "city": "Hyderabad", "flights": 100 },
+    { "city": "Kolkata", "flights": 51 }
+  ],
+  "topSourceCountries": [
+    { "country": "United States", "share": 18 },
+    { "country": "United Kingdom", "share": 15 },
+    { "country": "Bangladesh", "share": 13 },
+    { "country": "Russia", "share": 10 },
+    { "country": "Germany", "share": 7 },
+    { "country": "Others", "share": 37 }
+  ],
+  "unescoSites": [
+    { "name": "Durga Puja in Kolkata", "type": "Intangible Cultural Heritage", "year": 2021 },
+    { "name": "Sundarbans National Park", "type": "World Heritage Site", "year": 1987 },
+    { "name": "Darjeeling Himalayan Railway", "type": "World Heritage Site", "year": 1999 }
+  ],
+  "keyMetrics": {
+    "foreignArrivalsMillion": 3.12,
+    "rankForeignArrivals": 2,
+    "sharePct": 14.92,
+    "yoyGrowthPct": 14.8,
+    "durgaPujaEconomicImpactBillionUsd": 4.53,
+    "communityPujasCount": 36946,
+    "kolkataIntlFlightsDaily": 51,
+    "delhiIntlFlightsDaily": 590,
+    "mumbaiIntlFlightsDaily": 516
+  },
+  "sources": [
+    "India Tourism Data Compendium 2025",
+    "Ministry of Tourism, Government of India",
+    "UNESCO World Heritage Centre",
+    "WB Tourism Department"
+  ]
+}

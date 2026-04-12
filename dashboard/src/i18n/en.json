@@ -10,7 +10,11 @@
     "crime": "Crime",
     "transport": "Transport",
     "budget": "Budget",
-    "map": "Map"
+    "map": "Map",
+    "economy": "Economy",
+    "tourism": "Tourism",
+    "investment": "Investment",
+    "culture": "Culture"
   },
   "common": {
     "loading": "Loading",
@@ -97,5 +101,25 @@
     "pageTitle": "Geographic Map",
     "pageDesc": "Interactive district-level map of West Bengal with NFHS-5 indicators — sex ratio, literacy, immunization, and more.",
     "loading": "Loading map data..."
+  },
+  "economy": {
+    "pageTitle": "Economy",
+    "pageDesc": "GSDP growth, sectoral composition, exports, MSMEs, and how West Bengal stacks up against India on key macro indicators.",
+    "loading": "Loading economy data..."
+  },
+  "tourism": {
+    "pageTitle": "Tourism",
+    "pageDesc": "Foreign arrivals, UNESCO recognition, Durga Puja impact, and the air-connectivity opportunity for Kolkata.",
+    "loading": "Loading tourism data..."
+  },
+  "investment": {
+    "pageTitle": "Investment & Business",
+    "pageDesc": "Bengal Global Business Summit proposals, major corporate commitments, and the state's industrial ecosystem.",
+    "loading": "Loading investment data..."
+  },
+  "culture": {
+    "pageTitle": "Culture & Heritage",
+    "pageDesc": "Nobel laureates, iconic figures, living art forms, and twelve destinations that define Bengal.",
+    "loading": "Loading culture data..."
   }
 }
