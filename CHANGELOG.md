@@ -4,6 +4,40 @@ All notable changes to the West Bengal State Dashboard will be documented in thi
 
 ---
 
+## 2026-04-13 — Landing page redesign: chart above the fold
+
+Followed up the SWD sweep with a landing-page redesign that addresses the "looks AI-generated" critique. Core move: put a real data visualization above the fold on a data dashboard, and strip out the recognisable model-output tells.
+
+### Added
+- **Annotated GSDP line chart in the hero** — a rendered Recharts line (2015-16 → 2024-25, hardcoded 10-row constant for instant paint) with three direct annotations: starting point `₹8.03L`, the `COVID` dip, and the final `₹18.15L Cr` in bold mustard. No legend, no tooltip grid, no interactivity — explanatory, not exploratory. The line *shows* the "comeback" thesis that the headline *tells*.
+- **Asymmetric 12-column hero layout** — editorial headline left (5/12), chart right (7/12) at `lg` and up; stacked on mobile.
+- **Freshness strip** at the top of the landing: `UPDATED FY 2024-25 · 30+ OPEN DATA SOURCES · 14 DOMAINS`. Signals currency before anything else.
+- **Stat masthead** below the hero — four bare tiles separated by `divide-x border-border`, no card borders, no colour accents, no gerund labels, no `Explore →` CTAs. Reads like a newspaper masthead, not a marketing grid.
+- **Feature card for the Geographic group** — wide, typographic, with a huge muted `23` rendered as a background element anchored right. Breaks the uniform card-grid rhythm for the one group that only has a single item.
+- **`layout` discriminator on `SectionGroup`** — `'grid-4' | 'grid-2' | 'feature'` — so different groups can render with different grids on the landing without duplicating code.
+
+### Removed
+- **Gerund-labelled hero cards** (`GROWING / WELCOMING / BUILDING / REMEMBERING`). The four 2×2 narrative cards with border-left accents and `Explore X →` CTAs are gone. The chart + masthead combination does their job with more credibility and less marketing-copy feel.
+- **Per-card `Explore →` CTA** from every section card. The whole card is a link; the CTA was repetitive and was the second-clearest AI-generation tell.
+- **The formulaic `West Bengal in data: 14 domains, 30+ open datasets, one state's full portrait.` subhead** — folded into the freshness strip and shortened to `West Bengal in data — one state's full portrait.`
+
+### Changed
+- **All 5 section-group taglines** rewritten to break parallel cadence. Previous taglines all hit the same triadic em-dash rhythm (`Three X. Three Y. One Z.`). New versions use varied sentence forms:
+  - People: *"Fertility below replacement. Literacy climbing. The population curve is bending."*
+  - Economy: *"Share of India's GDP halved since 1960. GSDP has doubled in the last decade. The comeback is data-supported."*
+  - Culture: *"Tagore wrote two national anthems. Durga Puja moves \$4.5 billion. The brand outruns the infrastructure."*
+  - Environment: *"The delta takes the first cyclone each year. Kolkata's winter air crosses WHO limits by 10×."*
+  - Geographic: *"Click a district to see what the state average is hiding."*
+- **Section groups use differentiated grid widths** — People and Economy stay at `lg:grid-cols-4`, Culture and Environment use `sm:grid-cols-2`, Geographic uses the new `feature` layout. Visual rhythm varies across the page instead of every row looking identical.
+- **Headline typography** slightly tightened — `text-5xl xl:text-[3.5rem]` on the left column (was full-width `text-6xl`), fitting the new two-column constraint.
+
+### Verified
+- `npm run build` passes all 14 static routes with TypeScript strict mode.
+- Curl of rendered home HTML shows zero literal `\uXXXX` escape sequences, all headline elements present, all 5 new taglines rendered, GSDP chart container mounted.
+- Landing page paints instantly (GSDP data is a local constant — no fetch latency on the hero chart).
+
+---
+
 ## 2026-04-13 — Storytelling-with-Data full dashboard sweep
 
 Informed by Cole Nussbaumer Knaflic's four books (Storytelling with Data, Before & After, Storytelling with You, Let's Practice!). Every chart on every page was rewritten to follow SWD principles: takeaway titles, focused colour, quiet chart chrome, direct labels instead of legends, and per-page narrative blocks.
