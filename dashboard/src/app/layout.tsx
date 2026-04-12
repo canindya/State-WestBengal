@@ -1,13 +1,31 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono, Noto_Sans_Bengali } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import ConsentBanner from "@/components/layout/ConsentBanner";
 import ThemeProvider from "@/components/layout/ThemeProvider";
 import LanguageProvider from "@/i18n/LanguageProvider";
 import "./globals.css";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+
+// Google Consent Mode v2 default — denied for everything, with a short wait
+// window so an Accept click lands before the first event fires. This runs
+// before @next/third-parties loads gtag.js, so GA respects the denied state
+// from the first request and only fires cookieless pings until consent.
+const CONSENT_DEFAULT_SCRIPT = `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'analytics_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'wait_for_update': 500
+});
+`.trim();
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,6 +75,15 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${notoBengali.variable} h-full antialiased`}
     >
+      <head>
+        {GA_ID && (
+          <Script
+            id="consent-default"
+            strategy="beforeInteractive"
+            dangerouslySetInnerHTML={{ __html: CONSENT_DEFAULT_SCRIPT }}
+          />
+        )}
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeProvider>
           <LanguageProvider>
@@ -65,6 +92,7 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
+            {GA_ID && <ConsentBanner />}
           </LanguageProvider>
         </ThemeProvider>
         {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
