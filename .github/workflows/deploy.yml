@@ -35,6 +35,7 @@ jobs:
         working-directory: dashboard
         env:
           NEXT_PUBLIC_BASE_PATH: /State-WestBengal
+          NEXT_PUBLIC_GA_ID: G-N8FP4GZ1YL
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
